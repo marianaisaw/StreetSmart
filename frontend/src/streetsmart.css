@@ -214,3 +214,34 @@
   #toast { position: absolute; z-index: 2100; top: calc(var(--top-inset) + 6px); left: 50%; transform: translate(-50%, -160%); transition: transform .35s cubic-bezier(.2,.8,.2,1);
            padding: 10px 16px; border-radius: 999px; font-weight: 600; font-size: 14px; box-shadow: var(--shadow); white-space: nowrap; max-width: 92%; overflow: hidden; text-overflow: ellipsis; }
   #toast.on { transform: translate(-50%, 0); }
+
+  /* ---------- full-page web layout (default on desktop) ---------- */
+  .brandbar { display: none; align-items: center; gap: 10px; padding: 2px 4px 8px; }
+  .brandbar button { width: 30px; height: 30px; border-radius: 50%; border: 1px solid rgba(190,150,255,.4); background: rgba(124,58,237,.25); color: #f5f3ff; font: 700 12px Outfit, sans-serif; cursor: pointer; }
+  .brandbar b { font-family: Outfit, sans-serif; font-size: 18px; letter-spacing: -.01em; }
+  .brandbar span { margin-left: auto; font-size: 12px; color: var(--label2); }
+  .ss-root.web { display: block; background: var(--bg); --top-inset: 16px; }
+  .ss-root.web .phone { height: 100dvh; width: 100vw; aspect-ratio: auto; border-radius: 0; padding: 0; box-shadow: none; background: none; }
+  .ss-root.web .phone::before, .ss-root.web .phone::after, .ss-root.web .side-btn, .ss-root.web .island, .ss-root.web .statusbar, .ss-root.web .home-ind, .ss-root.web .aside { display: none; }
+  .ss-root.web .screen { border-radius: 0; }
+  .ss-root.web .brandbar { display: flex; }
+  @media (min-width: 720px) {
+    .ss-root.web #search { left: 16px; right: auto; width: 400px; top: 16px; }
+    .ss-root.web #sheet { top: 16px; left: 16px; bottom: 16px; right: auto; width: 400px; height: auto; border-radius: 18px; transform: none !important; }
+    .ss-root.web #sheet .grab { display: none; }
+    .ss-root.web #fabs { right: 16px; }
+    .ss-root.web .modal { top: 40px; bottom: 40px; left: 50%; right: auto; width: min(520px, calc(100vw - 80px)); border-radius: 18px; transform: translate(-50%, 110%); }
+    .ss-root.web .modal.open { transform: translate(-50%, 0); }
+    .ss-root.web #legend { left: auto; right: 16px; bottom: 16px !important; }
+    .ss-root.web #live { left: auto; right: 16px; bottom: 50px !important; }
+    .ss-root.web .mapboxgl-ctrl-bottom-right, .ss-root.web .maplibregl-ctrl-bottom-right { bottom: 80px; }
+    .ss-root.web #drive-hud { left: 436px; right: auto; width: 460px; transform: none; }
+  }
+  /* ---------- Tesla-style drive preview ---------- */
+  .puck { width: 34px; height: 34px; display: grid; place-items: center; filter: drop-shadow(0 0 10px rgba(10,132,255,.9)); }
+  .puck div { width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-bottom: 30px solid #fff; border-radius: 3px; }
+  #drive-hud { display: none; position: absolute; z-index: 1300; left: 50%; transform: translateX(-50%); bottom: 26px; width: min(460px, calc(100% - 24px));
+    border-radius: 18px; padding: 12px 14px; box-shadow: var(--shadow); align-items: center; gap: 12px; }
+  #drive-hud .hud-main { flex: 1; display: grid; gap: 2px; } #drive-hud .hud-main span { color: var(--label2); font-size: 13px; }
+  #drive-hud button { border: 0; background: var(--red); color: #fff; border-radius: 10px; padding: 9px 14px; font-weight: 600; cursor: pointer; }
+  .ss-root.driving #sheet, .ss-root.driving #legend, .ss-root.driving #live { opacity: .0; pointer-events: none; transition: opacity .3s; }

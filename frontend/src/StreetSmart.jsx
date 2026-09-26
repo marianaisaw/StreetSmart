@@ -27,6 +27,7 @@ const MARKUP = `
     <div id="map"></div>
 
     <div id="search" class="blur">
+      <div class="brandbar"><button onclick="window.__ssHome && window.__ssHome()">SS</button><b>StreetSmart</b><span>San Francisco</span></div>
       <div class="banner" id="share-banner"></div>
       <div id="search-main">
         <div class="od-wrap">
@@ -70,6 +71,7 @@ const MARKUP = `
       <div class="modal-body" id="settings-body"></div>
     </div>
 
+    <div id="drive-hud" class="blur"></div>
     <div id="toast" class="blur"></div>
     <div class="home-ind"></div>
   </div>

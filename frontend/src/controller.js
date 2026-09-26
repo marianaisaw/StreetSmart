@@ -1,6 +1,6 @@
 // StreetSmart app controller: vanilla DOM + Mapbox/MapLibre GL, mounted by StreetSmart.jsx.
 import * as h3 from 'h3-js';
-import { gl, isMapbox, styleFor, addBuildings } from './engine.js';
+import { gl, isMapbox, styleFor, addBuildings, applyLook } from './engine.js';
 
 let started = false;
 export function start() {
@@ -14,7 +14,7 @@ const DEFAULTS = {
   origin: DEMO_O, destination: DEMO_D, depart: 'now', deadline: '', tiers: [3, 15, 50], budget: 3,
   priority: 30, max_walk_min: 15, modes: { walk: true, muni: true, bart: true, uber: true }, surge: 1.0, effort: 'medium',
   scoring: { weights: { datasf: 1.0, news: 0.8, x: 0.4 }, halflife_hours: 72, night: true, night_mult: 1.5, thresholds: [2, 6] },
-  map: { heatmap: true, opacity: 1, showSafe: true, alternatives: true, legend: true, style: 'dark', tint: 'blue', tilt: true },
+  map: { heatmap: true, opacity: 1, showSafe: true, alternatives: true, legend: true, style: 'dark', tint: 'blue', tilt: true, look: 'night', frame: 'web' },
   stops: { autoCaption: true, autoPhoto: false },
   share: { name: '', eta: true, simulate: 'auto' },
   advanced: { demo: false, trace: false, ai: 'opus' },
@@ -52,42 +52,58 @@ function addLayers() {
   const dark = document.documentElement.dataset.theme === 'dark';
   for (const n of Object.keys(GEO)) if (!map.getSource(n)) map.addSource(n, { type: 'geojson', data: fc(GEO[n]) });
   addBuildings(map, dark);
-  const L = (o) => { if (!map.getLayer(o.id)) map.addLayer(o); };
+  // Mapbox Standard lights the scene (night preset); emissive layers stay bright like a car display.
+  const glow = (o) => { if (!isMapbox) return o; const k = o.type === 'fill' ? 'fill-emissive-strength' : o.type === 'line' ? 'line-emissive-strength' : null;
+    if (k) o.paint = { ...o.paint, [k]: 1 }; o.slot = 'top'; return o; };
+  const L = (o) => { if (!map.getLayer(o.id)) map.addLayer(glow(o)); };
   L({ id: 'cells-fill', type: 'fill', source: 'cells', paint: { 'fill-color': ['get', 'color'], 'fill-opacity': ['get', 'fo'] } });
   L({ id: 'cells-line', type: 'line', source: 'cells', paint: { 'line-color': ['get', 'color'], 'line-opacity': ['get', 'lo'], 'line-width': ['get', 'w'] } });
   L({ id: 'alts', type: 'line', source: 'alts', layout: { 'line-cap': 'round' }, paint: { 'line-color': dark ? '#9aa3b5' : '#6b7280', 'line-opacity': .6, 'line-width': 3, 'line-dasharray': [1, 2.5] } });
+  L({ id: 'rec-glow', type: 'line', source: 'rec', layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': ['get', 'color'], 'line-width': 22, 'line-blur': 14, 'line-opacity': .55 } });
   L({ id: 'rec-case', type: 'line', source: 'rec', layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': dark ? '#000' : '#fff', 'line-width': 11, 'line-opacity': .75 } });
   L({ id: 'rec-line', type: 'line', source: 'rec', filter: ['!=', ['get', 'mode'], 'walk'], layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': ['get', 'color'], 'line-width': 6 } });
   L({ id: 'rec-walk', type: 'line', source: 'rec', filter: ['==', ['get', 'mode'], 'walk'], layout: { 'line-cap': 'round' }, paint: { 'line-color': ['get', 'color'], 'line-width': 6, 'line-dasharray': [0.1, 1.8] } });
   L({ id: 'trail', type: 'line', source: 'trail', paint: { 'line-color': css('--tint'), 'line-width': 3, 'line-opacity': .85 } });
 }
 function initMap() {
-  const kind = S.map.style === 'satellite' ? 'satellite' : themeName();
-  styleKind = kind;
-  map = new gl.Map({ container: 'map', style: styleFor(kind), center: [-122.442, 37.77], zoom: 13, pitch: S.map.tilt ? 45 : 0,
-    attributionControl: false, ...(isMapbox ? {} : {}) });
+  styleKind = styleFor(S.map.look);
+  map = new gl.Map({ container: 'map', style: styleKind, center: [-122.442, 37.77], zoom: 13, pitch: S.map.tilt ? 55 : 0,
+    attributionControl: false, antialias: true });
   map.addControl(new gl.AttributionControl({ compact: true }), 'bottom-right');
-  map.on('style.load', () => { addLayers(); });
+  window.__ssMap = map;
+  map.on('error', e => console.warn('map error', e && e.error && e.error.message));
+  map.on('style.load', () => { applyLook(map, S.map.look); addLayers(); });
   map.on('click', onMapClick);
   map.on('mouseenter', 'cells-fill', () => map.getCanvas().style.cursor = 'pointer');
   map.on('mouseleave', 'cells-fill', () => map.getCanvas().style.cursor = '');
 }
 const mq = matchMedia('(prefers-color-scheme: dark)');
-function themeName(st = S) { return st.map.style === 'auto' ? (mq.matches ? 'dark' : 'light') : st.map.style === 'satellite' ? 'dark' : st.map.style; }
+function themeName(st = S) { return st.map.style === 'auto' ? (mq.matches ? 'dark' : 'light') : st.map.style; }
 function applyTheme(st = S) {
   const t = themeName(st);
   document.documentElement.dataset.theme = t;
   document.documentElement.style.setProperty('--tint', TINTS[st.map.tint] || TINTS.blue);
-  const kind = st.map.style === 'satellite' ? 'satellite' : t;
-  if (map && kind !== styleKind) { styleKind = kind; map.setStyle(styleFor(kind)); }
-  if (map) map.easeTo({ pitch: st.map.tilt ? 45 : 0, duration: 400 });
+  const root = document.querySelector('.ss-root'), wasWeb = root?.classList.contains('web');
+  root?.classList.toggle('web', st.map.frame === 'web');
+  if (map && wasWeb !== (st.map.frame === 'web')) setTimeout(() => { map.resize(); fitView(); }, 50);
+  const url = styleFor(st.map.look);
+  if (map && url !== styleKind) { styleKind = url; map.setStyle(url); }
+  else if (map && map.isStyleLoaded()) applyLook(map, st.map.look);
+  if (map && !driving) map.easeTo({ pitch: st.map.tilt ? 55 : 0, duration: 400 });
   drawCells(st); if (TRIP) drawRoutes(CURRENT && CURRENT.recommended_route_id, st);
   layoutFloating(st);
 }
 mq.addEventListener?.('change', () => S.map.style === 'auto' && applyTheme());
 
+function isWeb(st = S) { return st.map.frame === 'web' && innerWidth >= 720; }
 function layoutFloating(st = S) {
   const top = $('search').offsetTop + $('search').offsetHeight;
+  if (isWeb(st)) {
+    $('sheet').style.top = (top + 12) + 'px'; $('fabs').style.top = '16px'; $('live').style.bottom = ''; $('legend').style.bottom = '';
+    $('legend').style.opacity = st.map.heatmap && st.map.legend ? 1 : 0;
+    return { top: 30, peek: 30, left: 440, web: true };
+  }
+  $('sheet').style.top = '';
   $('fabs').style.top = (top + 10) + 'px';
   const peek = parseFloat(getComputedStyle($('sheet')).getPropertyValue('--peek'));
   $('live').style.bottom = (peek + 10) + 'px';
@@ -103,7 +119,7 @@ function fitView(animate) {
   const lats = pts.map(p => p[0]), lngs = pts.map(p => p[1]);
   const H = $('screen').clientHeight;
   map.fitBounds([[Math.min(...lngs), Math.min(...lats)], [Math.max(...lngs), Math.max(...lats)]],
-    { padding: { top: Math.min(top + 16, H * .45), bottom: Math.min(peek + 50, H * .45), left: 30, right: 70 }, maxZoom: 16, duration: animate ? 900 : 0, pitch: S.map.tilt ? 45 : 0 });
+    { padding: { top: Math.min(top + 16, H * .45), bottom: Math.min(peek + 50, H * .45), left: arguments[1] || (isWeb() ? 440 : 30), right: 70 }, maxZoom: 16, duration: animate ? 900 : 0, pitch: S.map.tilt ? 55 : 0, bearing: 0 });
 }
 
 /* ---------- safety cells ---------- */
@@ -329,7 +345,7 @@ function renderPlan() {
       ${rec.realtime ? '<span class="chip live">Live departures</span>' : ''}${p.cached ? '<span class="chip">Cached · no tokens</span>' : ''}${p.source === 'local' ? '<span class="chip">Free mode</span>' : ''}</div>
     <div class="why"><div class="h"><i></i>${p.source === 'local' ? 'Free safety score · no AI tokens' : 'Opus 5.5 · why this route'}</div><p>${esc(p.why)}</p></div>
     <div class="muted" style="margin-top:8px;font-size:14px">${esc(p.safety_summary)}</div>
-    <button class="btn" onclick="walkWithMe()">Walk with me</button>
+    <div class="row2"><button class="btn" onclick="drivePreview()">Preview route</button><button class="btn" onclick="walkWithMe()">Walk with me</button></div>
     <div class="row2">${p.source === 'local' ? '<button class="btn gray" onclick="plan({mode:\'opus\'})">Ask Opus 5.5 (~7¢)</button>' : `<button class="btn gray" onclick="plan({mode:'local'})">Free re-score</button>`}
       <button class="btn gray" onclick="scanArea(this)">Scan X + news here</button></div>
     <div class="section-h">Steps</div><div class="list">${legs}</div>
@@ -455,7 +471,9 @@ function renderSettings(section) {
     <div class="foot">0 hides a source. Cells re-score instantly with no model calls.</div>
 
     <div class="section-h">Map</div><div class="list">
-      ${segc('map.style', 'Map', [['dark', 'Dark'], ['light', 'Light'], ['satellite', 'Sat'], ['auto', 'Auto']])}
+      ${segc('map.look', 'Map', [['night', 'Night'], ['dusk', 'Dusk'], ['day', 'Day'], ['satellite', 'Sat']])}
+      ${segc('map.style', 'Panels', [['dark', 'Dark'], ['light', 'Light'], ['auto', 'Auto']])}
+      ${segc('map.frame', 'Layout', [['web', 'Full page'], ['phone', 'iPhone']])}
       ${sw('map.tilt', '3D view', 'Tilted map with 3D buildings')}
       <div class="li"><div class="grow t">Accent</div><div class="tints">${Object.entries(TINTS).map(([k, c]) => `<button data-tint="${k}" style="background:${c}" class="${DRAFT.map.tint === k ? 'on' : ''}" aria-label="${k}"></button>`).join('')}</div></div>
       ${sw('map.heatmap', 'Safety heatmap')}${sw('map.showSafe', 'Show “very safe” cells on the route')}
@@ -581,7 +599,7 @@ async function walkWithMe() {
 }
 function startTracking(rec) {
   stopTracking(true);
-  const path = pathOf(rec), send = (lat, lng, simulated) => { showMe(lat, lng); post(`/api/share/${shareId}/pos`, { lat, lng, simulated }).catch(() => {}); };
+  const path = pathOf(rec), send = (lat, lng, simulated) => { showMe(lat, lng); if (S.map.tilt && !driving) map.easeTo({ center: [lng, lat], zoom: 16.5, pitch: 60, duration: 1800 }); post(`/api/share/${shareId}/pos`, { lat, lng, simulated }).catch(() => {}); };
   const simulate = () => { let f = 0; const total = CURRENT.total_minutes * 60; const step = 2, speed = 20;
     simTimer = setInterval(() => { f += (step * speed) / total; const [la, ln] = alongPath(path, f); send(la, ln, true); if (f >= 1) clearInterval(simTimer); }, step * 1000);
     renderSharing(true); };
@@ -626,6 +644,42 @@ async function viewer(id) {
     } catch { $('sheet-body').innerHTML = '<div class="rname">This live link has expired</div>'; }
   };
   await tickV(); setInterval(tickV, 3000);
+}
+
+/* ======================= Tesla-style drive preview ======================= */
+let driving = null, puck = null;
+function bearingTo(a, b) { const r = Math.PI / 180, y = Math.sin((b[1] - a[1]) * r) * Math.cos(b[0] * r),
+  x = Math.cos(a[0] * r) * Math.sin(b[0] * r) - Math.sin(a[0] * r) * Math.cos(b[0] * r) * Math.cos((b[1] - a[1]) * r);
+  return (Math.atan2(y, x) / r + 360) % 360; }
+function drivePreview() {
+  if (!CURRENT || !map) return;
+  if (driving) return stopDrive();
+  const rec = TRIP.routes.find(r => r.id === CURRENT.recommended_route_id), path = pathOf(rec);
+  let total = 0; for (let i = 1; i < path.length; i++) total += hav(path[i - 1], path[i]);
+  const dur = Math.min(45000, Math.max(14000, total * 4)), t0 = performance.now();
+  let bear = bearingTo(path[0], path[Math.min(5, path.length - 1)]);
+  if (!puck) puck = new gl.Marker({ element: el('<div class="puck"><div></div></div>'), rotationAlignment: 'map', pitchAlignment: 'map' });
+  puck.setLngLat([path[0][1], path[0][0]]).addTo(map);
+  $('sheet').classList.remove('open'); document.querySelector('.ss-root').classList.add('driving');
+  $('drive-hud').style.display = 'flex';
+  const frame = now => {
+    const f = Math.min(1, (now - t0) / dur), p = alongPath(path, f), ahead = alongPath(path, Math.min(1, f + 0.012));
+    const target = hav(p, ahead) > 3 ? bearingTo(p, ahead) : bear;
+    let d = ((target - bear + 540) % 360) - 180; bear = (bear + d * 0.06 + 360) % 360;
+    map.jumpTo({ center: [p[1], p[0]], zoom: 17.2, pitch: 68, bearing: bear, padding: { top: 0, bottom: 0, left: isWeb() ? 420 : 0, right: 0 } });
+    puck.setLngLat([p[1], p[0]]).setRotation(bear);
+    const leg = legAt(rec, f);
+    $('drive-hud').innerHTML = `<div class="hud-main"><b>${esc(leg ? leg.label : rec.name)}</b><span>${Math.max(0, Math.round(CURRENT.total_minutes * (1 - f)))} min · ${Math.round(total * (1 - f) / 160.934) / 10} mi left</span></div><button onclick="drivePreview()">End</button>`;
+    if (f < 1) driving = requestAnimationFrame(frame); else stopDrive();
+  };
+  driving = requestAnimationFrame(frame);
+}
+function legAt(rec, f) { let tot = 0; const lens = rec.legs.map(l => { let d = 0; for (let i = 1; i < l.coords.length; i++) d += hav(l.coords[i - 1], l.coords[i]); tot += d; return d; });
+  let acc = 0; for (let i = 0; i < lens.length; i++) { acc += lens[i]; if (f * tot <= acc) return rec.legs[i]; } return rec.legs[rec.legs.length - 1]; }
+function stopDrive() {
+  if (driving) cancelAnimationFrame(driving); driving = null;
+  if (puck) puck.remove(); $('drive-hud').style.display = 'none'; document.querySelector('.ss-root').classList.remove('driving');
+  map.easeTo({ bearing: 0, duration: 600 }); setTimeout(() => fitView(true), 650);
 }
 
 /* ======================= refresh / scan ======================= */
@@ -676,7 +730,7 @@ addEventListener('keydown', e => { if (e.key === 'Escape') closeModals(true); })
   document.documentElement.dataset.theme = themeName(); initMap();
   applyTheme(); renderTiers(); renderWhen(); tick(); setInterval(tick, 15000);
   $('from').value = S.origin.name; $('to').value = S.destination.name; drawPins(); layoutFloating(); fitView();
-  try { const cfg = await (await fetch('/api/config')).json(); PRESETS = cfg.presets || []; } catch {}
+  try { const cfg = await (await fetch('/api/config')).json(); PRESETS = cfg.presets || []; if (cfg.ai === false) { S.advanced.ai = 'local'; toast('No Anthropic key on this server: using the free route scorer'); } } catch {}
   loadSpend(); setInterval(loadStatus, 30000);
   await loadCells().catch(() => {});
   if (isViewer()) return viewer(Q.get('watch'));
@@ -685,5 +739,5 @@ addEventListener('keydown', e => { if (e.key === 'Escape') closeModals(true); })
 
 Object.assign(window, { openStop, fetchPhoto, swapPhoto, stopTracking, openSettings, closeModals, applySettings, resetSettings,
   refreshNow, liveRefresh, setPlace, plan, swapOD, toggleHeat, locateMe, fitView, walkWithMe, closePopup, loadDemoTrip,
-  refreshAll, scanArea });
+  refreshAll, scanArea, drivePreview });
 }

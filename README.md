@@ -15,14 +15,20 @@ A door-to-door night navigator for San Francisco. For the demo trip (Mission & 1
 ```bash
 git clone https://github.com/marianaisaw/StreetSmart && cd StreetSmart
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-cp .env.example .env   # then paste your ANTHROPIC_API_KEY and APIFY_TOKEN into .env
-```
-
-The repo ships with the demo dataset (`data/*.json`), so the app runs straight away:
-
-```bash
+cp .env.example .env                    # ANTHROPIC_API_KEY (optional) + APIFY_TOKEN
+cd frontend && npm install
+cp .env.example .env                    # VITE_MAPBOX_TOKEN (optional: without it the app uses free MapLibre tiles)
+npm run build && cd ..
 .venv/bin/uvicorn server:app --port 8765
 ```
+
+Open http://localhost:8765 for the landing page (spinning globe), then **Plan a safe trip**. `?demo=1#app` opens the cached 11 PM demo trip; `/classic` is the original single-file Leaflet app. For front-end work, run `npm run dev` in `frontend/` (it proxies `/api` to :8765).
+
+- **No Anthropic key?** Everything still runs: plans come from the free route scorer (no tokens), and the demo trip uses saved Opus plans.
+- **Live data:** SFPD reports refresh citywide every 10 minutes; transit comes from Transitous (GTFS + real-time) for any SF trip; places from OpenStreetMap search.
+- **Token savers:** Opus plans are cached per trip + settings for 10 min; "Free re-score" / Route picker = Free never calls Claude; "Ask Opus 5.5" spends tokens only when you tap it.
+- **Refresh:** the refresh button pulls the newest SFPD reports and fresh departures; "Scan X + news here" runs Apify on places you haven't searched yet and has Opus read only the new posts.
+- **Map:** Mapbox Standard (Night / Dusk / Day / Satellite) with 3D buildings, glowing route, and a Tesla-style "Preview route" follow-camera.
 
 To rebuild the data from scratch (about $2 Apify + $0.60 Opus):
 
@@ -30,8 +36,6 @@ To rebuild the data from scratch (about $2 Apify + $0.60 Opus):
 .venv/bin/python scrape.py && .venv/bin/python extract.py && .venv/bin/python score.py
 .venv/bin/python warm_demo.py   # caches the 3 demo plans + stop captions
 ```
-
-Open http://localhost:8765 (live agent) or http://localhost:8765/?demo=1 (cached plans, instant). `python build_routes.py` rebuilds the candidate route geometry (OSRM); `python llm.py` prints total tokens and $ spent from `data/usage.log`.
 
 ## Settings
 
