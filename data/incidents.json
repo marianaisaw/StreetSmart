@@ -1895,19 +1895,6 @@
   "occurred_at": "2026-09-24T11:39:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: warrant"
- },
- {
-  "item_id": "datasf:1601907",
-  "source": "datasf",
-  "location_text": "HOWARD ST \\ MARY ST",
-  "lat": 37.780879974365234,
-  "lng": -122.40571594238281,
-  "incident_type": "police_activity",
-  "severity": 1,
-  "occurred_at": "2026-09-24T11:39:00-07:00",
-  "confidence": 0.95,
-  "url": "https://data.sf.gov/d/wg3w-h783",
   "summary": "SFPD report: drug violation"
  },
  {
@@ -1922,6 +1909,19 @@
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
   "summary": "SFPD report: other"
+ },
+ {
+  "item_id": "datasf:1601907",
+  "source": "datasf",
+  "location_text": "HOWARD ST \\ MARY ST",
+  "lat": 37.780879974365234,
+  "lng": -122.40571594238281,
+  "incident_type": "police_activity",
+  "severity": 1,
+  "occurred_at": "2026-09-24T11:39:00-07:00",
+  "confidence": 0.95,
+  "url": "https://data.sf.gov/d/wg3w-h783",
+  "summary": "SFPD report: warrant"
  },
  {
   "item_id": "datasf:1601913",
@@ -2961,7 +2961,7 @@
   "occurred_at": "2026-09-23T17:30:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: warrant"
+  "summary": "SFPD report: other"
  },
  {
   "item_id": "datasf:1601723",
@@ -2974,7 +2974,7 @@
   "occurred_at": "2026-09-23T17:30:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: other"
+  "summary": "SFPD report: warrant"
  },
  {
   "item_id": "datasf:1601723",
@@ -3052,7 +3052,7 @@
   "occurred_at": "2026-09-23T16:30:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: drug violation"
+  "summary": "SFPD report: warrant"
  },
  {
   "item_id": "datasf:1601780",
@@ -3065,7 +3065,7 @@
   "occurred_at": "2026-09-23T16:30:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: warrant"
+  "summary": "SFPD report: drug violation"
  },
  {
   "item_id": "datasf:1601714",
@@ -3164,12 +3164,12 @@
   "location_text": "AUSTIN ST \\ FRANK NORRIS ST \\ POLK ST",
   "lat": 37.78916549682617,
   "lng": -122.42040252685547,
-  "incident_type": "violent",
-  "severity": 4,
+  "incident_type": "hazard",
+  "severity": 1,
   "occurred_at": "2026-09-23T14:26:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: simple assault"
+  "summary": "SFPD report: vandalism"
  },
  {
   "item_id": "datasf:1601684",
@@ -3177,12 +3177,12 @@
   "location_text": "AUSTIN ST \\ FRANK NORRIS ST \\ POLK ST",
   "lat": 37.78916549682617,
   "lng": -122.42040252685547,
-  "incident_type": "hazard",
-  "severity": 1,
+  "incident_type": "violent",
+  "severity": 4,
   "occurred_at": "2026-09-23T14:26:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: vandalism"
+  "summary": "SFPD report: simple assault"
  },
  {
   "item_id": "datasf:1601698",
@@ -3372,12 +3372,12 @@
   "location_text": "GOUGH ST \\ PACIFIC AVE",
   "lat": 37.79439926147461,
   "lng": -122.426513671875,
-  "incident_type": "theft",
-  "severity": 2,
+  "incident_type": "police_activity",
+  "severity": 1,
   "occurred_at": "2026-09-23T13:00:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: burglary - residential"
+  "summary": "SFPD report: other"
  },
  {
   "item_id": "datasf:1601665",
@@ -3385,12 +3385,12 @@
   "location_text": "GOUGH ST \\ PACIFIC AVE",
   "lat": 37.79439926147461,
   "lng": -122.426513671875,
-  "incident_type": "police_activity",
-  "severity": 1,
+  "incident_type": "theft",
+  "severity": 2,
   "occurred_at": "2026-09-23T13:00:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: other"
+  "summary": "SFPD report: burglary - residential"
  },
  {
   "item_id": "datasf:1601660",
@@ -3637,7 +3637,7 @@
   "occurred_at": "2026-09-23T10:00:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: motor vehicle theft"
+  "summary": "SFPD report: burglary - residential"
  },
  {
   "item_id": "datasf:1601634",
@@ -3663,7 +3663,7 @@
   "occurred_at": "2026-09-23T10:00:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: burglary - residential"
+  "summary": "SFPD report: motor vehicle theft"
  },
  {
   "item_id": "datasf:1601633",
@@ -3674,19 +3674,6 @@
   "incident_type": "theft",
   "severity": 2,
   "occurred_at": "2026-09-23T09:53:00-07:00",
-  "confidence": 0.95,
-  "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: larceny theft - shoplifting"
- },
- {
-  "item_id": "datasf:1601625",
-  "source": "datasf",
-  "location_text": "04TH ST \\ CLARA ST",
-  "lat": 37.78121566772461,
-  "lng": -122.400146484375,
-  "incident_type": "theft",
-  "severity": 2,
-  "occurred_at": "2026-09-23T09:44:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
   "summary": "SFPD report: larceny theft - shoplifting"
@@ -3703,6 +3690,19 @@
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
   "summary": "SFPD report: vandalism"
+ },
+ {
+  "item_id": "datasf:1601625",
+  "source": "datasf",
+  "location_text": "04TH ST \\ CLARA ST",
+  "lat": 37.78121566772461,
+  "lng": -122.400146484375,
+  "incident_type": "theft",
+  "severity": 2,
+  "occurred_at": "2026-09-23T09:44:00-07:00",
+  "confidence": 0.95,
+  "url": "https://data.sf.gov/d/wg3w-h783",
+  "summary": "SFPD report: larceny theft - shoplifting"
  },
  {
   "item_id": "datasf:1601612",
@@ -4355,17 +4355,17 @@
   "summary": "SFPD report: robbery - other"
  },
  {
-  "item_id": "datasf:1601647",
+  "item_id": "datasf:1601543",
   "source": "datasf",
-  "location_text": "ALMA ST \\ COLE ST",
-  "lat": 37.76319885253906,
-  "lng": -122.44943237304688,
+  "location_text": "VICENTE ST \\ WEST PORTAL AVE",
+  "lat": 37.739723205566406,
+  "lng": -122.46698760986328,
   "incident_type": "theft",
   "severity": 2,
   "occurred_at": "2026-09-22T19:00:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: burglary - residential"
+  "summary": "SFPD report: larceny theft - other"
  },
  {
   "item_id": "datasf:1601741",
@@ -4381,17 +4381,17 @@
   "summary": "SFPD report: larceny theft - from building"
  },
  {
-  "item_id": "datasf:1601543",
+  "item_id": "datasf:1601647",
   "source": "datasf",
-  "location_text": "VICENTE ST \\ WEST PORTAL AVE",
-  "lat": 37.739723205566406,
-  "lng": -122.46698760986328,
+  "location_text": "ALMA ST \\ COLE ST",
+  "lat": 37.76319885253906,
+  "lng": -122.44943237304688,
   "incident_type": "theft",
   "severity": 2,
   "occurred_at": "2026-09-22T19:00:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: larceny theft - other"
+  "summary": "SFPD report: burglary - residential"
  },
  {
   "item_id": "datasf:1601613",
@@ -4573,7 +4573,7 @@
   "occurred_at": "2026-09-22T16:35:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: simple assault"
+  "summary": "SFPD report: aggravated assault"
  },
  {
   "item_id": "datasf:1601502",
@@ -4599,7 +4599,7 @@
   "occurred_at": "2026-09-22T16:35:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: aggravated assault"
+  "summary": "SFPD report: simple assault"
  },
  {
   "item_id": "datasf:1601491",
@@ -4628,19 +4628,6 @@
   "summary": "SFPD report: larceny theft - shoplifting"
  },
  {
-  "item_id": "datasf:1601644",
-  "source": "datasf",
-  "location_text": "ELWOOD ST \\ MASON ST",
-  "lat": 37.786659240722656,
-  "lng": -122.40977478027344,
-  "incident_type": "harassment",
-  "severity": 2,
-  "occurred_at": "2026-09-22T16:00:00-07:00",
-  "confidence": 0.95,
-  "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: intimidation"
- },
- {
   "item_id": "datasf:1601552",
   "source": "datasf",
   "location_text": "GROVE ST \\ VAN NESS AVE",
@@ -4654,17 +4641,17 @@
   "summary": "SFPD report: larceny theft - bicycle"
  },
  {
-  "item_id": "datasf:1601477",
+  "item_id": "datasf:1601644",
   "source": "datasf",
-  "location_text": "ELLIS ST \\ LEAVENWORTH ST",
-  "lat": 37.7846565246582,
-  "lng": -122.4144287109375,
-  "incident_type": "police_activity",
-  "severity": 1,
-  "occurred_at": "2026-09-22T15:50:00-07:00",
+  "location_text": "ELWOOD ST \\ MASON ST",
+  "lat": 37.786659240722656,
+  "lng": -122.40977478027344,
+  "incident_type": "harassment",
+  "severity": 2,
+  "occurred_at": "2026-09-22T16:00:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: drug violation"
+  "summary": "SFPD report: intimidation"
  },
  {
   "item_id": "datasf:1601477",
@@ -4678,6 +4665,19 @@
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
   "summary": "SFPD report: other"
+ },
+ {
+  "item_id": "datasf:1601477",
+  "source": "datasf",
+  "location_text": "ELLIS ST \\ LEAVENWORTH ST",
+  "lat": 37.7846565246582,
+  "lng": -122.4144287109375,
+  "incident_type": "police_activity",
+  "severity": 1,
+  "occurred_at": "2026-09-22T15:50:00-07:00",
+  "confidence": 0.95,
+  "url": "https://data.sf.gov/d/wg3w-h783",
+  "summary": "SFPD report: drug violation"
  },
  {
   "item_id": "datasf:1601496",
@@ -4716,7 +4716,7 @@
   "occurred_at": "2026-09-22T15:10:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: warrant"
+  "summary": "SFPD report: other"
  },
  {
   "item_id": "datasf:1601494",
@@ -4729,7 +4729,7 @@
   "occurred_at": "2026-09-22T15:10:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: other"
+  "summary": "SFPD report: warrant"
  },
  {
   "item_id": "datasf:1601932",
@@ -4810,7 +4810,7 @@
   "summary": "SFPD report: motor vehicle theft"
  },
  {
-  "item_id": "datasf:1601394",
+  "item_id": "datasf:1601463",
   "source": "datasf",
   "location_text": "19TH ST \\ FLORIDA ST",
   "lat": 37.76042556762695,
@@ -4823,7 +4823,7 @@
   "summary": "SFPD report: motor vehicle theft"
  },
  {
-  "item_id": "datasf:1601463",
+  "item_id": "datasf:1601394",
   "source": "datasf",
   "location_text": "19TH ST \\ FLORIDA ST",
   "lat": 37.76042556762695,
@@ -4950,7 +4950,20 @@
   "occurred_at": "2026-09-22T12:45:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: other"
+  "summary": "SFPD report: warrant"
+ },
+ {
+  "item_id": "datasf:1601388",
+  "source": "datasf",
+  "location_text": "20TH AVE \\ BUCKINGHAM WAY \\ WINSTON DR",
+  "lat": 37.73011779785156,
+  "lng": -122.47593688964844,
+  "incident_type": "theft",
+  "severity": 2,
+  "occurred_at": "2026-09-22T12:45:00-07:00",
+  "confidence": 0.95,
+  "url": "https://data.sf.gov/d/wg3w-h783",
+  "summary": "SFPD report: larceny theft - other"
  },
  {
   "item_id": "datasf:1601489",
@@ -4971,25 +4984,12 @@
   "location_text": "20TH AVE \\ BUCKINGHAM WAY \\ WINSTON DR",
   "lat": 37.73011779785156,
   "lng": -122.47593688964844,
-  "incident_type": "theft",
-  "severity": 2,
-  "occurred_at": "2026-09-22T12:45:00-07:00",
-  "confidence": 0.95,
-  "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: larceny theft - other"
- },
- {
-  "item_id": "datasf:1601388",
-  "source": "datasf",
-  "location_text": "20TH AVE \\ BUCKINGHAM WAY \\ WINSTON DR",
-  "lat": 37.73011779785156,
-  "lng": -122.47593688964844,
   "incident_type": "police_activity",
   "severity": 1,
   "occurred_at": "2026-09-22T12:45:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: warrant"
+  "summary": "SFPD report: other"
  },
  {
   "item_id": "datasf:1601602",
@@ -5005,17 +5005,43 @@
   "summary": "SFPD report: vandalism"
  },
  {
-  "item_id": "datasf:1601691",
+  "item_id": "datasf:1601376",
   "source": "datasf",
-  "location_text": "21ST AVE \\ ANZA ST",
-  "lat": 37.778358459472656,
-  "lng": -122.48030853271484,
-  "incident_type": "theft",
-  "severity": 2,
+  "location_text": "GOLDEN GATE AVE \\ LEAVENWORTH ST",
+  "lat": 37.781864166259766,
+  "lng": -122.41386413574219,
+  "incident_type": "police_activity",
+  "severity": 1,
   "occurred_at": "2026-09-22T12:40:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: motor vehicle theft"
+  "summary": "SFPD report: drug violation"
+ },
+ {
+  "item_id": "datasf:1601376",
+  "source": "datasf",
+  "location_text": "GOLDEN GATE AVE \\ LEAVENWORTH ST",
+  "lat": 37.781864166259766,
+  "lng": -122.41386413574219,
+  "incident_type": "police_activity",
+  "severity": 1,
+  "occurred_at": "2026-09-22T12:40:00-07:00",
+  "confidence": 0.95,
+  "url": "https://data.sf.gov/d/wg3w-h783",
+  "summary": "SFPD report: drug violation"
+ },
+ {
+  "item_id": "datasf:1601376",
+  "source": "datasf",
+  "location_text": "GOLDEN GATE AVE \\ LEAVENWORTH ST",
+  "lat": 37.781864166259766,
+  "lng": -122.41386413574219,
+  "incident_type": "police_activity",
+  "severity": 1,
+  "occurred_at": "2026-09-22T12:40:00-07:00",
+  "confidence": 0.95,
+  "url": "https://data.sf.gov/d/wg3w-h783",
+  "summary": "SFPD report: drug violation"
  },
  {
   "item_id": "datasf:1601482",
@@ -5031,43 +5057,17 @@
   "summary": "SFPD report: burglary - residential"
  },
  {
-  "item_id": "datasf:1601376",
+  "item_id": "datasf:1601691",
   "source": "datasf",
-  "location_text": "GOLDEN GATE AVE \\ LEAVENWORTH ST",
-  "lat": 37.781864166259766,
-  "lng": -122.41386413574219,
-  "incident_type": "police_activity",
-  "severity": 1,
+  "location_text": "21ST AVE \\ ANZA ST",
+  "lat": 37.778358459472656,
+  "lng": -122.48030853271484,
+  "incident_type": "theft",
+  "severity": 2,
   "occurred_at": "2026-09-22T12:40:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: drug violation"
- },
- {
-  "item_id": "datasf:1601376",
-  "source": "datasf",
-  "location_text": "GOLDEN GATE AVE \\ LEAVENWORTH ST",
-  "lat": 37.781864166259766,
-  "lng": -122.41386413574219,
-  "incident_type": "police_activity",
-  "severity": 1,
-  "occurred_at": "2026-09-22T12:40:00-07:00",
-  "confidence": 0.95,
-  "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: drug violation"
- },
- {
-  "item_id": "datasf:1601376",
-  "source": "datasf",
-  "location_text": "GOLDEN GATE AVE \\ LEAVENWORTH ST",
-  "lat": 37.781864166259766,
-  "lng": -122.41386413574219,
-  "incident_type": "police_activity",
-  "severity": 1,
-  "occurred_at": "2026-09-22T12:40:00-07:00",
-  "confidence": 0.95,
-  "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: drug violation"
+  "summary": "SFPD report: motor vehicle theft"
  },
  {
   "item_id": "datasf:1601380",
@@ -5093,7 +5093,7 @@
   "occurred_at": "2026-09-22T11:35:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: other"
+  "summary": "SFPD report: drug violation"
  },
  {
   "item_id": "datasf:1601465",
@@ -5119,7 +5119,7 @@
   "occurred_at": "2026-09-22T11:35:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: drug violation"
+  "summary": "SFPD report: other"
  },
  {
   "item_id": "datasf:1601374",
@@ -5153,12 +5153,25 @@
   "location_text": "OFARRELL ST \\ POWELL ST",
   "lat": 37.78641128540039,
   "lng": -122.40803527832031,
-  "incident_type": "police_activity",
+  "incident_type": "theft",
+  "severity": 2,
+  "occurred_at": "2026-09-22T11:00:00-07:00",
+  "confidence": 0.95,
+  "url": "https://data.sf.gov/d/wg3w-h783",
+  "summary": "SFPD report: larceny theft - shoplifting"
+ },
+ {
+  "item_id": "datasf:1601346",
+  "source": "datasf",
+  "location_text": "GRIFFITH ST \\ OAKDALE AVE",
+  "lat": 37.728233337402344,
+  "lng": -122.3791732788086,
+  "incident_type": "hazard",
   "severity": 1,
   "occurred_at": "2026-09-22T11:00:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: other"
+  "summary": "SFPD report: vandalism"
  },
  {
   "item_id": "datasf:1601369",
@@ -5179,25 +5192,12 @@
   "location_text": "OFARRELL ST \\ POWELL ST",
   "lat": 37.78641128540039,
   "lng": -122.40803527832031,
-  "incident_type": "theft",
-  "severity": 2,
-  "occurred_at": "2026-09-22T11:00:00-07:00",
-  "confidence": 0.95,
-  "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: larceny theft - shoplifting"
- },
- {
-  "item_id": "datasf:1601346",
-  "source": "datasf",
-  "location_text": "GRIFFITH ST \\ OAKDALE AVE",
-  "lat": 37.728233337402344,
-  "lng": -122.3791732788086,
-  "incident_type": "hazard",
+  "incident_type": "police_activity",
   "severity": 1,
   "occurred_at": "2026-09-22T11:00:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: vandalism"
+  "summary": "SFPD report: other"
  },
  {
   "item_id": "datasf:1601342",
@@ -5283,12 +5283,12 @@
   "location_text": "BROADWAY \\ POWELL ST \\ ROBERT C LEVY TUNL",
   "lat": 37.797420501708984,
   "lng": -122.41026306152344,
-  "incident_type": "hazard",
-  "severity": 1,
+  "incident_type": "harassment",
+  "severity": 2,
   "occurred_at": "2026-09-22T10:06:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: vandalism"
+  "summary": "SFPD report: intimidation"
  },
  {
   "item_id": "datasf:1601337",
@@ -5296,12 +5296,12 @@
   "location_text": "BROADWAY \\ POWELL ST \\ ROBERT C LEVY TUNL",
   "lat": 37.797420501708984,
   "lng": -122.41026306152344,
-  "incident_type": "harassment",
-  "severity": 2,
+  "incident_type": "hazard",
+  "severity": 1,
   "occurred_at": "2026-09-22T10:06:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: intimidation"
+  "summary": "SFPD report: vandalism"
  },
  {
   "item_id": "datasf:1601593",
@@ -5626,7 +5626,7 @@
   "occurred_at": "2026-09-22T02:51:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: warrant"
+  "summary": "SFPD report: drug violation"
  },
  {
   "item_id": "datasf:1601248",
@@ -5639,7 +5639,7 @@
   "occurred_at": "2026-09-22T02:51:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: drug violation"
+  "summary": "SFPD report: warrant"
  },
  {
   "item_id": "datasf:1601303",
@@ -6383,19 +6383,6 @@
   "summary": "SFPD report: drug violation"
  },
  {
-  "item_id": "datasf:1601479",
-  "source": "datasf",
-  "location_text": "INDIANA ST \\ MARIN ST",
-  "lat": 37.74878692626953,
-  "lng": -122.39029693603516,
-  "incident_type": "theft",
-  "severity": 2,
-  "occurred_at": "2026-09-21T16:00:00-07:00",
-  "confidence": 0.95,
-  "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: theft from vehicle"
- },
- {
   "item_id": "datasf:1601155",
   "source": "datasf",
   "location_text": "GOLDEN GATE AVE \\ LEAVENWORTH ST",
@@ -6410,6 +6397,19 @@
  },
  {
   "item_id": "datasf:1601462",
+  "source": "datasf",
+  "location_text": "INDIANA ST \\ MARIN ST",
+  "lat": 37.74878692626953,
+  "lng": -122.39029693603516,
+  "incident_type": "theft",
+  "severity": 2,
+  "occurred_at": "2026-09-21T16:00:00-07:00",
+  "confidence": 0.95,
+  "url": "https://data.sf.gov/d/wg3w-h783",
+  "summary": "SFPD report: theft from vehicle"
+ },
+ {
+  "item_id": "datasf:1601479",
   "source": "datasf",
   "location_text": "INDIANA ST \\ MARIN ST",
   "lat": 37.74878692626953,
@@ -7722,19 +7722,6 @@
   "summary": "SFPD report: drug violation"
  },
  {
-  "item_id": "datasf:1600986",
-  "source": "datasf",
-  "location_text": "HYDE ST \\ TURK ST",
-  "lat": 37.78258514404297,
-  "lng": -122.41569519042969,
-  "incident_type": "police_activity",
-  "severity": 1,
-  "occurred_at": "2026-09-20T22:02:00-07:00",
-  "confidence": 0.95,
-  "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: warrant"
- },
- {
   "item_id": "datasf:1601021",
   "source": "datasf",
   "location_text": "EDDY ST \\ TAYLOR ST",
@@ -7759,6 +7746,19 @@
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
   "summary": "SFPD report: intimidation"
+ },
+ {
+  "item_id": "datasf:1600986",
+  "source": "datasf",
+  "location_text": "HYDE ST \\ TURK ST",
+  "lat": 37.78258514404297,
+  "lng": -122.41569519042969,
+  "incident_type": "police_activity",
+  "severity": 1,
+  "occurred_at": "2026-09-20T22:02:00-07:00",
+  "confidence": 0.95,
+  "url": "https://data.sf.gov/d/wg3w-h783",
+  "summary": "SFPD report: warrant"
  },
  {
   "item_id": "datasf:1601053",
@@ -8047,19 +8047,6 @@
   "summary": "SFPD report: drug violation"
  },
  {
-  "item_id": "datasf:1601340",
-  "source": "datasf",
-  "location_text": "BRUNSWICK ST \\ CURTIS ST",
-  "lat": 37.71175003051758,
-  "lng": -122.43907928466797,
-  "incident_type": "theft",
-  "severity": 2,
-  "occurred_at": "2026-09-20T18:00:00-07:00",
-  "confidence": 0.95,
-  "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: larceny - from vehicle"
- },
- {
   "item_id": "datasf:1601032",
   "source": "datasf",
   "location_text": "17TH ST \\ CAROLINA ST",
@@ -8201,6 +8188,19 @@
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
   "summary": "SFPD report: drug violation"
+ },
+ {
+  "item_id": "datasf:1601340",
+  "source": "datasf",
+  "location_text": "BRUNSWICK ST \\ CURTIS ST",
+  "lat": 37.71175003051758,
+  "lng": -122.43907928466797,
+  "incident_type": "theft",
+  "severity": 2,
+  "occurred_at": "2026-09-20T18:00:00-07:00",
+  "confidence": 0.95,
+  "url": "https://data.sf.gov/d/wg3w-h783",
+  "summary": "SFPD report: larceny - from vehicle"
  },
  {
   "item_id": "datasf:1601979",
@@ -8554,19 +8554,6 @@
   "summary": "SFPD report: simple assault"
  },
  {
-  "item_id": "datasf:1600904",
-  "source": "datasf",
-  "location_text": "POST ST \\ STOCKTON ST",
-  "lat": 37.78849792480469,
-  "lng": -122.40676879882812,
-  "incident_type": "hazard",
-  "severity": 1,
-  "occurred_at": "2026-09-20T15:04:00-07:00",
-  "confidence": 0.95,
-  "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: vandalism"
- },
- {
   "item_id": "datasf:1600912",
   "source": "datasf",
   "location_text": "06TH ST \\ TEHAMA ST",
@@ -8578,6 +8565,19 @@
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
   "summary": "SFPD report: drunkenness"
+ },
+ {
+  "item_id": "datasf:1600904",
+  "source": "datasf",
+  "location_text": "POST ST \\ STOCKTON ST",
+  "lat": 37.78849792480469,
+  "lng": -122.40676879882812,
+  "incident_type": "hazard",
+  "severity": 1,
+  "occurred_at": "2026-09-20T15:04:00-07:00",
+  "confidence": 0.95,
+  "url": "https://data.sf.gov/d/wg3w-h783",
+  "summary": "SFPD report: vandalism"
  },
  {
   "item_id": "datasf:1601940",
@@ -8593,11 +8593,11 @@
   "summary": "SFPD report: larceny theft - shoplifting"
  },
  {
-  "item_id": "datasf:1600981",
+  "item_id": "datasf:1601273",
   "source": "datasf",
-  "location_text": "LARKIN ST \\ NORTH POINT ST",
-  "lat": 37.80549621582031,
-  "lng": -122.42200469970703,
+  "location_text": "14TH ST \\ FOLSOM ST",
+  "lat": 37.76853561401367,
+  "lng": -122.41561126708984,
   "incident_type": "theft",
   "severity": 2,
   "occurred_at": "2026-09-20T15:00:00-07:00",
@@ -8606,11 +8606,11 @@
   "summary": "SFPD report: larceny - from vehicle"
  },
  {
-  "item_id": "datasf:1601273",
+  "item_id": "datasf:1600981",
   "source": "datasf",
-  "location_text": "14TH ST \\ FOLSOM ST",
-  "lat": 37.76853561401367,
-  "lng": -122.41561126708984,
+  "location_text": "LARKIN ST \\ NORTH POINT ST",
+  "lat": 37.80549621582031,
+  "lng": -122.42200469970703,
   "incident_type": "theft",
   "severity": 2,
   "occurred_at": "2026-09-20T15:00:00-07:00",
@@ -8671,19 +8671,6 @@
   "summary": "SFPD report: larceny theft - other"
  },
  {
-  "item_id": "datasf:1600915",
-  "source": "datasf",
-  "location_text": "25TH ST \\ OSAGE ALY",
-  "lat": 37.750606536865234,
-  "lng": -122.41886138916016,
-  "incident_type": "theft",
-  "severity": 2,
-  "occurred_at": "2026-09-20T14:20:00-07:00",
-  "confidence": 0.95,
-  "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: motor vehicle theft"
- },
- {
   "item_id": "datasf:1601075",
   "source": "datasf",
   "location_text": "17TH ST \\ MISSION ST",
@@ -8695,6 +8682,19 @@
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
   "summary": "SFPD report: robbery - street"
+ },
+ {
+  "item_id": "datasf:1600915",
+  "source": "datasf",
+  "location_text": "25TH ST \\ OSAGE ALY",
+  "lat": 37.750606536865234,
+  "lng": -122.41886138916016,
+  "incident_type": "theft",
+  "severity": 2,
+  "occurred_at": "2026-09-20T14:20:00-07:00",
+  "confidence": 0.95,
+  "url": "https://data.sf.gov/d/wg3w-h783",
+  "summary": "SFPD report: motor vehicle theft"
  },
  {
   "item_id": "datasf:1600896",
@@ -9152,19 +9152,6 @@
   "summary": "SFPD report: aggravated assault"
  },
  {
-  "item_id": "datasf:1600919",
-  "source": "datasf",
-  "location_text": "ARGUELLO BLVD \\ FREDERICK ST \\ LINCOLN WAY",
-  "lat": 37.766014099121094,
-  "lng": -122.4577865600586,
-  "incident_type": "theft",
-  "severity": 2,
-  "occurred_at": "2026-09-20T08:00:00-07:00",
-  "confidence": 0.95,
-  "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: motor vehicle theft"
- },
- {
   "item_id": "datasf:1601822",
   "source": "datasf",
   "location_text": "DUBOCE AVE \\ FILLMORE ST",
@@ -9176,6 +9163,19 @@
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
   "summary": "SFPD report: larceny theft - other"
+ },
+ {
+  "item_id": "datasf:1600919",
+  "source": "datasf",
+  "location_text": "ARGUELLO BLVD \\ FREDERICK ST \\ LINCOLN WAY",
+  "lat": 37.766014099121094,
+  "lng": -122.4577865600586,
+  "incident_type": "theft",
+  "severity": 2,
+  "occurred_at": "2026-09-20T08:00:00-07:00",
+  "confidence": 0.95,
+  "url": "https://data.sf.gov/d/wg3w-h783",
+  "summary": "SFPD report: motor vehicle theft"
  },
  {
   "item_id": "datasf:1600829",
@@ -9711,19 +9711,6 @@
   "summary": "SFPD report: other"
  },
  {
-  "item_id": "datasf:1600759",
-  "source": "datasf",
-  "location_text": "FRANCE AVE \\ MISSION ST",
-  "lat": 37.72001647949219,
-  "lng": -122.4383316040039,
-  "incident_type": "theft",
-  "severity": 2,
-  "occurred_at": "2026-09-19T23:30:00-07:00",
-  "confidence": 0.95,
-  "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: larceny theft - shoplifting"
- },
- {
   "item_id": "datasf:1601077",
   "source": "datasf",
   "location_text": "JACKSON ST \\ WENTWORTH PL",
@@ -9737,6 +9724,19 @@
   "summary": "SFPD report: larceny theft - pickpocket"
  },
  {
+  "item_id": "datasf:1600759",
+  "source": "datasf",
+  "location_text": "FRANCE AVE \\ MISSION ST",
+  "lat": 37.72001647949219,
+  "lng": -122.4383316040039,
+  "incident_type": "theft",
+  "severity": 2,
+  "occurred_at": "2026-09-19T23:30:00-07:00",
+  "confidence": 0.95,
+  "url": "https://data.sf.gov/d/wg3w-h783",
+  "summary": "SFPD report: larceny theft - shoplifting"
+ },
+ {
   "item_id": "datasf:1600784",
   "source": "datasf",
   "location_text": "04TH ST \\ TOWNSEND ST",
@@ -9748,6 +9748,19 @@
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
   "summary": "SFPD report: larceny theft - bicycle"
+ },
+ {
+  "item_id": "datasf:1601254",
+  "source": "datasf",
+  "location_text": "FILLMORE ST \\ MOULTON ST",
+  "lat": 37.79941940307617,
+  "lng": -122.43595886230469,
+  "incident_type": "theft",
+  "severity": 2,
+  "occurred_at": "2026-09-19T23:00:00-07:00",
+  "confidence": 0.95,
+  "url": "https://data.sf.gov/d/wg3w-h783",
+  "summary": "SFPD report: larceny theft - other"
  },
  {
   "item_id": "datasf:1601018",
@@ -9807,19 +9820,6 @@
   "location_text": "GREEN ST \\ POWELL ST",
   "lat": 37.79930114746094,
   "lng": -122.41064453125,
-  "incident_type": "theft",
-  "severity": 2,
-  "occurred_at": "2026-09-19T23:00:00-07:00",
-  "confidence": 0.95,
-  "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: larceny theft - other"
- },
- {
-  "item_id": "datasf:1601254",
-  "source": "datasf",
-  "location_text": "FILLMORE ST \\ MOULTON ST",
-  "lat": 37.79941940307617,
-  "lng": -122.43595886230469,
   "incident_type": "theft",
   "severity": 2,
   "occurred_at": "2026-09-19T23:00:00-07:00",
@@ -10335,6 +10335,19 @@
   "summary": "SFPD report: larceny theft - shoplifting"
  },
  {
+  "item_id": "datasf:1601267",
+  "source": "datasf",
+  "location_text": "22ND ST \\ SHOTWELL ST",
+  "lat": 37.75563430786133,
+  "lng": -122.41547393798828,
+  "incident_type": "theft",
+  "severity": 2,
+  "occurred_at": "2026-09-19T17:30:00-07:00",
+  "confidence": 0.95,
+  "url": "https://data.sf.gov/d/wg3w-h783",
+  "summary": "SFPD report: larceny theft - other"
+ },
+ {
   "item_id": "datasf:1600849",
   "source": "datasf",
   "location_text": "SANSOME ST \\ VALLEJO ST",
@@ -10385,19 +10398,6 @@
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
   "summary": "SFPD report: motor vehicle theft"
- },
- {
-  "item_id": "datasf:1601267",
-  "source": "datasf",
-  "location_text": "22ND ST \\ SHOTWELL ST",
-  "lat": 37.75563430786133,
-  "lng": -122.41547393798828,
-  "incident_type": "theft",
-  "severity": 2,
-  "occurred_at": "2026-09-19T17:30:00-07:00",
-  "confidence": 0.95,
-  "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: larceny theft - other"
  },
  {
   "item_id": "datasf:1600705",
@@ -10457,12 +10457,12 @@
   "location_text": "KEARNY ST \\ UNION ST",
   "lat": 37.80083465576172,
   "lng": -122.40602111816406,
-  "incident_type": "violent",
-  "severity": 3,
+  "incident_type": "theft",
+  "severity": 2,
   "occurred_at": "2026-09-19T16:14:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: weapons offense"
+  "summary": "SFPD report: burglary - residential"
  },
  {
   "item_id": "datasf:1600710",
@@ -10470,12 +10470,12 @@
   "location_text": "KEARNY ST \\ UNION ST",
   "lat": 37.80083465576172,
   "lng": -122.40602111816406,
-  "incident_type": "theft",
-  "severity": 2,
+  "incident_type": "violent",
+  "severity": 3,
   "occurred_at": "2026-09-19T16:14:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: burglary - residential"
+  "summary": "SFPD report: weapons offense"
  },
  {
   "item_id": "datasf:1600716",
@@ -10574,8 +10574,8 @@
   "location_text": "EDDY ST \\ LEAVENWORTH ST",
   "lat": 37.783721923828125,
   "lng": -122.41423797607422,
-  "incident_type": "police_activity",
-  "severity": 1,
+  "incident_type": "harassment",
+  "severity": 2,
   "occurred_at": "2026-09-19T14:24:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
@@ -10587,8 +10587,8 @@
   "location_text": "EDDY ST \\ LEAVENWORTH ST",
   "lat": 37.783721923828125,
   "lng": -122.41423797607422,
-  "incident_type": "harassment",
-  "severity": 2,
+  "incident_type": "police_activity",
+  "severity": 1,
   "occurred_at": "2026-09-19T14:24:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",
@@ -10881,19 +10881,6 @@
   "summary": "SFPD report: larceny theft - shoplifting"
  },
  {
-  "item_id": "datasf:1600681",
-  "source": "datasf",
-  "location_text": "LARKIN ST \\ OFARRELL ST",
-  "lat": 37.7851676940918,
-  "lng": -122.41790008544922,
-  "incident_type": "police_activity",
-  "severity": 1,
-  "occurred_at": "2026-09-19T12:09:00-07:00",
-  "confidence": 0.95,
-  "url": "https://data.sf.gov/d/wg3w-h783",
-  "summary": "SFPD report: drug violation"
- },
- {
   "item_id": "datasf:1600708",
   "source": "datasf",
   "location_text": "JONES ST \\ OFARRELL ST",
@@ -10940,6 +10927,19 @@
   "lng": -122.41790008544922,
   "incident_type": "harassment",
   "severity": 2,
+  "occurred_at": "2026-09-19T12:09:00-07:00",
+  "confidence": 0.95,
+  "url": "https://data.sf.gov/d/wg3w-h783",
+  "summary": "SFPD report: drug violation"
+ },
+ {
+  "item_id": "datasf:1600681",
+  "source": "datasf",
+  "location_text": "LARKIN ST \\ OFARRELL ST",
+  "lat": 37.7851676940918,
+  "lng": -122.41790008544922,
+  "incident_type": "police_activity",
+  "severity": 1,
   "occurred_at": "2026-09-19T12:09:00-07:00",
   "confidence": 0.95,
   "url": "https://data.sf.gov/d/wg3w-h783",

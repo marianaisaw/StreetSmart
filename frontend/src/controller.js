@@ -15,6 +15,7 @@ const DEFAULTS = {
   priority: 30, max_walk_min: 15, modes: { walk: true, muni: true, bart: true, uber: true }, surge: 1.0, effort: 'medium',
   scoring: { weights: { datasf: 1.0, news: 0.8, x: 0.4 }, halflife_hours: 72, night: true, night_mult: 1.5, thresholds: [2, 6] },
   map: { heatmap: true, opacity: 1, showSafe: true, alternatives: true, legend: true, style: 'dark', tint: 'blue', tilt: true, look: 'night', frame: 'web' },
+  bubbles: { on: true, news: true, x: true, sfpd: true, max: 12 },
   stops: { autoCaption: true, autoPhoto: false },
   share: { name: '', eta: true, simulate: 'auto' },
   advanced: { demo: false, trace: false, ai: 'opus' },
@@ -74,6 +75,7 @@ function initMap() {
   map.on('error', e => console.warn('map error', e && e.error && e.error.message));
   map.on('style.load', () => { applyLook(map, S.map.look); addLayers(); });
   map.on('click', onMapClick);
+  map.on('moveend', () => { clearTimeout(bubbleTimer); bubbleTimer = setTimeout(() => drawBubbles(), 120); });
   map.on('mouseenter', 'cells-fill', () => map.getCanvas().style.cursor = 'pointer');
   map.on('mouseleave', 'cells-fill', () => map.getCanvas().style.cursor = '');
 }
@@ -350,6 +352,7 @@ function renderPlan() {
       <button class="btn gray" onclick="scanArea(this)">Scan X + news here</button></div>
     <div class="section-h">Steps</div><div class="list">${legs}</div>
     ${stops ? `<div class="section-h">Stops</div><div class="list">${stops}</div>` : ''}
+    ${(() => { const nn = newsNearRoute(rec); return nn.length ? `<div class="section-h">News near this route</div><div class="list">${nn.map(it => `<div class="li${it.url ? ' tap' : ''}" ${it.url ? `onclick="window.open('${esc(it.url)}','_blank')"` : ''}><span class="badge b-${it.source}">${SRC[it.source]}</span><div class="grow"><div class="t" style="font-size:14px">${esc(it.summary)}</div><div class="s">${esc(it.where || '')}${it.hours_ago != null ? ' · ' + agoH(it.hours_ago) : ''}</div></div></div>`).join('')}</div>` : ''; })()}
     ${alts ? `<div class="section-h">Also considered</div><div class="list">${alts}</div>` : ''}
     ${trace}
     <div class="foot" style="margin-top:14px">${p.source === 'local' ? 'Scored without AI (free)' : p.cached ? 'Cached Opus 5.5 plan (no new tokens)' : 'Planned live by Claude Opus 5.5'} · ${TRIP.live ? 'transit from Transitous (real-time where available)' : 'precomputed demo routes'} · fares from SFMTA and BART · rideshare prices are estimates</div>`;
@@ -408,7 +411,7 @@ function closeStop() { $('stop-modal').classList.remove('open'); if (!$('setting
 function openModal(id) { $('scrim').classList.add('on'); $(id).classList.add('open'); }
 function closeModals(cancel) {
   $('scrim').classList.remove('on'); document.querySelectorAll('.modal').forEach(m => m.classList.remove('open'));
-  if (cancel && DRAFT) { DRAFT = null; applyTheme(); }
+  if (cancel && DRAFT) { DRAFT = null; applyTheme(); drawBubbles(); }
 }
 
 /* ======================= settings UI ======================= */
@@ -481,6 +484,13 @@ function renderSettings(section) {
       ${sw('map.legend', 'Legend')}${sw('map.alternatives', 'Show other routes')}
     </div>
 
+    <div class="section-h">News bubbles</div><div class="list">
+      ${sw('bubbles.on', 'Show news bubbles on the map', 'Brief notes from local news, X posts and SFPD hotspots')}
+      ${sw('bubbles.news', 'Local news')}${sw('bubbles.x', 'X posts')}${sw('bubbles.sfpd', 'SFPD hotspots')}
+      ${stepper('bubbles.max', 'Max bubbles on screen', 2, 2, 30, FMT.n)}
+    </div>
+    <div class="foot">Tap a bubble to see where it happened and open the source.</div>
+
     <div class="section-h">Stops</div><div class="list">
       ${sw('stops.autoCaption', 'Auto-caption stop photos', 'Opus 5.5 vision, cached after the first look')}
       ${sw('stops.autoPhoto', 'Auto-fetch missing stop photos', 'Runs a small Apify Google Maps job (~1¢, ~30 s)')}
@@ -511,7 +521,7 @@ function renderSettings(section) {
 function preview() { applyTheme(DRAFT); }
 function bindSettings() {
   const body = $('settings-body');
-  const after = p => { if (p.startsWith('map.')) preview(); };
+  const after = p => { if (p.startsWith('map.')) preview(); if (p.startsWith('bubbles.')) drawBubbles(DRAFT); };
   body.querySelectorAll('input[type=checkbox]').forEach(i => i.onchange = () => { set(DRAFT, i.dataset.p, i.checked); after(i.dataset.p); });
   body.querySelectorAll('input[type=range]').forEach(i => i.oninput = () => { set(DRAFT, i.dataset.p, +i.value); $('v-' + i.dataset.p).textContent = fmtFor[i.dataset.p](+i.value); after(i.dataset.p); });
   body.querySelectorAll('input.txt').forEach(i => i.oninput = () => set(DRAFT, i.dataset.p, i.value));
@@ -535,7 +545,7 @@ async function applySettings() {
   if (!Object.values(DRAFT.modes).some(Boolean)) DRAFT.modes.uber = true;
   DRAFT.origin = S.origin; DRAFT.destination = S.destination;
   S = DRAFT; DRAFT = null; save(); closeModals();
-  renderTiers(); renderWhen(); applyTheme(); tick();
+  renderTiers(); renderWhen(); applyTheme(); drawBubbles(); tick();
   if (JSON.stringify([S.scoring, S.depart]) !== beforeScore) await loadCells();
   if (JSON.stringify(planBody()) !== before || S.advanced.demo !== demoBefore) plan();
   else if (CURRENT) { drawRoutes(CURRENT.recommended_route_id); renderPlan(); }
@@ -646,6 +656,44 @@ async function viewer(id) {
   await tickV(); setInterval(tickV, 3000);
 }
 
+/* ======================= news bubbles ======================= */
+let NEWS = { items: [], hotspots: [] }, bubbleMarkers = [], bubbleTimer = null;
+const TYPE_LABEL = { violent: 'Violence', theft: 'Theft', harassment: 'Harassment', hazard: 'Hazard', police_activity: 'Police', other: 'Report', hotspot: 'Hotspot' };
+async function loadNews() {
+  try { NEWS = await (await fetch('/api/news')).json(); } catch { NEWS = { items: [], hotspots: [] }; }
+  drawBubbles(); if (CURRENT) renderPlan();
+}
+function agoH(h) { return h == null ? '' : h < 1 ? 'just now' : h < 24 ? `${Math.round(h)}h ago` : `${Math.round(h / 24)}d ago`; }
+function bubbleSet(st = S) {
+  const b = st.bubbles;
+  return [...NEWS.items.filter(i => (i.source === 'news' && b.news) || (i.source === 'x' && b.x)), ...(b.sfpd ? NEWS.hotspots : [])];
+}
+function drawBubbles(st = S) {
+  bubbleMarkers.forEach(m => m.remove()); bubbleMarkers = [];
+  $('fab-news')?.classList.toggle('off', !st.bubbles.on);
+  if (!map || !st.bubbles.on || driving || map.getZoom() < 11) return;
+  const bounds = map.getBounds(), placed = [];
+  const cand = bubbleSet(st).filter(i => bounds.contains([i.lng, i.lat]))
+    .sort((a, b) => (b.source !== 'datasf') - (a.source !== 'datasf') || b.severity - a.severity || (a.hours_ago ?? 1e9) - (b.hours_ago ?? 1e9));
+  for (const it of cand) {
+    if (placed.length >= st.bubbles.max) break;
+    const p = map.project([it.lng, it.lat]);
+    if (placed.some(q => Math.abs(q.x - p.x) < 190 && Math.abs(q.y - p.y) < 64)) continue;  // declutter
+    placed.push(p);
+    const src = it.source === 'datasf' ? 'SFPD data' : SRC[it.source];
+    const node = el(`<div class="nb nb-${it.source}"><div class="nb-h"><span class="badge b-${it.source}">${src}</span><span>${esc(TYPE_LABEL[it.type] || '')}</span><span class="nb-t">${agoH(it.hours_ago)}</span></div>
+      <div class="nb-s">${esc(it.summary)}</div>
+      <div class="nb-more">${it.where ? `<div>${esc(it.where)}</div>` : ''}${it.url ? `<a href="${esc(it.url)}" target="_blank" rel="noopener">Open source ↗</a>` : ''}</div></div>`);
+    node.addEventListener('click', e => { e.stopPropagation(); node.classList.toggle('open'); });
+    bubbleMarkers.push(new gl.Marker({ element: node, anchor: 'bottom', offset: [0, -6] }).setLngLat([it.lng, it.lat]).addTo(map));
+  }
+}
+function toggleBubbles() { S.bubbles.on = !S.bubbles.on; save(); drawBubbles(); toast(S.bubbles.on ? 'News bubbles on' : 'News bubbles off'); }
+function newsNearRoute(rec, meters = 450) {
+  const pts = rec.legs.flatMap(l => l.coords).filter((_, i) => i % 3 === 0);
+  return bubbleSet().filter(it => it.source !== 'datasf' && pts.some(p => hav(p, [it.lat, it.lng]) < meters)).slice(0, 5);
+}
+
 /* ======================= Tesla-style drive preview ======================= */
 let driving = null, puck = null;
 function bearingTo(a, b) { const r = Math.PI / 180, y = Math.sin((b[1] - a[1]) * r) * Math.cos(b[0] * r),
@@ -661,7 +709,7 @@ function drivePreview() {
   if (!puck) puck = new gl.Marker({ element: el('<div class="puck"><div></div></div>'), rotationAlignment: 'map', pitchAlignment: 'map' });
   puck.setLngLat([path[0][1], path[0][0]]).addTo(map);
   $('sheet').classList.remove('open'); document.querySelector('.ss-root').classList.add('driving');
-  $('drive-hud').style.display = 'flex';
+  $('drive-hud').style.display = 'flex'; bubbleMarkers.forEach(m => m.remove()); bubbleMarkers = [];
   const frame = now => {
     const f = Math.min(1, (now - t0) / dur), p = alongPath(path, f), ahead = alongPath(path, Math.min(1, f + 0.012));
     const target = hav(p, ahead) > 3 ? bearingTo(p, ahead) : bear;
@@ -689,7 +737,7 @@ async function refreshAll() {
   try {
     await post('/api/refresh');
     for (let i = 0; i < 30; i++) { await new Promise(r => setTimeout(r, 1200)); await loadStatus(); if (!STATUS.refreshing) break; }
-    await loadCells();
+    await loadCells(); loadNews();
     await plan({ fresh: true, force: S.advanced.ai === 'opus' ? false : false });
     toast(`Updated · ${STATUS.datasf_rows || 0} SFPD reports · fresh departures`);
   } finally { $('fab-ref').classList.remove('spinning'); }
@@ -699,7 +747,7 @@ async function scanArea(btn) {
   try {
     const r = await jget(await post('/api/scan', { origin: S.origin, destination: S.destination, depart: S.depart }));
     toast(r.added ? `${r.added} new incident${r.added > 1 ? 's' : ''} from ${r.new_items} new posts` : `No new located incidents in ${r.items} posts`);
-    if (r.added) { await loadCells(); plan({ mode: 'local' }); }
+    if (r.added) { await loadCells(); await loadNews(); plan({ mode: 'local' }); }
     loadSpend();
   } catch (e) { toast('Scan failed: ' + e.message); }
   btn.disabled = false; btn.textContent = 'Scan X + news here';
@@ -731,7 +779,7 @@ addEventListener('keydown', e => { if (e.key === 'Escape') closeModals(true); })
   applyTheme(); renderTiers(); renderWhen(); tick(); setInterval(tick, 15000);
   $('from').value = S.origin.name; $('to').value = S.destination.name; drawPins(); layoutFloating(); fitView();
   try { const cfg = await (await fetch('/api/config')).json(); PRESETS = cfg.presets || []; if (cfg.ai === false) { S.advanced.ai = 'local'; toast('No Anthropic key on this server: using the free route scorer'); } } catch {}
-  loadSpend(); setInterval(loadStatus, 30000);
+  loadSpend(); setInterval(loadStatus, 30000); loadNews(); setInterval(loadNews, 300000);
   await loadCells().catch(() => {});
   if (isViewer()) return viewer(Q.get('watch'));
   plan();
@@ -739,5 +787,5 @@ addEventListener('keydown', e => { if (e.key === 'Escape') closeModals(true); })
 
 Object.assign(window, { openStop, fetchPhoto, swapPhoto, stopTracking, openSettings, closeModals, applySettings, resetSettings,
   refreshNow, liveRefresh, setPlace, plan, swapOD, toggleHeat, locateMe, fitView, walkWithMe, closePopup, loadDemoTrip,
-  refreshAll, scanArea, drivePreview });
+  refreshAll, scanArea, drivePreview, toggleBubbles });
 }

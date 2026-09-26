@@ -28,6 +28,7 @@ Open http://localhost:8765 for the landing page (spinning globe), then **Plan a 
 - **Live data:** SFPD reports refresh citywide every 10 minutes; transit comes from Transitous (GTFS + real-time) for any SF trip; places from OpenStreetMap search.
 - **Token savers:** Opus plans are cached per trip + settings for 10 min; "Free re-score" / Route picker = Free never calls Claude; "Ask Opus 5.5" spends tokens only when you tap it.
 - **Refresh:** the refresh button pulls the newest SFPD reports and fresh departures; "Scan X + news here" runs Apify on places you haven't searched yet and has Opus read only the new posts.
+- **News bubbles:** brief text bubbles on the map from local news, X posts and SFPD hotspots (tap to expand, open the source); toggle with the speech-bubble button or per source in Settings; the plan lists news near your route.
 - **Map:** Mapbox Standard (Night / Dusk / Day / Satellite) with 3D buildings, glowing route, and a Tesla-style "Preview route" follow-camera.
 
 To rebuild the data from scratch (about $2 Apify + $0.60 Opus):

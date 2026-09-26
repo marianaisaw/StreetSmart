@@ -871,6 +871,32 @@ def share_get(sid: str):
     return {**s, "age_s": round(time.time() - s["updated"]) if s["updated"] else None}
 
 
+@app.get("/api/news")
+def news(days: int = 14, hotspots: int = 10):
+    """Short located items for the map's text bubbles: news + X incidents (Opus-extracted) and SFPD hotspots."""
+    now = datetime.now(routing.SF_TZ)
+    items = []
+    for i in incidents():
+        if i.get("source") not in ("news", "x"):
+            continue
+        t = score.parse_time(i.get("occurred_at"))
+        hrs = round((now - t).total_seconds() / 3600, 1) if t else None
+        if hrs is not None and hrs > days * 24:
+            continue
+        items.append({"id": i.get("item_id"), "source": i["source"], "lat": i["lat"], "lng": i["lng"],
+                      "summary": i.get("summary", ""), "where": i.get("location_text", ""), "type": i.get("incident_type"),
+                      "severity": i.get("severity", 1), "hours_ago": hrs, "url": i.get("url", "")})
+    items.sort(key=lambda x: (x["hours_ago"] is None, x["hours_ago"] or 0))
+    hs = []
+    for c in cells_for(Scoring(), "23:00"):
+        if c["band"] != "unsafe" or len(hs) >= hotspots:
+            continue
+        lat, lng = h3.cell_to_latlng(c["cell"])
+        hs.append({"id": c["cell"], "source": "datasf", "lat": lat, "lng": lng, "summary": c["reason"], "where": "",
+                   "type": "hotspot", "severity": 4, "hours_ago": c["newest_hours"], "url": ""})
+    return {"items": items, "hotspots": hs}
+
+
 @app.get("/api/usage")
 def usage():
     return usage_summary()
