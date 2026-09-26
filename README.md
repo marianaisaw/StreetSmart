@@ -40,7 +40,7 @@ The gear button opens an iOS-style settings sheet, saved in the browser: trip ti
 ## Keys and secrets
 
 - Keys live only in `.env` (git-ignored, `chmod 600`) and are loaded with python-dotenv. `.env.example` shows the format.
-- `data/raw/` (raw scraped tweets and the full Maps dump) is git-ignored; the app reads the slim `data/places.json` instead.
+- `data/raw/` holds the original scrapes (X, news, SFPD, Maps) so the demo never needs a re-scrape.
 
 ## Notes
 
