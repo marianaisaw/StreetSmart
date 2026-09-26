@@ -12,6 +12,7 @@ GET  /api/usage      token + $ totals from data/usage.log
 import base64
 import hashlib
 import json
+import os
 import threading
 from functools import lru_cache
 from pathlib import Path
@@ -384,9 +385,12 @@ def routes():
 def plan(req: PlanReq, demo: int = 0):
     key = cache_key(req)
     cache = jload("demo_cache.json", {})
-    hit = cache.get(key) or (cache.get(f"{req.budget:g}") if demo else None)
-    if demo and hit:
+    use_saved = bool(demo) or not os.environ.get("ANTHROPIC_API_KEY")
+    hit = cache.get(key) or (cache.get(f"{req.budget:g}") if use_saved else None)
+    if use_saved and hit:
         return {**enrich(dict(hit["plan"])), "cached": True, "trace": hit["trace"]}
+    if use_saved:
+        raise HTTPException(503, "No saved plan for this trip, and there is no Anthropic key to plan a new one.")
     p, trace = run_agent(req)
     cache = jload("demo_cache.json", {})
     cache[key] = {"plan": p, "trace": trace}
@@ -409,12 +413,24 @@ def caption(req: CapReq):
 
 @app.post("/api/live")
 def live_refresh():
-    """Opus 5.5 + Apify remote MCP: scrape the newest X posts along the route and merge new incidents."""
-    import live
-    out = live.refresh()
-    added = live.merge(out["new"]) if out["new"] else 0
-    _incidents.cache_clear()
-    return {"added": added, "incidents": out["new"], "mcp_tools_used": out.get("mcp_tools_used", []), "note": out.get("note")}
+    """Scrape fresh X posts and news with Apify. No Claude call."""
+    token = os.environ.get("APIFY_TOKEN")
+    if not token:
+        raise HTTPException(400, "APIFY_TOKEN is missing from .env")
+    from apify_client import ApifyClient
+    import scrape
+    client = ApifyClient(token)
+    tweets = scrape.scrape_x(client)
+    articles = scrape.scrape_news(client)
+    scrape.save("x", tweets)
+    scrape.save("news", articles)
+    return {
+        "scraped": len(tweets) + len(articles),
+        "tweets": len(tweets),
+        "articles": len(articles),
+        "added": 0,
+        "note": "Apify scrape saved. Placing new posts on the map still needs an Anthropic key.",
+    }
 
 
 @app.get("/api/usage")

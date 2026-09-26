@@ -34,6 +34,9 @@ export default function App() {
             <br />
             Streetsmart knows the streets.
           </p>
+          <a className="enter" href="http://127.0.0.1:8765/">
+            Open the project
+          </a>
         </div>
 
         <ul className="marks" aria-hidden="true">

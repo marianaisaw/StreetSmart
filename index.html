@@ -13,7 +13,7 @@
 <style>
   /* ---------- iOS tokens (dark default) ---------- */
   :root {
-    --tint: #0a84ff; --top-inset: 54px;
+    --tint: #0a84ff; --top-inset: 16px;
     --bg: #000; --bg2: #1c1c1e; --bg3: #2c2c2e; --fill: #3a3a3c; --sep: #38383a;
     --label: #fff; --label2: #ebebf599; --label3: #ebebf54d;
     --material: rgba(30,30,32,.72); --material-strong: rgba(28,28,30,.92);
@@ -33,36 +33,24 @@
   }
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   html, body { margin: 0; height: 100%; }
-  body { background: var(--desk); color: var(--label); font: 15px/1.35 -apple-system, BlinkMacSystemFont, "SF Pro Text", Inter, system-ui, sans-serif;
-         display: flex; align-items: center; justify-content: center; gap: 56px; overflow: hidden; -webkit-font-smoothing: antialiased; }
+  body { background: var(--bg); color: var(--label); font: 15px/1.35 -apple-system, BlinkMacSystemFont, "SF Pro Text", Inter, system-ui, sans-serif;
+         overflow: hidden; -webkit-font-smoothing: antialiased; }
   button { font: inherit; color: inherit; }
 
-  /* ---------- device frame (desktop) ---------- */
-  .phone { position: relative; height: min(852px, calc(100vh - 48px)); aspect-ratio: 393 / 852; border-radius: 64px; padding: 12px;
-           background: linear-gradient(145deg, #3a3d44, #16171a 40%, #2b2d33); box-shadow: 0 0 0 2px #0b0b0c, 0 40px 80px rgba(0,0,0,.55), inset 0 0 3px rgba(255,255,255,.25); flex: none; }
-  .phone::before, .phone::after { content: ""; position: absolute; left: -3px; width: 3px; border-radius: 2px 0 0 2px; background: #2a2c31; }
-  .phone::before { top: 150px; height: 34px; } .phone::after { top: 210px; height: 64px; box-shadow: 0 84px 0 #2a2c31; }
-  .side-btn { position: absolute; right: -3px; top: 240px; width: 3px; height: 96px; background: #2a2c31; border-radius: 0 2px 2px 0; }
-  .screen { position: relative; width: 100%; height: 100%; border-radius: 52px; overflow: hidden; background: var(--bg); isolation: isolate; }
-  .island { position: absolute; z-index: 2000; top: 11px; left: 50%; transform: translateX(-50%); width: 124px; height: 36px; border-radius: 20px; background: #000; }
-  .statusbar { position: absolute; z-index: 1900; top: 0; left: 0; right: 0; height: 54px; display: flex; justify-content: space-between; align-items: center;
-               padding: 6px 34px 0 42px; font-weight: 600; font-size: 16px; pointer-events: none; color: var(--label); }
-  .statusbar .icons { display: flex; gap: 6px; align-items: center; }
-  .home-ind { position: absolute; z-index: 2000; bottom: 8px; left: 50%; transform: translateX(-50%); width: 134px; height: 5px; border-radius: 3px; background: var(--label); opacity: .85; pointer-events: none; }
-  .aside { max-width: 300px; color: var(--label); }
-  .aside h1 { font-size: 40px; letter-spacing: -.03em; margin: 0 0 8px; }
-  .aside p { color: var(--label2); margin: 0 0 10px; font-size: 15px; }
-  .aside .pill { display: inline-block; padding: 4px 10px; border-radius: 999px; background: var(--material); border: 1px solid var(--sep); font-size: 12px; font-weight: 600; margin: 2px 4px 2px 0; }
+  .phone { position: relative; height: 100dvh; width: 100vw; }
+  .screen { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--bg); isolation: isolate; }
+  .side-btn, .island, .statusbar, .home-ind, .aside { display: none; }
 
-  /* real phones: no frame */
-  @media (max-width: 520px) {
-    :root { --top-inset: max(env(safe-area-inset-top), 10px); }
-    body { display: block; background: var(--bg); }
-    .phone { height: 100dvh; width: 100vw; aspect-ratio: auto; border-radius: 0; padding: 0; box-shadow: none; background: none; }
-    .phone::before, .phone::after, .side-btn, .island, .statusbar, .home-ind, .aside { display: none; }
-    .screen { border-radius: 0; }
+  @media (min-width: 720px) {
+    #search { left: 16px; right: auto; width: 400px; top: 16px; }
+    #sheet { top: 16px; left: 16px; bottom: 16px; right: auto; width: 400px; height: auto;
+             border-radius: 18px; transform: none !important; }
+    #sheet .grab { display: none; }
+    #fabs { right: 16px; }
+    .modal { top: 40px; bottom: 40px; left: 50%; right: auto; width: min(520px, calc(100vw - 80px));
+             border-radius: 18px; transform: translate(-50%, 110%); }
+    .modal.open { transform: translate(-50%, 0); }
   }
-  @media (max-width: 900px) and (min-width: 521px) { .aside { display: none; } }
 
   /* ---------- map ---------- */
   #map { position: absolute; inset: 0; z-index: 0; background: var(--bg); }
@@ -277,7 +265,7 @@ const DEFAULTS = {
   map: { heatmap: true, opacity: 1, showSafe: true, alternatives: true, legend: true, style: 'dark', tint: 'blue' },
   stops: { autoCaption: true },
   share: { name: '', eta: true },
-  advanced: { demo: false, trace: false },
+  advanced: { demo: true, trace: false },
 };
 const TINTS = { blue: '#0a84ff', green: '#30d158', orange: '#ff9f0a', pink: '#ff375f', purple: '#bf5af2', teal: '#40c8e0' };
 const clone = o => JSON.parse(JSON.stringify(o));
@@ -323,20 +311,40 @@ function applyTheme(st = S) {
 mq.addEventListener?.('change', () => S.map.style === 'auto' && applyTheme());
 
 function layoutFloating(st = S) {
+  const wide = window.innerWidth >= 720;
   const top = $('search').offsetTop + $('search').offsetHeight;
-  $('fabs').style.top = (top + 10) + 'px';
-  const peek = parseFloat(getComputedStyle($('sheet')).getPropertyValue('--peek'));
-  $('legend').style.bottom = (peek + 10) + 'px';
+  $('fabs').style.top = wide ? '16px' : (top + 10) + 'px';
+  const peek = wide ? 16 : parseFloat(getComputedStyle($('sheet')).getPropertyValue('--peek'));
   $('legend').style.opacity = st.map.heatmap && st.map.legend ? 1 : 0;
-  $('legend').style.bottom = (peek + 36) + 'px'; $('spend').style.bottom = (peek + 10) + 'px';
-  return { top, peek };
+  if (wide) {
+    $('sheet').style.top = (top + 12) + 'px';
+    $('legend').style.left = 'auto';
+    $('legend').style.right = '16px';
+    $('legend').style.bottom = '16px';
+    $('spend').style.left = 'auto';
+    $('spend').style.right = '16px';
+    $('spend').style.bottom = '52px';
+  } else {
+    $('sheet').style.top = '';
+    $('legend').style.left = '';
+    $('legend').style.right = '';
+    $('legend').style.bottom = (peek + 36) + 'px';
+    $('spend').style.left = '';
+    $('spend').style.right = '';
+    $('spend').style.bottom = (peek + 10) + 'px';
+  }
+  return { top, peek, wide };
 }
 function fitView(animate) {
   if (!ROUTES) return;
-  const { top, peek } = layoutFloating();
+  const { top, peek, wide } = layoutFloating();
   const r = CURRENT && ROUTES.routes.find(x => x.id === CURRENT.recommended_route_id);
   const pts = (r ? [r] : ROUTES.routes).flatMap(r => r.legs.flatMap(l => l.coords));
-  map.fitBounds(L.latLngBounds(pts), { paddingTopLeft: [24, top + 16], paddingBottomRight: [60, peek + 40], animate: !!animate });
+  map.fitBounds(L.latLngBounds(pts), {
+    paddingTopLeft: [wide ? 440 : 24, top + 16],
+    paddingBottomRight: [80, wide ? 40 : peek + 40],
+    animate: !!animate
+  });
 }
 
 async function loadCells() {
@@ -566,7 +574,7 @@ function renderSettings() {
       ${segc('effort', 'Opus effort', [['low', 'Low'], ['medium', 'Med'], ['high', 'High']])}
       ${sw('advanced.demo', 'Demo mode', 'Use cached plans for instant answers')}
       ${sw('advanced.trace', 'Show agent trace')}
-      <div class="li tap" onclick="liveRefresh(this)"><div class="grow"><div class="t" style="color:var(--tint)">Check for new reports</div><div class="s">Opus 5.5 runs Apify's X scraper via remote MCP · about $0.45</div></div><span class="chev">›</span></div>
+      <div class="li tap" onclick="liveRefresh(this)"><div class="grow"><div class="t" style="color:var(--tint)">Check for new reports</div><div class="s">Apify scrapes X and local news along the route</div></div><span class="chev">›</span></div>
       <div class="li"><div class="grow"><div class="t">Spent so far</div><div class="s" id="usage">Loading…</div></div></div>
     </div>
 
@@ -611,13 +619,14 @@ async function applySettings() {
 
 /* ======================= misc ======================= */
 async function liveRefresh(row) {
-  const s = row.querySelector('.s'); s.innerHTML = '<span class="spin" style="width:12px;height:12px;vertical-align:-2px"></span> Scraping X through Apify MCP…';
+  const s = row.querySelector('.s'); s.innerHTML = '<span class="spin" style="width:12px;height:12px;vertical-align:-2px"></span> Scraping X and news with Apify…';
   try {
-    const r = await (await fetch('/api/live', { method: 'POST' })).json();
-    s.textContent = r.added ? `${r.added} new report${r.added > 1 ? 's' : ''} added to the map` : 'No new located reports in the last 24h';
-    if (r.added) await loadCells();
+    const res = await fetch('/api/live', { method: 'POST' });
+    const r = await res.json();
+    if (!res.ok) { s.textContent = r.detail || 'Apify scrape failed'; return; }
+    s.textContent = `Apify saved ${r.tweets || 0} posts and ${r.articles || 0} articles`;
     loadSpend();
-  } catch { s.textContent = 'Live check failed'; }
+  } catch { s.textContent = 'Apify scrape failed'; }
 }
 
 function toggleHeat() { S.map.heatmap = !S.map.heatmap; save(); $('fab-heat').classList.toggle('off', !S.map.heatmap); drawCells(); layoutFloating(); }
