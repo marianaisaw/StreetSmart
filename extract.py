@@ -111,9 +111,9 @@ SF_MAP = {
 }
 
 
-def datasf_incidents():
+def datasf_incidents(rows=None):
     out = []
-    for r in load("datasf"):
+    for r in (load("datasf") if rows is None else rows):
         cat = r.get("incident_category") or ""
         if cat not in SF_MAP or not r.get("latitude"):
             continue

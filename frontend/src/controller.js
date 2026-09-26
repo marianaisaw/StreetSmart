@@ -1,305 +1,11 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>StreetSmart</title>
-<meta name="theme-color" content="#000000">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  /* ---------- iOS tokens (dark default) ---------- */
-  :root {
-    --tint: #0a84ff; --top-inset: 54px;
-    --bg: #000; --bg2: #1c1c1e; --bg3: #2c2c2e; --fill: #3a3a3c; --sep: #38383a;
-    --label: #fff; --label2: #ebebf599; --label3: #ebebf54d;
-    --material: rgba(30,30,32,.72); --material-strong: rgba(28,28,30,.94);
-    --safe: #0a84ff; --mid: #ff9f0a; --bad: #ff453a;
-    --walk: #f2f2f7; --muni: #bf5af2; --bart: #64d2ff; --uber: #30d158; --rail: #ffd60a;
-    --green: #30d158; --red: #ff453a;
-    --shadow: 0 8px 30px rgba(0,0,0,.45);
-    --desk: radial-gradient(1200px 700px at 30% 20%, #1b2233 0%, #0a0c12 55%, #050608 100%);
-  }
-  :root[data-theme="light"] {
-    --bg: #f2f2f7; --bg2: #fff; --bg3: #f2f2f7; --fill: #e5e5ea; --sep: #c6c6c8;
-    --label: #000; --label2: #3c3c4399; --label3: #3c3c434d;
-    --material: rgba(255,255,255,.74); --material-strong: rgba(250,250,252,.96);
-    --safe: #007aff; --mid: #ff9500; --bad: #ff3b30; --walk: #1c1c1e; --muni: #af52de; --bart: #32ade6; --uber: #34c759; --rail: #d4a800;
-    --green: #34c759; --red: #ff3b30; --shadow: 0 8px 30px rgba(0,0,0,.15);
-    --desk: radial-gradient(1200px 700px at 30% 20%, #e8ecf5 0%, #cfd5e2 60%, #b9c0cf 100%);
-  }
-  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-  html, body { margin: 0; height: 100%; }
-  body { background: var(--desk); color: var(--label); font: 15px/1.35 -apple-system, BlinkMacSystemFont, "SF Pro Text", Inter, system-ui, sans-serif;
-         display: flex; align-items: center; justify-content: center; gap: 48px; overflow: hidden; -webkit-font-smoothing: antialiased; }
-  button { font: inherit; color: inherit; }
+// StreetSmart app controller: vanilla DOM + Mapbox/MapLibre GL, mounted by StreetSmart.jsx.
+import * as h3 from 'h3-js';
+import { gl, isMapbox, styleFor, addBuildings } from './engine.js';
 
-  /* ---------- device frame (desktop) ---------- */
-  .phone { position: relative; height: min(1000px, calc(100vh - 16px)); aspect-ratio: 430 / 932; border-radius: 68px; padding: 13px;
-           background: linear-gradient(145deg, #3a3d44, #16171a 40%, #2b2d33); box-shadow: 0 0 0 2px #0b0b0c, 0 40px 80px rgba(0,0,0,.55), inset 0 0 3px rgba(255,255,255,.25); flex: none; }
-  .phone::before, .phone::after { content: ""; position: absolute; left: -3px; width: 3px; border-radius: 2px 0 0 2px; background: #2a2c31; }
-  .phone::before { top: 16%; height: 4%; } .phone::after { top: 23%; height: 7%; box-shadow: 0 90px 0 #2a2c31; }
-  .side-btn { position: absolute; right: -3px; top: 26%; width: 3px; height: 10%; background: #2a2c31; border-radius: 0 2px 2px 0; }
-  .screen { position: relative; width: 100%; height: 100%; border-radius: 55px; overflow: hidden; background: var(--bg); isolation: isolate; }
-  .island { position: absolute; z-index: 2000; top: 11px; left: 50%; transform: translateX(-50%); width: 126px; height: 37px; border-radius: 20px; background: #000; }
-  .statusbar { position: absolute; z-index: 1900; top: 0; left: 0; right: 0; height: 54px; display: flex; justify-content: space-between; align-items: center;
-               padding: 6px 36px 0 44px; font-weight: 600; font-size: 16px; pointer-events: none; color: var(--label); }
-  .statusbar .icons { display: flex; gap: 6px; align-items: center; }
-  .home-ind { position: absolute; z-index: 2000; bottom: 8px; left: 50%; transform: translateX(-50%); width: 140px; height: 5px; border-radius: 3px; background: var(--label); opacity: .85; pointer-events: none; }
-  .aside { max-width: 280px; color: var(--label); }
-  .aside h1 { font-size: 40px; letter-spacing: -.03em; margin: 0 0 8px; }
-  .aside p { color: var(--label2); margin: 0 0 10px; font-size: 15px; }
-  .aside .pill { display: inline-block; padding: 4px 10px; border-radius: 999px; background: var(--material); border: 1px solid var(--sep); font-size: 12px; font-weight: 600; margin: 2px 4px 2px 0; }
-
-  @media (max-width: 520px) {
-    :root { --top-inset: max(env(safe-area-inset-top), 10px); }
-    body { display: block; background: var(--bg); }
-    .phone { height: 100dvh; width: 100vw; aspect-ratio: auto; border-radius: 0; padding: 0; box-shadow: none; background: none; }
-    .phone::before, .phone::after, .side-btn, .island, .statusbar, .home-ind, .aside { display: none; }
-    .screen { border-radius: 0; }
-  }
-  @media (max-width: 1000px) and (min-width: 521px) { .aside { display: none; } }
-
-  /* ---------- map ---------- */
-  #map { position: absolute; inset: 0; z-index: 0; background: var(--bg); }
-  .leaflet-container { font: inherit; background: var(--bg); }
-  .darktiles { filter: invert(1) hue-rotate(180deg) brightness(.85) contrast(.9) saturate(.3); }
-  .leaflet-control-attribution { font-size: 9px; background: transparent !important; color: var(--label3) !important; }
-  .leaflet-control-attribution a { color: var(--label3) !important; }
-  .leaflet-popup-content-wrapper, .leaflet-popup-tip { background: var(--material-strong); color: var(--label); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: var(--shadow); border-radius: 14px; }
-  .leaflet-popup-content { margin: 10px 14px; font-size: 14px; line-height: 1.35; }
-  .leaflet-popup-close-button { display: none; }
-  .leaflet-tooltip { background: var(--material-strong); color: var(--label); border: 0; border-radius: 8px; box-shadow: var(--shadow); font-size: 12px; }
-  .pband { font-weight: 700; text-transform: capitalize; font-size: 13px; }
-  .muted { color: var(--label2); } .tiny { font-size: 12px; }
-  .badges { display: flex; gap: 4px; margin-top: 6px; flex-wrap: wrap; }
-  .badge { font-size: 10px; font-weight: 700; letter-spacing: .03em; padding: 2px 7px; border-radius: 999px; background: var(--fill); }
-  .badge.b-x { background: #000; color: #fff; border: .5px solid #555; } .badge.b-news { background: #ff9f0a33; color: var(--mid); }
-  .badge.b-datasf { background: #0a84ff33; color: var(--safe); }
-  .tops { margin-top: 6px; font-size: 12px; }
-  .popbtns { display: flex; gap: 6px; margin-top: 8px; }
-  .popbtns button { flex: 1; border: 0; border-radius: 9px; padding: 7px 10px; font-weight: 600; font-size: 13px; cursor: pointer; background: var(--fill); color: var(--label); }
-  .popbtns button.go { background: var(--tint); color: #fff; }
-  .pin { width: 22px; height: 22px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,.5); }
-  .me { width: 18px; height: 18px; border-radius: 50%; background: var(--tint); border: 3px solid #fff; box-shadow: 0 0 0 8px rgba(10,132,255,.25); animation: pulse 1.6s infinite; }
-  @keyframes pulse { 50% { box-shadow: 0 0 0 14px rgba(10,132,255,.08); } }
-
-  .blur { background: var(--material); backdrop-filter: saturate(180%) blur(22px); -webkit-backdrop-filter: saturate(180%) blur(22px); }
-
-  /* ---------- top search card ---------- */
-  #search { position: absolute; z-index: 1200; top: calc(var(--top-inset) + 4px); left: 10px; right: 10px; border-radius: 18px; padding: 8px 10px 10px; box-shadow: var(--shadow); }
-  .od-row { display: flex; align-items: center; gap: 10px; padding: 6px 40px 6px 2px; }
-  .od-row + .od-row { border-top: .5px solid var(--sep); }
-  .od-row .ic { width: 10px; height: 10px; border-radius: 50%; flex: none; margin-left: 4px; }
-  .od-row input { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--label); font-weight: 500; font-size: 15px; font-family: inherit; outline: none; text-overflow: ellipsis; }
-  .od-row input:focus { color: var(--tint); }
-  .od-wrap { position: relative; }
-  .swap { position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 30px; height: 30px; border-radius: 50%; border: 0; background: var(--fill); display: grid; place-items: center; cursor: pointer; }
-  .sugg { display: none; margin: 6px -2px 0; max-height: 330px; overflow-y: auto; border-radius: 12px; background: var(--bg2); }
-  :root:not([data-theme="light"]) .sugg { background: rgba(58,58,60,.6); }
-  .sugg.on { display: block; }
-  .sugg .li { cursor: pointer; }
-  .sugg .li:active, .sugg .li.hl { background: var(--fill); }
-  .sico { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; flex: none; background: var(--fill); color: var(--tint); }
-  .when { display: flex; gap: 6px; margin-top: 8px; align-items: center; overflow-x: auto; scrollbar-width: none; }
-  .when::-webkit-scrollbar { display: none; }
-  .pillbtn { border: 0; background: var(--fill); border-radius: 999px; padding: 5px 11px; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap; flex: none; }
-  .pillbtn.on { background: var(--tint); color: #fff; }
-  .pillbtn input[type=time] { border: 0; background: transparent; color: inherit; font: inherit; width: 88px; color-scheme: dark; }
-  :root[data-theme="light"] .pillbtn input[type=time] { color-scheme: light; }
-  .seg { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; background: var(--fill); border-radius: 9px; padding: 2px; margin-top: 8px; position: relative; }
-  .seg button { position: relative; z-index: 1; border: 0; background: transparent; padding: 7px 0; font-weight: 600; font-size: 15px; cursor: pointer; border-radius: 7px; color: var(--label); }
-  .seg button.on { background: var(--bg2); box-shadow: 0 3px 8px rgba(0,0,0,.18), 0 0 0 .5px rgba(0,0,0,.04); }
-  :root:not([data-theme="light"]) .seg button.on { background: #636366; }
-  .seg button:disabled { opacity: .55; }
-  .seg.small { margin: 0; min-width: 150px; }
-  .seg.small button { font-size: 13px; padding: 4px 8px; }
-
-  /* ---------- floating buttons / pills ---------- */
-  #fabs { position: absolute; z-index: 1000; right: 10px; display: flex; flex-direction: column; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
-  #fabs button { width: 44px; height: 44px; border: 0; background: transparent; display: grid; place-items: center; cursor: pointer; color: var(--tint); }
-  #fabs button + button { border-top: .5px solid var(--sep); }
-  #fabs button.off { color: var(--label3); }
-  #legend { position: absolute; z-index: 999; left: 10px; display: flex; gap: 10px; padding: 6px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; box-shadow: var(--shadow); transition: opacity .2s; }
-  #legend span { display: inline-flex; align-items: center; gap: 5px; }
-  #legend i { width: 9px; height: 9px; border-radius: 2px; display: inline-block; }
-  #live { position: absolute; z-index: 1000; left: 10px; font-size: 10.5px; font-weight: 600; padding: 4px 9px; border-radius: 999px; color: var(--label2); box-shadow: var(--shadow); display: flex; gap: 6px; align-items: center; cursor: pointer; max-width: calc(100% - 20px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); flex: none; box-shadow: 0 0 0 0 rgba(48,209,88,.6); animation: ping 1.8s infinite; }
-  .dot.off { background: var(--label3); animation: none; }
-  @keyframes ping { 70% { box-shadow: 0 0 0 7px rgba(48,209,88,0); } 100% { box-shadow: 0 0 0 0 rgba(48,209,88,0); } }
-
-  /* ---------- bottom sheet ---------- */
-  #sheet { position: absolute; z-index: 1100; left: 0; right: 0; bottom: 0; height: 76%; border-radius: 14px 14px 0 0; box-shadow: 0 -6px 30px rgba(0,0,0,.35);
-           transform: translateY(calc(100% - var(--peek))); transition: transform .35s cubic-bezier(.2,.8,.2,1); display: flex; flex-direction: column; --peek: 262px;
-           background: var(--material-strong); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); }
-  #sheet.open { transform: translateY(0); }
-  #sheet.dragging { transition: none; }
-  .grab { padding: 7px 0 4px; cursor: grab; touch-action: none; flex: none; }
-  .grab div { width: 36px; height: 5px; border-radius: 3px; background: var(--label3); margin: 0 auto; }
-  .sheet-body { overflow-y: auto; padding: 4px 16px 40px; flex: 1; overscroll-behavior: contain; }
-  .stats { display: flex; align-items: flex-end; gap: 20px; }
-  .stats .big { font-size: 28px; font-weight: 700; letter-spacing: -.02em; line-height: 1.1; }
-  .stats .sub { color: var(--label2); font-size: 12px; }
-  .rname { font-weight: 600; margin: 8px 0 6px; font-size: 16px; }
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
-  .chip { font-size: 12px; font-weight: 600; padding: 4px 9px; border-radius: 999px; background: var(--fill); display: inline-flex; gap: 6px; align-items: center; }
-  .chip i { width: 8px; height: 8px; border-radius: 50%; }
-  .chip.live { background: rgba(48,209,88,.18); color: var(--green); }
-  .why { background: #000; color: #fff; border-radius: 14px; padding: 11px 13px; margin-top: 12px; }
-  :root[data-theme="light"] .why { background: #1c1c1e; }
-  .why .h { display: flex; align-items: center; gap: 6px; font-size: 11px; letter-spacing: .05em; text-transform: uppercase; color: #ebebf599; margin-bottom: 4px; font-weight: 600; }
-  .why .h i { width: 7px; height: 7px; border-radius: 50%; background: #d97757; }
-  .why p { margin: 0; font-size: 15px; }
-  .section-h { font-size: 13px; text-transform: uppercase; color: var(--label2); margin: 18px 4px 6px; letter-spacing: .02em; }
-  .list { background: var(--bg2); border-radius: 12px; overflow: hidden; }
-  :root:not([data-theme="light"]) #sheet .list { background: rgba(58,58,60,.55); }
-  .li { display: flex; align-items: center; gap: 12px; padding: 11px 14px; min-height: 44px; position: relative; }
-  .li + .li::before { content: ""; position: absolute; top: 0; left: 14px; right: 0; border-top: .5px solid var(--sep); }
-  .li .grow { flex: 1; min-width: 0; }
-  .li .t { font-weight: 500; } .li .s { color: var(--label2); font-size: 13px; }
-  .li.tap { cursor: pointer; } .li.tap:active { background: var(--fill); }
-  .chev { color: var(--label3); font-size: 20px; line-height: 1; }
-  .thumb { width: 44px; height: 44px; border-radius: 8px; object-fit: cover; background: var(--fill); flex: none; }
-  .btn { display: block; width: 100%; border: 0; border-radius: 12px; padding: 14px; font-weight: 600; font-size: 16px; cursor: pointer; background: var(--tint); color: #fff; margin-top: 14px; }
-  .btn.gray { background: var(--fill); color: var(--tint); }
-  .btn.red { background: var(--red); }
-  .loading { display: flex; gap: 10px; align-items: center; color: var(--label2); padding: 10px 0; }
-  .spin { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--fill); border-top-color: var(--label2); animation: spin .8s linear infinite; flex: none; display: inline-block; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .steps { font-size: 13px; color: var(--label2); margin-top: 4px; }
-  .steps div::before { content: "✓ "; color: var(--green); }
-  .trace { font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--label2); white-space: pre-wrap; word-break: break-word; }
-  .banner { background: var(--green); color: #002a0d; font-weight: 600; font-size: 13px; padding: 7px 10px; border-radius: 10px; margin-bottom: 6px; display: none; }
-  .rt { display: inline-flex; align-items: center; gap: 4px; color: var(--green); font-weight: 600; }
-  .rt::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
-
-  /* ---------- modal sheets ---------- */
-  .modal { position: absolute; z-index: 1500; left: 0; right: 0; bottom: 0; top: calc(var(--top-inset) + 8px); background: var(--bg); border-radius: 14px 14px 0 0;
-           transform: translateY(105%); transition: transform .38s cubic-bezier(.2,.8,.2,1); display: flex; flex-direction: column; box-shadow: 0 -8px 40px rgba(0,0,0,.4); }
-  :root:not([data-theme="light"]) .modal { background: #1c1c1e; }
-  .modal.open { transform: translateY(0); }
-  .scrim { position: absolute; inset: 0; z-index: 1400; background: rgba(0,0,0,.4); opacity: 0; pointer-events: none; transition: opacity .3s; }
-  .scrim.on { opacity: 1; pointer-events: auto; }
-  .navbar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 14px 16px 8px; flex: none; }
-  .navbar .ttl { font-weight: 600; font-size: 17px; text-align: center; max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .navbar button { border: 0; background: none; color: var(--tint); font-size: 17px; cursor: pointer; padding: 0; justify-self: start; }
-  .navbar .r { justify-self: end; font-weight: 600; }
-  .modal-body { overflow-y: auto; padding: 0 16px 50px; flex: 1; overscroll-behavior: contain; }
-  :root:not([data-theme="light"]) .modal .list { background: #2c2c2e; }
-  .foot { color: var(--label2); font-size: 12px; margin: 6px 16px 0; }
-  .photo { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 14px; background: var(--fill); display: block; }
-  .photos { display: flex; gap: 6px; margin-top: 6px; }
-  .photos img { width: 64px; height: 48px; object-fit: cover; border-radius: 8px; cursor: pointer; opacity: .6; }
-  .photos img.on { opacity: 1; outline: 2px solid var(--tint); }
-
-  /* controls */
-  .switch { position: relative; width: 51px; height: 31px; flex: none; }
-  .switch input { opacity: 0; width: 0; height: 0; position: absolute; }
-  .switch span { position: absolute; inset: 0; border-radius: 16px; background: var(--fill); transition: background .2s; cursor: pointer; }
-  .switch span::after { content: ""; position: absolute; top: 2px; left: 2px; width: 27px; height: 27px; border-radius: 50%; background: #fff; box-shadow: 0 3px 8px rgba(0,0,0,.15), 0 1px 1px rgba(0,0,0,.16); transition: transform .2s; }
-  .switch input:checked + span { background: var(--green); }
-  .switch input:checked + span::after { transform: translateX(20px); }
-  .stepper { display: flex; align-items: center; background: var(--fill); border-radius: 8px; overflow: hidden; flex: none; }
-  .stepper button { border: 0; background: none; width: 40px; height: 30px; font-size: 20px; cursor: pointer; color: var(--label); }
-  .stepper button + button { border-left: .5px solid var(--sep); }
-  .val { color: var(--label2); min-width: 48px; text-align: right; font-variant-numeric: tabular-nums; }
-  input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; border-radius: 2px; background: var(--fill); outline: none; margin: 12px 0 10px; }
-  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 26px; height: 26px; border-radius: 50%; background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,.3); cursor: pointer; }
-  input[type=range]::-moz-range-thumb { width: 26px; height: 26px; border-radius: 50%; background: #fff; border: 0; box-shadow: 0 2px 6px rgba(0,0,0,.3); }
-  .li.slider-row { display: block; }
-  .slider-row .top { display: flex; justify-content: space-between; }
-  .slider-row .ends { display: flex; justify-content: space-between; font-size: 12px; color: var(--label2); margin-top: -4px; }
-  .li input.txt, .li input[type=time] { border: 0; background: transparent; color: var(--label2); text-align: right; font: inherit; outline: none; min-width: 0; flex: 1; }
-  .li input[type=time] { flex: none; color-scheme: dark; }
-  :root[data-theme="light"] .li input[type=time] { color-scheme: light; }
-  .tints { display: flex; gap: 10px; }
-  .tints button { width: 26px; height: 26px; border-radius: 50%; border: 0; cursor: pointer; }
-  .tints button.on { box-shadow: 0 0 0 2px var(--bg2), 0 0 0 4px var(--label2); }
-  .danger { color: var(--red); font-weight: 500; cursor: pointer; text-align: center; width: 100%; }
-  .modeico { width: 29px; height: 29px; border-radius: 7px; display: grid; place-items: center; color: #fff; flex: none; font-size: 12px; font-weight: 700; }
-
-  #toast { position: absolute; z-index: 2100; top: calc(var(--top-inset) + 6px); left: 50%; transform: translate(-50%, -160%); transition: transform .35s cubic-bezier(.2,.8,.2,1);
-           padding: 10px 16px; border-radius: 999px; font-weight: 600; font-size: 14px; box-shadow: var(--shadow); white-space: nowrap; max-width: 92%; overflow: hidden; text-overflow: ellipsis; }
-  #toast.on { transform: translate(-50%, 0); }
-</style>
-</head>
-<body>
-
-<div class="aside">
-  <h1>StreetSmart</h1>
-  <p>Door-to-door navigation for San Francisco that puts safety first at night.</p>
-  <p>Live Muni and BART departures, live SFPD reports, X posts and local news scraped with Apify and read by Claude Opus 5.5, scored on H3 hexes. Pick a budget and an Opus 5.5 agent picks the safest way there.</p>
-  <span class="pill">Claude Opus 5.5</span><span class="pill">Apify</span><span class="pill">Transitous real-time</span><span class="pill">DataSF</span><span class="pill">H3</span>
-</div>
-
-<div class="phone">
-  <div class="side-btn"></div>
-  <div class="screen" id="screen">
-    <div class="island"></div>
-    <div class="statusbar"><span id="clock">--:--</span>
-      <span class="icons">
-        <svg width="18" height="12" viewBox="0 0 18 12" fill="currentColor"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
-        <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><path d="M8 2.3c2.3 0 4.4.9 6 2.4l1.2-1.3A10.4 10.4 0 0 0 8 .5 10.4 10.4 0 0 0 .8 3.4L2 4.7a8.6 8.6 0 0 1 6-2.4Zm0 3.6c1.3 0 2.5.5 3.4 1.3l1.2-1.3A6.7 6.7 0 0 0 8 4.1a6.7 6.7 0 0 0-4.6 1.8l1.2 1.3c.9-.8 2.1-1.3 3.4-1.3Zm0 3.5c-.5 0-1 .2-1.3.5L8 11.5l1.3-1.6c-.3-.3-.8-.5-1.3-.5Z"/></svg>
-        <svg width="27" height="13" viewBox="0 0 27 13" fill="none"><rect x=".5" y=".5" width="23" height="12" rx="3.5" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="17" height="9" rx="2" fill="currentColor"/><path d="M25 4.5v4c.8-.3 1.3-1.1 1.3-2s-.5-1.7-1.3-2Z" fill="currentColor" opacity=".45"/></svg>
-      </span>
-    </div>
-
-    <div id="map"></div>
-
-    <div id="search" class="blur">
-      <div class="banner" id="share-banner"></div>
-      <div id="search-main">
-        <div class="od-wrap">
-          <div class="od-row"><i class="ic" style="background:var(--tint)"></i><input id="from" aria-label="From" autocomplete="off" placeholder="Start"></div>
-          <div class="od-row"><i class="ic" style="background:var(--red)"></i><input id="to" aria-label="To" autocomplete="off" placeholder="Where to?"></div>
-          <button class="swap" title="Swap start and destination" onclick="swapOD()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 4v16M7 4 3 8M7 4l4 4M17 20V4m0 16-4-4m4 4 4-4"/></svg></button>
-        </div>
-        <div class="sugg" id="sugg"></div>
-        <div id="search-rest">
-          <div class="when" id="when"></div>
-          <div class="seg" id="tiers"></div>
-        </div>
-      </div>
-    </div>
-
-    <div id="fabs" class="blur">
-      <button onclick="openSettings()" title="Settings"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></svg></button>
-      <button id="fab-heat" onclick="toggleHeat()" title="Safety heatmap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 2 21 7v10l-9 5-9-5V7z"/><path d="m12 7 4.5 2.5v5L12 17l-4.5-2.5v-5z"/></svg></button>
-      <button onclick="locateMe()" title="My location"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M21 3 3 10.5l7.3 2.2L12.5 20z"/></svg></button>
-      <button onclick="fitView(true)" title="Show whole trip"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
-    </div>
-
-    <div id="legend" class="blur"><span><i style="background:var(--safe)"></i>Very safe</span><span><i style="background:var(--mid)"></i>Kind of safe</span><span><i style="background:var(--bad)"></i>Unsafe</span></div>
-    <div id="live" class="blur" onclick="openSettings('agent')" title="Live data status"><span class="dot off" id="live-dot"></span><span id="live-text">Connecting…</span></div>
-
-    <div id="sheet">
-      <div class="grab" id="grab"><div></div></div>
-      <div class="sheet-body" id="sheet-body"><div class="loading"><div class="spin"></div>Loading map…</div></div>
-    </div>
-
-    <div class="scrim" id="scrim" onclick="closeModals(true)"></div>
-
-    <div class="modal" id="stop-modal">
-      <div class="navbar"><span></span><span class="ttl" id="stop-title">Stop</span><button class="r" onclick="closeModals()">Done</button></div>
-      <div class="modal-body" id="stop-body"></div>
-    </div>
-
-    <div class="modal" id="settings-modal">
-      <div class="navbar"><button onclick="closeModals(true)">Cancel</button><span class="ttl">Settings</span><button class="r" onclick="applySettings()">Done</button></div>
-      <div class="modal-body" id="settings-body"></div>
-    </div>
-
-    <div id="toast" class="blur"></div>
-    <div class="home-ind"></div>
-  </div>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/h3-js@4.1.0/dist/h3-js.umd.js"></script>
-<script>
+let started = false;
+export function start() {
+  if (started) return;
+  started = true;
 /* ======================= settings ======================= */
 const Q = new URLSearchParams(location.search);
 const DEMO_O = { name: 'Mission St & 16th St', lat: 37.76506, lng: -122.41963 };
@@ -308,10 +14,10 @@ const DEFAULTS = {
   origin: DEMO_O, destination: DEMO_D, depart: 'now', deadline: '', tiers: [3, 15, 50], budget: 3,
   priority: 30, max_walk_min: 15, modes: { walk: true, muni: true, bart: true, uber: true }, surge: 1.0, effort: 'medium',
   scoring: { weights: { datasf: 1.0, news: 0.8, x: 0.4 }, halflife_hours: 72, night: true, night_mult: 1.5, thresholds: [2, 6] },
-  map: { heatmap: true, opacity: 1, showSafe: true, alternatives: true, legend: true, style: 'dark', tint: 'blue' },
+  map: { heatmap: true, opacity: 1, showSafe: true, alternatives: true, legend: true, style: 'dark', tint: 'blue', tilt: true },
   stops: { autoCaption: true, autoPhoto: false },
   share: { name: '', eta: true, simulate: 'auto' },
-  advanced: { demo: false, trace: false },
+  advanced: { demo: false, trace: false, ai: 'opus' },
 };
 const TINTS = { blue: '#0a84ff', green: '#30d158', orange: '#ff9f0a', pink: '#ff375f', purple: '#bf5af2', teal: '#40c8e0' };
 const clone = o => JSON.parse(JSON.stringify(o));
@@ -329,31 +35,52 @@ const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).
 const post = (url, body) => fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body || {}) });
 async function jget(res) { if (!res.ok) { const t = await res.text(); let d; try { d = JSON.parse(t).detail; } catch { d = t.slice(0, 160); } throw new Error(d || res.status); } return res.json(); }
 
-const map = L.map('map', { zoomControl: false, attributionControl: true, preferCanvas: true }).setView([37.7700, -122.4420], 13);
-const cellLayer = L.layerGroup().addTo(map), altLayer = L.layerGroup().addTo(map), recLayer = L.layerGroup().addTo(map),
-      stopLayer = L.layerGroup().addTo(map), pinLayer = L.layerGroup().addTo(map), meLayer = L.layerGroup().addTo(map);
-let TRIP = null, STOPS = {}, CELLS = null, CURRENT = null, busy = false, tiles = null, planSeq = 0, pickMode = null, STATUS = null;
+let map = null;
+let TRIP = null, STOPS = {}, CELLS = null, CURRENT = null, busy = false, planSeq = 0, pickMode = null, STATUS = null, CELLMAP = {};
 const BANDC = () => ({ 'very safe': css('--safe'), 'kind of safe': css('--mid'), 'unsafe': css('--bad') });
 const MODEC = () => ({ walk: css('--walk'), muni: css('--muni'), bart: css('--bart'), uber: css('--uber'), rail: css('--rail') });
 const MODE_NAME = { walk: 'Walk', muni: 'Muni', bart: 'BART', uber: 'Uber', rail: 'Rail' };
 const SRC = { x: 'X', news: 'News', datasf: 'SFPD data' };
-
+const GEO = { cells: [], alts: [], rec: [], trail: [] };
+const fc = f => ({ type: 'FeatureCollection', features: f });
+const line = (coords, props) => ({ type: 'Feature', properties: props || {}, geometry: { type: 'LineString', coordinates: coords.map(([a, b]) => [b, a]) } });
+function setSrc(name, feats) { GEO[name] = feats; const s = map && map.getSource(name); if (s) s.setData(fc(feats)); }
+let styleKind = null, pinMarkers = [], stopMarkers = [], meMarker = null, popup = null;
+function closePopup() { if (popup) { popup.remove(); popup = null; } }
+function openPopup(lngLat, html) { closePopup(); popup = new gl.Popup({ offset: 8, closeButton: false, maxWidth: '260px' }).setLngLat(lngLat).setHTML(html).addTo(map); return popup; }
+function addLayers() {
+  const dark = document.documentElement.dataset.theme === 'dark';
+  for (const n of Object.keys(GEO)) if (!map.getSource(n)) map.addSource(n, { type: 'geojson', data: fc(GEO[n]) });
+  addBuildings(map, dark);
+  const L = (o) => { if (!map.getLayer(o.id)) map.addLayer(o); };
+  L({ id: 'cells-fill', type: 'fill', source: 'cells', paint: { 'fill-color': ['get', 'color'], 'fill-opacity': ['get', 'fo'] } });
+  L({ id: 'cells-line', type: 'line', source: 'cells', paint: { 'line-color': ['get', 'color'], 'line-opacity': ['get', 'lo'], 'line-width': ['get', 'w'] } });
+  L({ id: 'alts', type: 'line', source: 'alts', layout: { 'line-cap': 'round' }, paint: { 'line-color': dark ? '#9aa3b5' : '#6b7280', 'line-opacity': .6, 'line-width': 3, 'line-dasharray': [1, 2.5] } });
+  L({ id: 'rec-case', type: 'line', source: 'rec', layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': dark ? '#000' : '#fff', 'line-width': 11, 'line-opacity': .75 } });
+  L({ id: 'rec-line', type: 'line', source: 'rec', filter: ['!=', ['get', 'mode'], 'walk'], layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': ['get', 'color'], 'line-width': 6 } });
+  L({ id: 'rec-walk', type: 'line', source: 'rec', filter: ['==', ['get', 'mode'], 'walk'], layout: { 'line-cap': 'round' }, paint: { 'line-color': ['get', 'color'], 'line-width': 6, 'line-dasharray': [0.1, 1.8] } });
+  L({ id: 'trail', type: 'line', source: 'trail', paint: { 'line-color': css('--tint'), 'line-width': 3, 'line-opacity': .85 } });
+}
+function initMap() {
+  const kind = S.map.style === 'satellite' ? 'satellite' : themeName();
+  styleKind = kind;
+  map = new gl.Map({ container: 'map', style: styleFor(kind), center: [-122.442, 37.77], zoom: 13, pitch: S.map.tilt ? 45 : 0,
+    attributionControl: false, ...(isMapbox ? {} : {}) });
+  map.addControl(new gl.AttributionControl({ compact: true }), 'bottom-right');
+  map.on('style.load', () => { addLayers(); });
+  map.on('click', onMapClick);
+  map.on('mouseenter', 'cells-fill', () => map.getCanvas().style.cursor = 'pointer');
+  map.on('mouseleave', 'cells-fill', () => map.getCanvas().style.cursor = '');
+}
 const mq = matchMedia('(prefers-color-scheme: dark)');
-function themeName(st = S) { return st.map.style === 'auto' ? (mq.matches ? 'dark' : 'light') : st.map.style; }
+function themeName(st = S) { return st.map.style === 'auto' ? (mq.matches ? 'dark' : 'light') : st.map.style === 'satellite' ? 'dark' : st.map.style; }
 function applyTheme(st = S) {
   const t = themeName(st);
   document.documentElement.dataset.theme = t;
   document.documentElement.style.setProperty('--tint', TINTS[st.map.tint] || TINTS.blue);
-  document.querySelector('meta[name=theme-color]').content = t === 'dark' ? '#000000' : '#f2f2f7';
-  const local = ['localhost', '127.0.0.1'].includes(location.hostname);
-  // CARTO dark_all now needs a key; Stadia works keyless on localhost; elsewhere OSM (inverted in dark mode).
-  const url = local ? `https://tiles.stadiamaps.com/tiles/alidade_smooth${t === 'dark' ? '_dark' : ''}/{z}/{x}/{y}{r}.png`
-                    : 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
-  const cls = !local && t === 'dark' ? 'darktiles' : '';
-  if (!tiles || tiles._url !== url || tiles.options.className !== cls) {
-    if (tiles) map.removeLayer(tiles);
-    tiles = L.tileLayer(url, { maxZoom: 19, className: cls, attribution: '&copy; OpenStreetMap' + (local ? ' &copy; Stadia Maps' : '') }).addTo(map);
-  }
+  const kind = st.map.style === 'satellite' ? 'satellite' : t;
+  if (map && kind !== styleKind) { styleKind = kind; map.setStyle(styleFor(kind)); }
+  if (map) map.easeTo({ pitch: st.map.tilt ? 45 : 0, duration: 400 });
   drawCells(st); if (TRIP) drawRoutes(CURRENT && CURRENT.recommended_route_id, st);
   layoutFloating(st);
 }
@@ -370,9 +97,13 @@ function layoutFloating(st = S) {
 }
 function fitView(animate) {
   const { top, peek } = layoutFloating();
+  if (!map) return;
   let pts = [[S.origin.lat, S.origin.lng], [S.destination.lat, S.destination.lng]];
   if (TRIP) { const r = CURRENT && TRIP.routes.find(x => x.id === CURRENT.recommended_route_id); pts = pts.concat((r ? [r] : TRIP.routes).flatMap(r => r.legs.flatMap(l => l.coords))); }
-  map.fitBounds(L.latLngBounds(pts), { paddingTopLeft: [24, top + 16], paddingBottomRight: [64, peek + 50], animate: !!animate, maxZoom: 16 });
+  const lats = pts.map(p => p[0]), lngs = pts.map(p => p[1]);
+  const H = $('screen').clientHeight;
+  map.fitBounds([[Math.min(...lngs), Math.min(...lats)], [Math.max(...lngs), Math.max(...lats)]],
+    { padding: { top: Math.min(top + 16, H * .45), bottom: Math.min(peek + 50, H * .45), left: 30, right: 70 }, maxZoom: 16, duration: animate ? 900 : 0, pitch: S.map.tilt ? 45 : 0 });
 }
 
 /* ---------- safety cells ---------- */
@@ -388,56 +119,48 @@ function cellPopup(c, col) {
     (c.incidents ? `<div class="muted tiny" style="margin-top:4px">${c.incidents} report${c.incidents > 1 ? 's' : ''} · risk ${c.risk}</div>` : '');
 }
 function drawCells(st = S) {
-  cellLayer.clearLayers();
-  if (!st.map.heatmap || !CELLS) return;
-  const BC = BANDC(), k = st.map.opacity, onRoute = new Set(TRIP?.route_cells || []), seen = new Set();
-  const add = (c) => {
-    const col = BC[c.band];
-    L.polygon(h3.cellToBoundary(c.cell), { color: col, weight: c.band === 'very safe' ? .6 : 1.2, opacity: Math.min(1, .7 * k), fillColor: col,
-      fillOpacity: Math.min(.9, (c.band === 'very safe' ? .12 : c.band === 'kind of safe' ? .32 : .48) * k) })
-      .bindPopup(cellPopup(c, col)).addTo(cellLayer);
-  };
-  for (const c of CELLS) {
-    seen.add(c.cell);
-    if (c.band === 'very safe' && (!st.map.showSafe || !onRoute.has(c.cell))) continue;
-    add(c);
+  const feats = []; CELLMAP = {};
+  if (st.map.heatmap && CELLS) {
+    const BC = BANDC(), k = st.map.opacity, onRoute = new Set(TRIP?.route_cells || []), seen = new Set();
+    const add = c => { const col = BC[c.band]; CELLMAP[c.cell] = c;
+      feats.push({ type: 'Feature', properties: { cell: c.cell, color: col, w: c.band === 'very safe' ? .6 : 1.2, lo: Math.min(1, .7 * k),
+        fo: Math.min(.9, (c.band === 'very safe' ? .12 : c.band === 'kind of safe' ? .32 : .48) * k) },
+        geometry: { type: 'Polygon', coordinates: [h3.cellToBoundary(c.cell, true)] } }); };
+    for (const c of CELLS) { seen.add(c.cell); if (c.band === 'very safe' && (!st.map.showSafe || !onRoute.has(c.cell))) continue; add(c); }
+    if (st.map.showSafe) for (const cell of onRoute) if (!seen.has(cell)) add({ cell, band: 'very safe', reason: 'No incidents reported in the last week', incidents: 0 });
   }
-  if (st.map.showSafe) for (const cell of onRoute) if (!seen.has(cell)) add({ cell, band: 'very safe', reason: 'No incidents reported in the last week', incidents: 0 });
+  setSrc('cells', feats);
 }
 
 /* ---------- pins ---------- */
-function pinIcon(color) { return L.divIcon({ className: '', html: `<div class="pin" style="background:${color}"></div>`, iconSize: [22, 22], iconAnchor: [11, 11] }); }
+function el(html) { const d = document.createElement('div'); d.innerHTML = html; return d.firstElementChild; }
 function drawPins() {
-  pinLayer.clearLayers();
+  if (!map) return;
+  pinMarkers.forEach(m => m.remove()); pinMarkers = [];
   for (const [key, color, label] of [['origin', css('--tint'), 'Start'], ['destination', css('--red'), 'End']]) {
     const p = S[key];
-    L.marker([p.lat, p.lng], { icon: pinIcon(color), draggable: !isViewer(), zIndexOffset: 1000 })
-      .bindTooltip(`${label} · ${p.name} · drag to move`)
-      .on('dragend', async e => { const ll = e.target.getLatLng(); await setPlace(key, await reverseName(ll.lat, ll.lng)); })
-      .addTo(pinLayer);
+    const m = new gl.Marker({ element: el(`<div class="pin" style="background:${color}" title="${label} · ${esc(p.name)} · drag to move"></div>`), draggable: !isViewer() })
+      .setLngLat([p.lng, p.lat]).addTo(map);
+    m.on('dragend', async () => { const ll = m.getLngLat(); await setPlace(key, await reverseName(ll.lat, ll.lng)); });
+    pinMarkers.push(m);
   }
 }
 function drawRoutes(recId, st = S) {
-  altLayer.clearLayers(); recLayer.clearLayers(); stopLayer.clearLayers(); drawPins();
-  if (!TRIP) return;
+  drawPins();
+  stopMarkers.forEach(m => m.remove()); stopMarkers = [];
+  if (!TRIP) { setSrc('alts', []); setSrc('rec', []); return; }
   const MC = MODEC();
-  for (const r of TRIP.routes) {
-    if (r.id === recId || (recId && !st.map.alternatives)) continue;
-    for (const l of r.legs) L.polyline(l.coords, { color: css('--label2'), weight: 3, opacity: .5, dashArray: '2 7' }).addTo(altLayer);
-  }
+  setSrc('alts', TRIP.routes.filter(r => r.id !== recId && !(recId && !st.map.alternatives)).flatMap(r => r.legs.map(l => line(l.coords))));
   const rec = TRIP.routes.find(r => r.id === recId);
+  setSrc('rec', rec ? rec.legs.map(l => line(l.coords, { mode: l.mode, color: MC[l.mode] || MC.muni, label: l.label })) : []);
   if (!rec) return;
-  for (const l of rec.legs) {
-    L.polyline(l.coords, { color: themeName(st) === 'dark' ? '#000' : '#fff', weight: 11, opacity: .7 }).addTo(recLayer);
-    L.polyline(l.coords, { color: MC[l.mode] || MC.muni, weight: 6, dashArray: l.mode === 'walk' ? '1 9' : null, lineCap: 'round' }).bindTooltip(l.label).addTo(recLayer);
-  }
   for (const sid of rec.stops) {
     const s = STOPS[sid]; if (!s) continue;
-    L.circleMarker([s.lat, s.lng], { radius: 8, color: '#fff', weight: 3, fillColor: '#1c1c1e', fillOpacity: 1 })
-      .bindTooltip(s.name + ' · tap for photo').on('click', () => openStop(sid)).addTo(stopLayer);
+    const m = new gl.Marker({ element: el(`<div class="stopdot" title="${esc(s.name)} · tap for photo"></div>`) }).setLngLat([s.lng, s.lat]).addTo(map);
+    m.getElement().addEventListener('click', e => { e.stopPropagation(); openStop(sid); });
+    stopMarkers.push(m);
   }
 }
-
 /* ======================= places: search, current location, map picks ======================= */
 let suggField = null, suggTimer = null, suggItems = [];
 const ICON = {
@@ -501,22 +224,28 @@ async function useMyLocation(field) {
     await setPlace(field, { ...(await reverseName(c.latitude, c.longitude)), name: 'Current location' });
   } catch { toast('Location unavailable. Allow location access and try again'); }
 }
-function showMe(lat, lng) { meLayer.clearLayers(); L.marker([lat, lng], { icon: L.divIcon({ className: '', html: '<div class="me"></div>', iconSize: [18, 18], iconAnchor: [9, 9] }), interactive: false }).addTo(meLayer); }
+function showMe(lat, lng) {
+  if (!map) return;
+  if (!meMarker) meMarker = new gl.Marker({ element: el('<div class="me"></div>') }).setLngLat([lng, lat]).addTo(map);
+  else meMarker.setLngLat([lng, lat]);
+}
 async function locateMe() {
   try { const c = await getPosition(); showMe(c.latitude, c.longitude);
-    if (inSF(c.latitude, c.longitude)) map.setView([c.latitude, c.longitude], 16); else toast('You appear to be outside San Francisco');
+    if (inSF(c.latitude, c.longitude)) map.flyTo({ center: [c.longitude, c.latitude], zoom: 16 }); else toast('You appear to be outside San Francisco');
   } catch { toast('Location unavailable'); }
 }
-map.on('click', async e => {
+async function onMapClick(e) {
   if (isViewer()) return;
-  const { lat, lng } = e.latlng;
+  const { lat, lng } = e.lngLat;
   if (pickMode) { const f = pickMode; pickMode = null; return setPlace(f, await reverseName(lat, lng)); }
-  if (e.originalEvent?.target?.closest?.('.leaflet-interactive')) return;
-  const pop = L.popup({ offset: [0, -4] }).setLatLng(e.latlng).setContent('<div class="loading" style="padding:0"><span class="spin"></span>Looking up…</div>').openOn(map);
+  const hit = map.queryRenderedFeatures(e.point, { layers: ['cells-fill'] })[0];
+  const c = hit && CELLMAP[hit.properties.cell];
+  const head = c ? cellPopup(c, BANDC()[c.band]) + '<hr style="border:0;border-top:.5px solid var(--sep);margin:8px 0">' : '';
+  const pop = openPopup(e.lngLat, head + '<div class="loading" style="padding:0"><span class="spin"></span>Looking up…</div>');
   const place = await reverseName(lat, lng);
   window._drop = place;
-  pop.setContent(`<b>${esc(place.name)}</b><div class="popbtns"><button onclick="map.closePopup();setPlace('origin',window._drop)">Start here</button><button class="go" onclick="map.closePopup();setPlace('destination',window._drop)">Go here</button></div>`);
-});
+  if (popup === pop) pop.setHTML(head + `<b>${esc(place.name)}</b><div class="popbtns"><button onclick="closePopup();setPlace('origin',window._drop)">Start here</button><button class="go" onclick="closePopup();setPlace('destination',window._drop)">Go here</button></div>`);
+}
 
 /* ======================= when + budget ======================= */
 function fmt12(hhmm) { const [h, m] = hhmm.split(':').map(Number); return `${(h % 12) || 12}:${String(m).padStart(2, '0')} ${h < 12 ? 'AM' : 'PM'}`; }
@@ -547,23 +276,25 @@ function loadingView(steps) {
   $('sheet-body').innerHTML = `<div class="loading"><div class="spin"></div><div><b>${esc(S.origin.name)} → ${esc(S.destination.name)}</b>
     <div class="tiny">Opus 5.5 is weighing cost, time and safety for $${S.budget}…</div></div></div><div class="steps">${steps.map(s => `<div>${esc(s)}</div>`).join('')}</div>`;
 }
-async function plan() {
+async function plan(opts = {}) {
   const seq = ++planSeq; busy = true;
   renderTiers();
   CURRENT = null; closeStop();
   const steps = [];
   loadingView(steps);
   try {
-    const demo = useDemo() ? '?demo=1' : '';
-    const trip = await jget(await post('/api/trip' + demo, { origin: S.origin, destination: S.destination, depart: S.depart }));
+    const demo = useDemo();
+    const mode = opts.mode || S.advanced.ai;
+    const q = (extra) => { const u = new URLSearchParams(demo ? { demo: 1 } : {}); for (const k in extra) if (extra[k]) u.set(k, extra[k]); const s = u.toString(); return s ? '?' + s : ''; };
+    const trip = await jget(await post('/api/trip' + q({ fresh: opts.fresh ? 1 : 0 }), { origin: S.origin, destination: S.destination, depart: S.depart }));
     if (seq !== planSeq) return;
     TRIP = trip; STOPS = { ...trip.stop_cards };
     const rt = trip.routes.some(r => r.realtime);
     steps.push(`${trip.routes.length} routes found${trip.live ? (rt ? ' with live departures' : '') : ' (demo trip)'}`);
     loadingView(steps); drawCells(); drawRoutes(null); fitView(true);
-    steps.push('Scoring each route against live SFPD, news and X incidents');
+    steps.push(mode === 'local' ? 'Scoring each route for free (no AI tokens)' : 'Opus 5.5 is scoring each route against live SFPD, news and X incidents');
     loadingView(steps);
-    const p = await jget(await post('/api/plan' + demo, planBody()));
+    const p = await jget(await post('/api/plan' + q({ mode, force: opts.force ? 1 : 0 }), planBody()));
     if (seq !== planSeq) return;
     TRIP = p.trip; STOPS = { ...p.trip.stop_cards, ...STOPS };
     CURRENT = { ...p, budget: S.budget };
@@ -595,15 +326,17 @@ function renderPlan() {
     </div>
     <div class="rname">${esc(rec.name)}</div>
     <div class="chips">${modes.map(m => `<span class="chip"><i style="background:${MC[m] || MC.muni}"></i>${MODE_NAME[m] || m}</span>`).join('')}
-      ${rec.realtime ? '<span class="chip live">Live departures</span>' : ''}${p.cached ? '<span class="chip">Cached demo</span>' : ''}</div>
-    <div class="why"><div class="h"><i></i>Opus 5.5 · why this route</div><p>${esc(p.why)}</p></div>
+      ${rec.realtime ? '<span class="chip live">Live departures</span>' : ''}${p.cached ? '<span class="chip">Cached · no tokens</span>' : ''}${p.source === 'local' ? '<span class="chip">Free mode</span>' : ''}</div>
+    <div class="why"><div class="h"><i></i>${p.source === 'local' ? 'Free safety score · no AI tokens' : 'Opus 5.5 · why this route'}</div><p>${esc(p.why)}</p></div>
     <div class="muted" style="margin-top:8px;font-size:14px">${esc(p.safety_summary)}</div>
     <button class="btn" onclick="walkWithMe()">Walk with me</button>
+    <div class="row2">${p.source === 'local' ? '<button class="btn gray" onclick="plan({mode:\'opus\'})">Ask Opus 5.5 (~7¢)</button>' : `<button class="btn gray" onclick="plan({mode:'local'})">Free re-score</button>`}
+      <button class="btn gray" onclick="scanArea(this)">Scan X + news here</button></div>
     <div class="section-h">Steps</div><div class="list">${legs}</div>
     ${stops ? `<div class="section-h">Stops</div><div class="list">${stops}</div>` : ''}
     ${alts ? `<div class="section-h">Also considered</div><div class="list">${alts}</div>` : ''}
     ${trace}
-    <div class="foot" style="margin-top:14px">${p.cached ? 'Cached demo plan' : 'Planned live by Claude Opus 5.5'} · ${TRIP.live ? 'transit from Transitous (real-time where available)' : 'precomputed demo routes'} · fares from SFMTA and BART · rideshare prices are estimates</div>`;
+    <div class="foot" style="margin-top:14px">${p.source === 'local' ? 'Scored without AI (free)' : p.cached ? 'Cached Opus 5.5 plan (no new tokens)' : 'Planned live by Claude Opus 5.5'} · ${TRIP.live ? 'transit from Transitous (real-time where available)' : 'precomputed demo routes'} · fares from SFMTA and BART · rideshare prices are estimates</div>`;
 }
 
 /* ======================= stops ======================= */
@@ -689,7 +422,7 @@ function renderSettings(section) {
       ${segc('depart', 'Leave', [['now', 'Now'], ['23:00', '11 PM']])}
       <div class="li"><div class="grow t">Or leave at</div><input type="time" data-p="depart" value="${DRAFT.depart === 'now' ? '' : DRAFT.depart}"></div>
       <div class="li"><div class="grow"><div class="t">Arrive by</div><div class="s">Optional deadline</div></div><input type="time" data-p="deadline" value="${DRAFT.deadline}"></div>
-      <div class="li tap" onclick="closeModals(true);S.origin=DEMO_O;S.destination=DEMO_D;S.depart='23:00';save();renderWhen();loadCells();plan()"><div class="grow t" style="color:var(--tint)">Load the demo trip</div><span class="chev">›</span></div>
+      <div class="li tap" onclick="loadDemoTrip()"><div class="grow t" style="color:var(--tint)">Load the demo trip</div><span class="chev">›</span></div>
     </div>
     <div class="foot">Change places with the search fields, the map (tap it or drag the pins), or your current location.</div>
 
@@ -722,7 +455,8 @@ function renderSettings(section) {
     <div class="foot">0 hides a source. Cells re-score instantly with no model calls.</div>
 
     <div class="section-h">Map</div><div class="list">
-      ${segc('map.style', 'Appearance', [['dark', 'Dark'], ['light', 'Light'], ['auto', 'Auto']])}
+      ${segc('map.style', 'Map', [['dark', 'Dark'], ['light', 'Light'], ['satellite', 'Sat'], ['auto', 'Auto']])}
+      ${sw('map.tilt', '3D view', 'Tilted map with 3D buildings')}
       <div class="li"><div class="grow t">Accent</div><div class="tints">${Object.entries(TINTS).map(([k, c]) => `<button data-tint="${k}" style="background:${c}" class="${DRAFT.map.tint === k ? 'on' : ''}" aria-label="${k}"></button>`).join('')}</div></div>
       ${sw('map.heatmap', 'Safety heatmap')}${sw('map.showSafe', 'Show “very safe” cells on the route')}
       ${slider('map.opacity', 'Heatmap strength', .2, 1.6, .1, FMT.pct)}
@@ -739,6 +473,7 @@ function renderSettings(section) {
     <div class="foot">Auto uses GPS in San Francisco and simulates walking the route anywhere else (handy for demos).</div>
 
     <div class="section-h" id="sec-agent">Agent and live data</div><div class="list">
+      ${segc('advanced.ai', 'Route picker', [['opus', 'Opus 5.5'], ['local', 'Free']])}
       ${segc('effort', 'Opus effort', [['low', 'Low'], ['medium', 'Med'], ['high', 'High']])}
       ${sw('advanced.demo', 'Demo mode', 'Cached plans for the demo trip at 11 PM')}
       ${sw('advanced.trace', 'Show agent trace')}
@@ -822,10 +557,11 @@ async function liveRefresh(row) {
 /* ======================= Walk with me (live) ======================= */
 let shareId = null, watchId = null, simTimer = null;
 const isViewer = () => !!Q.get('watch');
+function hav(a, b) { const r = Math.PI / 180, x = Math.sin((b[0] - a[0]) * r / 2) ** 2 + Math.cos(a[0] * r) * Math.cos(b[0] * r) * Math.sin((b[1] - a[1]) * r / 2) ** 2; return 12742000 * Math.asin(Math.sqrt(x)); }
 function pathOf(route) { return route.legs.flatMap(l => l.coords); }
 function alongPath(path, frac) {
   const seg = []; let total = 0;
-  for (let i = 1; i < path.length; i++) { const d = map.distance(path[i - 1], path[i]); seg.push(d); total += d; }
+  for (let i = 1; i < path.length; i++) { const d = hav(path[i - 1], path[i]); seg.push(d); total += d; }
   let target = total * Math.min(1, Math.max(0, frac));
   for (let i = 1; i < path.length; i++) { if (target <= seg[i - 1]) { const t = seg[i - 1] ? target / seg[i - 1] : 0;
       return [path[i - 1][0] + (path[i][0] - path[i - 1][0]) * t, path[i - 1][1] + (path[i][1] - path[i - 1][1]) * t]; } target -= seg[i - 1]; }
@@ -859,7 +595,7 @@ function startTracking(rec) {
 }
 function stopTracking(silent) {
   if (watchId !== null) navigator.geolocation.clearWatch(watchId); if (simTimer) clearInterval(simTimer);
-  watchId = null; simTimer = null; meLayer.clearLayers();
+  watchId = null; simTimer = null; if (meMarker) { meMarker.remove(); meMarker = null; }
   if (!silent) { $('share-banner').style.display = 'none'; layoutFloating(); toast('Stopped sharing'); }
 }
 function renderSharing(sim) {
@@ -869,23 +605,20 @@ function renderSharing(sim) {
 }
 async function viewer(id) {
   $('search-main').style.display = 'none'; $('fabs').style.display = 'none';
-  let drawn = false, trail = null, dot = null;
+  let drawn = false;
   const tickV = async () => {
     try {
       const s = await jget(await fetch('/api/share/' + id));
-      if (!drawn) {
+      if (!drawn && map.isStyleLoaded()) {
         drawn = true; const MC = MODEC();
-        for (const l of s.route.legs) L.polyline(l.coords, { color: MC[l.mode] || MC.muni, weight: 6, dashArray: l.mode === 'walk' ? '1 9' : null }).addTo(recLayer);
+        setSrc('rec', s.route.legs.map(l => line(l.coords, { mode: l.mode, color: MC[l.mode] || MC.muni })));
         if (s.origin && s.destination) { S.origin = s.origin; S.destination = s.destination; drawPins(); }
-        map.fitBounds(L.latLngBounds(s.route.legs.flatMap(l => l.coords)), { paddingTopLeft: [24, 120], paddingBottomRight: [64, 300] });
+        const pts = s.route.legs.flatMap(l => l.coords), la = pts.map(p => p[0]), ln = pts.map(p => p[1]);
+        map.fitBounds([[Math.min(...ln), Math.min(...la)], [Math.max(...ln), Math.max(...la)]], { padding: { top: 120, bottom: 300, left: 30, right: 70 }, duration: 0 });
       }
       $('share-banner').style.display = 'block';
       $('share-banner').textContent = `Following ${s.name || 'a friend'} live` + (s.eta ? ` · ETA ${s.eta}` : '');
-      if (s.pos) {
-        if (!dot) dot = L.marker([s.pos.lat, s.pos.lng], { icon: L.divIcon({ className: '', html: '<div class="me"></div>', iconSize: [18, 18], iconAnchor: [9, 9] }) }).addTo(meLayer);
-        dot.setLatLng([s.pos.lat, s.pos.lng]);
-        if (trail) trail.setLatLngs(s.trail); else trail = L.polyline(s.trail, { color: css('--tint'), weight: 3, opacity: .8 }).addTo(meLayer);
-      }
+      if (s.pos) { showMe(s.pos.lat, s.pos.lng); setSrc('trail', [line(s.trail.length > 1 ? s.trail : [s.trail[0] || [s.pos.lat, s.pos.lng], [s.pos.lat, s.pos.lng]])]); }
       $('sheet-body').innerHTML = `<div class="rname">${esc(s.route.name)}</div>
         <div class="muted">${esc(s.origin?.name || '')} → ${esc(s.destination?.name || '')}</div>
         <div class="list" style="margin-top:12px"><div class="li"><div class="grow"><div class="t">Last update</div><div class="s">${s.age_s === null ? 'Waiting for their first position…' : s.age_s < 10 ? 'Just now' : s.age_s + ' s ago'}${s.pos?.simulated ? ' · simulated' : ''}</div></div><span class="rt">Live</span></div>
@@ -894,6 +627,30 @@ async function viewer(id) {
   };
   await tickV(); setInterval(tickV, 3000);
 }
+
+/* ======================= refresh / scan ======================= */
+async function refreshAll() {
+  toast('Refreshing live data…');
+  $('fab-ref').classList.add('spinning');
+  try {
+    await post('/api/refresh');
+    for (let i = 0; i < 30; i++) { await new Promise(r => setTimeout(r, 1200)); await loadStatus(); if (!STATUS.refreshing) break; }
+    await loadCells();
+    await plan({ fresh: true, force: S.advanced.ai === 'opus' ? false : false });
+    toast(`Updated · ${STATUS.datasf_rows || 0} SFPD reports · fresh departures`);
+  } finally { $('fab-ref').classList.remove('spinning'); }
+}
+async function scanArea(btn) {
+  btn.disabled = true; btn.innerHTML = '<span class="spin" style="width:14px;height:14px;vertical-align:-2px"></span> Scanning X + news…';
+  try {
+    const r = await jget(await post('/api/scan', { origin: S.origin, destination: S.destination, depart: S.depart }));
+    toast(r.added ? `${r.added} new incident${r.added > 1 ? 's' : ''} from ${r.new_items} new posts` : `No new located incidents in ${r.items} posts`);
+    if (r.added) { await loadCells(); plan({ mode: 'local' }); }
+    loadSpend();
+  } catch (e) { toast('Scan failed: ' + e.message); }
+  btn.disabled = false; btn.textContent = 'Scan X + news here';
+}
+function loadDemoTrip() { closeModals(true); S.origin = DEMO_O; S.destination = DEMO_D; S.depart = '23:00'; save(); $('from').value = S.origin.name; $('to').value = S.destination.name; renderWhen(); loadCells(); plan(); }
 
 /* ======================= misc ======================= */
 function toggleHeat() { S.map.heatmap = !S.map.heatmap; save(); $('fab-heat').classList.toggle('off', !S.map.heatmap); drawCells(); layoutFloating(); }
@@ -912,10 +669,11 @@ for (const [id, field] of [['from', 'origin'], ['to', 'destination']]) {
   el.addEventListener('keydown', e => { if (e.key === 'Enter' && suggItems[0] && !suggItems[0].action) pickSugg(suggItems[0]); if (e.key === 'Escape') { hideSugg(); el.blur(); } });
 }
 $('fab-heat').classList.toggle('off', !S.map.heatmap);
-addEventListener('resize', () => { map.invalidateSize(); layoutFloating(); });
+addEventListener('resize', () => { map && map.resize(); layoutFloating(); });
 addEventListener('keydown', e => { if (e.key === 'Escape') closeModals(true); });
 
 (async () => {
+  document.documentElement.dataset.theme = themeName(); initMap();
   applyTheme(); renderTiers(); renderWhen(); tick(); setInterval(tick, 15000);
   $('from').value = S.origin.name; $('to').value = S.destination.name; drawPins(); layoutFloating(); fitView();
   try { const cfg = await (await fetch('/api/config')).json(); PRESETS = cfg.presets || []; } catch {}
@@ -924,6 +682,8 @@ addEventListener('keydown', e => { if (e.key === 'Escape') closeModals(true); })
   if (isViewer()) return viewer(Q.get('watch'));
   plan();
 })();
-</script>
-</body>
-</html>
+
+Object.assign(window, { openStop, fetchPhoto, swapPhoto, stopTracking, openSettings, closeModals, applySettings, resetSettings,
+  refreshNow, liveRefresh, setPlace, plan, swapOD, toggleHeat, locateMe, fitView, walkWithMe, closePopup, loadDemoTrip,
+  refreshAll, scanArea });
+}

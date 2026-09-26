@@ -202,3 +202,13 @@
     font-size: clamp(4.2rem, 18vw, 6.4rem);
   }
 }
+
+/* ---- StreetSmart app entry points ---- */
+.cta-row { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; position: relative; z-index: 2; }
+.cta { display: inline-flex; align-items: center; padding: 14px 24px; border-radius: 999px; font-weight: 600; font-size: 16px;
+  background: linear-gradient(135deg, #a855f7, #6d28d9); color: #fff; box-shadow: 0 10px 30px rgba(124, 58, 237, .45);
+  transition: transform .15s ease, box-shadow .15s ease; }
+.cta:hover { transform: translateY(-1px); box-shadow: 0 14px 36px rgba(124, 58, 237, .6); }
+.cta.ghost { background: rgba(255, 255, 255, .06); border: 1px solid rgba(190, 150, 255, .35); box-shadow: none; }
+.feats { list-style: none; padding: 0; margin: 26px 0 0; display: grid; gap: 8px; color: rgba(245, 243, 255, .75); font-size: 15px; position: relative; z-index: 2; }
+.feats b { color: #d8b4fe; font-weight: 600; margin-right: 4px; }

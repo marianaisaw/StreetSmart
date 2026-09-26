@@ -129,13 +129,13 @@ def is_night(hour):
     return hour >= 21 or hour < 6
 
 
-def compute_cells(incidents, late=None, params=None, reasons=None):
+def compute_cells(incidents, late=None, params=None, reasons=None, base_cells=None):
     """Pure scoring (no LLM): risk per H3 cell. Params override DEFAULTS; used live by the server."""
     p = {**DEFAULTS, **(params or {})}
     p["weights"] = {**SOURCE_W, **(p.get("weights") or {})}
     late = place_cells(p["day"], p["hour"]) if late is None else late
     now = datetime.now(timezone.utc)
-    corridor = set(h3.polygon_to_cells(h3.LatLngPoly(CORRIDOR), RES))
+    corridor = set(h3.polygon_to_cells(h3.LatLngPoly(CORRIDOR), RES)) if base_cells is None else set(base_cells)
     cells = {c: [] for c in corridor}
     for inc in incidents:
         if p["weights"].get(inc["source"], 0.4) <= 0:
