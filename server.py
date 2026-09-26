@@ -502,6 +502,7 @@ def local_plan(req: PlanReq, trip):
 
 
 PLAN_CACHE = {}
+AI = bool(os.environ.get("ANTHROPIC_API_KEY"))  # teammates can run the app without an Anthropic key
 
 
 def plan_key(req: PlanReq, mode):
@@ -555,17 +556,17 @@ def trip_payload(trip):
 def apify_stop_photo(st):
     """Small Google Maps run around one stop (about 1-2 cents, ~30-60 s); result appended to places.json."""
     from apify_client import ApifyClient
-    from scrape import log_apify
+    from scrape import _field, log_apify
     client = ApifyClient(os.environ["APIFY_TOKEN"])
     term = "BART station" if st.get("kind") == "BART station" else "bus stop"
     run = client.actor("compass/crawler-google-places").call(run_input={
         "searchStringsArray": [term], "language": "en", "maxImages": 3, "maxReviews": 0,
         "maxCrawledPlacesPerSearch": 4, "scrapePlaceDetailPage": False,
         "customGeolocation": {"type": "Point", "coordinates": [st["lng"], st["lat"]], "radiusKm": 0.25},
-    }, max_items=4, max_total_charge_usd=Decimal("0.08"), timeout_secs=150, logger=None)
-    run = client.run(run["id"]).get() or run
+    }, max_items=4, max_total_charge_usd=Decimal("0.08"), logger=None)
+    run = client.run(_field(run, "id")).get() or run
     log_apify(f"stop_photo:{st['name'][:20]}", run)
-    items = list(client.dataset(run["defaultDatasetId"]).iterate_items())
+    items = list(client.dataset(_field(run, "default_dataset_id", "defaultDatasetId")).iterate_items())
     keep = ("placeId", "title", "location", "categoryName", "categories", "openingHours", "imageUrl", "imageUrls",
             "address", "url", "totalScore")
     new = [{k: p.get(k) for k in keep} for p in items if (p.get("location") or {}).get("lat")]
@@ -647,7 +648,7 @@ def classic():
 
 @app.get("/api/config")
 def config():
-    return {"defaults": PlanReq().dict(), "fares": FARES, "rideshare": RIDESHARE, "presets": PRESETS,
+    return {"defaults": PlanReq().dict(), "fares": FARES, "rideshare": RIDESHARE, "presets": PRESETS, "ai": AI,
             "demo_trip": {"origin": DEMO["origin"], "destination": DEMO["destination"], "depart": DEMO["depart"]}}
 
 
@@ -699,8 +700,16 @@ def trip(req: TripReq, demo: int = 0, fresh: int = 0):
 
 @app.post("/api/plan")
 def plan(req: PlanReq, demo: int = 0, mode: str = "opus", force: int = 0, fresh: int = 0):
-    """mode=opus: Opus 5.5 agent (cached 10 min per trip+settings unless force=1). mode=local: free, no tokens."""
+    """mode=opus: Opus 5.5 agent (cached 10 min per trip+settings unless force=1). mode=local: free, no tokens.
+    Without an ANTHROPIC_API_KEY, saved plans are used when they exist and everything else is scored for free."""
     use_demo = bool(demo) and is_demo_trip(req) and req.depart == "23:00"
+    if not AI and mode != "local":
+        if use_demo or (is_demo_trip(req) and req.depart == "23:00"):
+            hit = jload("demo_cache.json", {}).get(f"{req.budget:g}")
+            if hit:
+                t = get_trip(req, demo=True)
+                return {**hit["plan"], "cached": True, "trace": hit["trace"], "trip": trip_payload(t)}
+        mode = "local"
     t = get_trip(req, demo=use_demo, fresh=bool(fresh))
     if mode == "local":
         return {**local_plan(req, t), "cached": False, "trace": [], "trip": trip_payload(t)}
@@ -812,7 +821,20 @@ def refresh():
 
 @app.post("/api/live")
 def live_refresh():
-    """Opus 5.5 + Apify remote MCP: scrape the newest X posts along the route and merge new incidents."""
+    """Opus 5.5 + Apify remote MCP: scrape the newest X posts along the route and merge new incidents.
+    Without an Anthropic key: plain Apify scrape of X + news saved to data/raw (no Claude call)."""
+    if not AI:
+        token = os.environ.get("APIFY_TOKEN")
+        if not token:
+            raise HTTPException(400, "APIFY_TOKEN is missing from .env")
+        from apify_client import ApifyClient
+        import scrape
+        client = ApifyClient(token)
+        tweets, articles = scrape.scrape_x(client), scrape.scrape_news(client)
+        scrape.save("x", tweets)
+        scrape.save("news", articles)
+        return {"scraped": len(tweets) + len(articles), "tweets": len(tweets), "articles": len(articles), "added": 0,
+                "note": "Apify scrape saved. Placing new posts on the map needs an Anthropic key."}
     import live
     out = live.refresh()
     added = live.merge(out["new"]) if out["new"] else 0

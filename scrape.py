@@ -49,27 +49,37 @@ def save(name, items):
     print(f"  saved {len(items)} items -> data/raw/{name}.json")
 
 
+def _field(run, *names, default=None):
+    for name in names:
+        value = run.get(name) if isinstance(run, dict) else getattr(run, name, None)
+        if value is not None:
+            return value
+    return default
+
+
 def log_apify(tag, run):
-    usd = float(run.get("usageTotalUsd") or 0)
+    usd = float(_field(run, "usage_total_usd", "usageTotalUsd", default=0) or 0)
     with (DATA / "usage.log").open("a") as f:
         f.write(json.dumps({"ts": time.strftime("%Y-%m-%dT%H:%M:%S"), "tag": f"apify:{tag}", "model": "apify",
                             "input": 0, "output": 0, "cache_read": 0, "cache_write": 0, "usd": round(usd, 5),
-                            "secs": 0, "stop": run.get("status")}) + "\n")
+                            "secs": 0, "stop": _field(run, "status")}) + "\n")
 
 
 def run_actor(client, actor, run_input, max_items, max_usd, name, quiet=False):
     if not quiet:
         print(f"[{name}] running {actor} (maxItems={max_items}, max ${max_usd})")
     run = client.actor(actor).call(run_input=run_input, max_items=max_items,
-                                   max_total_charge_usd=Decimal(str(max_usd)), timeout_secs=600, logger=None)
+                                   max_total_charge_usd=Decimal(str(max_usd)), logger=None)
     if not run:
         raise RuntimeError("run returned nothing")
-    run = client.run(run["id"]).get() or run  # refresh so usageTotalUsd is final
+    run = client.run(_field(run, "id")).get() or run
     log_apify(name, run)
-    items = list(client.dataset(run["defaultDatasetId"]).iterate_items())
-    print(f"  [{name}] status={run.get('status')} items={len(items)} cost=${run.get('usageTotalUsd') or 0:.3f}")
-    if run.get("status") != "SUCCEEDED" and not items:
-        raise RuntimeError(f"run {run.get('status')}")
+    items = list(client.dataset(_field(run, "default_dataset_id", "defaultDatasetId")).iterate_items())
+    status = _field(run, "status")
+    usd = float(_field(run, "usage_total_usd", "usageTotalUsd", default=0) or 0)
+    print(f"  [{name}] status={status} items={len(items)} cost=${usd:.3f}")
+    if status != "SUCCEEDED" and not items:
+        raise RuntimeError(f"run {status}")
     return items
 
 
