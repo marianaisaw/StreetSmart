@@ -1,0 +1,13 @@
+# secrets: never commit
+.env
+.env.*
+!.env.example
+
+# raw scrapes (tweets etc.) stay local
+data/raw/
+
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+.claude/

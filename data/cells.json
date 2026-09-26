@@ -1,0 +1,2922 @@
+[
+ {
+  "cell": "89283082ab7ffff",
+  "risk": 41.31,
+  "band": "unsafe",
+  "incidents": 62,
+  "newest_hours": 16.3,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: aggravated assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: weapons offense",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "police_activity": 51,
+   "violent": 5,
+   "theft": 3
+  },
+  "reason": "62 incidents, newest 16h ago \u00b7 5 violent incl. assault \u00b7 nothing open late"
+ },
+ {
+  "cell": "8928308286fffff",
+  "risk": 31.7,
+  "band": "unsafe",
+  "incidents": 39,
+  "newest_hours": 18.9,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "police_activity": 20,
+   "theft": 7,
+   "violent": 6
+  },
+  "reason": "39 incidents, newest 19h ago \u00b7 6 violent, 7 thefts \u00b7 nothing open late"
+ },
+ {
+  "cell": "89283082aa7ffff",
+  "risk": 20.69,
+  "band": "unsafe",
+  "incidents": 34,
+  "newest_hours": 42.2,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: robbery - other",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: weapons offense",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: robbery - commercial",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf",
+   "x"
+  ],
+  "types": {
+   "theft": 21,
+   "violent": 6,
+   "police_activity": 5
+  },
+  "reason": "34 incidents, newest 42h ago \u00b7 21 thefts incl. robberies \u00b7 nothing open late"
+ },
+ {
+  "cell": "8928308286bffff",
+  "risk": 13.05,
+  "band": "unsafe",
+  "incidents": 20,
+  "newest_hours": 26.1,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: aggravated assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: robbery - other",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "police_activity": 9,
+   "violent": 4,
+   "theft": 3
+  },
+  "reason": "20 incidents, newest 26h ago \u00b7 4 violent incl. aggravated assault"
+ },
+ {
+  "cell": "89283082867ffff",
+  "risk": 11.96,
+  "band": "unsafe",
+  "incidents": 15,
+  "newest_hours": 34.0,
+  "open_late": [
+   "Emperor Norton's BoozeLand",
+   "Polk market&gift shop"
+  ],
+  "top": [
+   {
+    "summary": "SFPD report: weapons offense",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "police_activity": 9,
+   "violent": 5,
+   "hazard": 1
+  },
+  "reason": "15 incidents, newest 34h ago \u00b7 5 violent, weapons offense \u00b7 2 places open late"
+ },
+ {
+  "cell": "89283082807ffff",
+  "risk": 10.82,
+  "band": "unsafe",
+  "incidents": 7,
+  "newest_hours": 38.0,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: weapons offense",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: aggravated assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: intimidation",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "police_activity": 3,
+   "violent": 2,
+   "harassment": 1
+  },
+  "reason": "7 incidents, newest 38h ago \u00b7 weapons offense, aggravated assault \u00b7 nothing open late"
+ },
+ {
+  "cell": "8928308284fffff",
+  "risk": 10.42,
+  "band": "unsafe",
+  "incidents": 13,
+  "newest_hours": 26.0,
+  "open_late": [
+   "Tony Baloney's Market"
+  ],
+  "top": [
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: aggravated assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: robbery - other",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "police_activity": 6,
+   "violent": 4,
+   "harassment": 2
+  },
+  "reason": "13 incidents, newest 26h ago \u00b7 4 violent incl. robbery \u00b7 1 place open late"
+ },
+ {
+  "cell": "89283082863ffff",
+  "risk": 10.31,
+  "band": "unsafe",
+  "incidents": 24,
+  "newest_hours": 38.8,
+  "open_late": [
+   "Subway",
+   "Gateway Croissant"
+  ],
+  "top": [
+   {
+    "summary": "SFPD report: aggravated assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: aggravated assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: weapons offense",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "police_activity": 18,
+   "violent": 3,
+   "theft": 2
+  },
+  "reason": "24 incidents, newest 39h ago \u00b7 2 aggravated assaults \u00b7 2 places open late"
+ },
+ {
+  "cell": "8928308289bffff",
+  "risk": 10.01,
+  "band": "unsafe",
+  "incidents": 20,
+  "newest_hours": 18.8,
+  "open_late": [
+   "SPORTBAR TR\u00c9BOL #3",
+   "Mission Bowling Club",
+   "Kiitos Cocktail and Music Lounge"
+  ],
+  "top": [
+   {
+    "summary": "SFPD report: robbery - other",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "police_activity": 9,
+   "violent": 5,
+   "hazard": 4
+  },
+  "reason": "20 incidents, newest 19h ago \u00b7 5 violent incl. robbery \u00b7 3 places open late"
+ },
+ {
+  "cell": "89283082b9bffff",
+  "risk": 9.28,
+  "band": "unsafe",
+  "incidents": 21,
+  "newest_hours": 19.8,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "Stabbing reported, priority A call",
+    "source": "x",
+    "url": "https://x.com/SFPDcallsBot/status/2102714692561146002"
+   },
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf",
+   "x"
+  ],
+  "types": {
+   "police_activity": 17,
+   "violent": 3,
+   "harassment": 1
+  },
+  "reason": "21 incidents, newest 20h ago \u00b7 stabbing reported \u00b7 nothing open late"
+ },
+ {
+  "cell": "89283082d2fffff",
+  "risk": 9.14,
+  "band": "unsafe",
+  "incidents": 2,
+  "newest_hours": 15.9,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: robbery - other",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: aggravated assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "violent": 2
+  },
+  "reason": "2 violent incidents, newest 16h ago \u00b7 robbery and aggravated assault"
+ },
+ {
+  "cell": "8928308280fffff",
+  "risk": 8.29,
+  "band": "unsafe",
+  "incidents": 6,
+  "newest_hours": 15.2,
+  "open_late": [
+   "Mr. Tipple's Jazz Club",
+   "The Bar & Bean fusion"
+  ],
+  "top": [
+   {
+    "summary": "Passenger stabbed on 14-Mission bus, life-threatening injuries; suspect arrested",
+    "source": "news",
+    "url": "https://sfist.com/2026/09/24/suspect-arrested-after-stabbing-on-14-mission-bus-in-soma/"
+   },
+   {
+    "summary": "SFPD report: robbery - commercial",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: robbery - commercial",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf",
+   "news"
+  ],
+  "types": {
+   "violent": 3,
+   "theft": 3
+  },
+  "reason": "6 incidents, newest 15h ago \u00b7 bus stabbing, 2 robberies \u00b7 2 places open late"
+ },
+ {
+  "cell": "89283082bd3ffff",
+  "risk": 8.1,
+  "band": "unsafe",
+  "incidents": 9,
+  "newest_hours": 40.0,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "Stabbing reported near O'Farrell and Shannon, priority A response",
+    "source": "x",
+    "url": "https://x.com/SFPDcallsBot/status/2101589772590572008"
+   },
+   {
+    "summary": "SFPD report: aggravated assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf",
+   "x"
+  ],
+  "types": {
+   "violent": 6,
+   "police_activity": 2,
+   "harassment": 1
+  },
+  "reason": "9 incidents, newest 40h ago \u00b7 6 violent incl. stabbing \u00b7 nothing open late"
+ },
+ {
+  "cell": "89283082847ffff",
+  "risk": 8.04,
+  "band": "unsafe",
+  "incidents": 12,
+  "newest_hours": 28.7,
+  "open_late": [
+   "Unimart"
+  ],
+  "top": [
+   {
+    "summary": "SFPD report: aggravated assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: weapons offense",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "police_activity": 7,
+   "violent": 3,
+   "harassment": 2
+  },
+  "reason": "12 incidents, newest 29h ago \u00b7 3 violent, weapons offense \u00b7 1 place open late"
+ },
+ {
+  "cell": "89283082883ffff",
+  "risk": 7.57,
+  "band": "unsafe",
+  "incidents": 35,
+  "newest_hours": 20.2,
+  "open_late": [
+   "Blondie's Bar",
+   "Rudi\u2019s Sports Bar",
+   "Lore Speakeasy and Escape Room",
+   "Jake's Steaks",
+   "Skylark",
+   "Casanova Lounge",
+   "Delirium",
+   "Kilowatt Bar",
+   "Mother",
+   "Big Lantern",
+   "K&H Liquors",
+   "S&M Liquor Market",
+   "Big Finish Wine Tavern"
+  ],
+  "top": [
+   {
+    "summary": "Stabbing reported, officer observed and handled",
+    "source": "x",
+    "url": "https://x.com/SFPDcallsBot/status/2102895877673381922"
+   },
+   {
+    "summary": "SFPD report: aggravated assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: larceny - from vehicle",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf",
+   "x"
+  ],
+  "types": {
+   "police_activity": 27,
+   "hazard": 3,
+   "theft": 3
+  },
+  "reason": "35 incidents, newest 20h ago \u00b7 stabbing reported \u00b7 3 places open late"
+ },
+ {
+  "cell": "8928308280bffff",
+  "risk": 7.06,
+  "band": "unsafe",
+  "incidents": 9,
+  "newest_hours": 26.7,
+  "open_late": [
+   "Go Go Market & Deli"
+  ],
+  "top": [
+   {
+    "summary": "Stabbing reported, priority A call",
+    "source": "x",
+    "url": "https://x.com/SFPDcallsBot/status/2102865679649288353"
+   },
+   {
+    "summary": "SFPD report: aggravated assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf",
+   "x"
+  ],
+  "types": {
+   "violent": 3,
+   "police_activity": 3,
+   "hazard": 2
+  },
+  "reason": "9 incidents, newest 27h ago \u00b7 stabbing reported \u00b7 1 place open late"
+ },
+ {
+  "cell": "8928308288fffff",
+  "risk": 6.78,
+  "band": "unsafe",
+  "incidents": 6,
+  "newest_hours": 23.3,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "police_activity": 3,
+   "violent": 3
+  },
+  "reason": "6 incidents, newest 23h ago \u00b7 3 simple assaults \u00b7 nothing open late"
+ },
+ {
+  "cell": "89283082d23ffff",
+  "risk": 4.92,
+  "band": "kind of safe",
+  "incidents": 2,
+  "newest_hours": 23.7,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: disorderly conduct",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "harassment": 1,
+   "violent": 1
+  },
+  "reason": "2 incidents, newest 24h ago \u00b7 1 assault, 1 disorderly conduct"
+ },
+ {
+  "cell": "89283082813ffff",
+  "risk": 4.67,
+  "band": "kind of safe",
+  "incidents": 1,
+  "newest_hours": 14.4,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: weapons offense",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "violent": 1
+  },
+  "reason": "1 weapons offense 14h ago \u00b7 nothing open late"
+ },
+ {
+  "cell": "89283082877ffff",
+  "risk": 4.1,
+  "band": "kind of safe",
+  "incidents": 3,
+  "newest_hours": 62.4,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: larceny theft - other",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: larceny theft - other",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 2,
+   "violent": 1
+  },
+  "reason": "3 incidents, newest 62h ago \u00b7 2 thefts, 1 assault"
+ },
+ {
+  "cell": "8928308287bffff",
+  "risk": 4.07,
+  "band": "kind of safe",
+  "incidents": 9,
+  "newest_hours": 24.5,
+  "open_late": [
+   "Bay Food Market"
+  ],
+  "top": [
+   {
+    "summary": "SFPD report: other",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: other",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: other",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "police_activity": 9
+  },
+  "reason": "9 police reports, newest 25h ago \u00b7 no violence \u00b7 1 place open late"
+ },
+ {
+  "cell": "89283082803ffff",
+  "risk": 4.0,
+  "band": "kind of safe",
+  "incidents": 1,
+  "newest_hours": 25.4,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "violent": 1
+  },
+  "reason": "1 simple assault 25h ago \u00b7 nothing open late"
+ },
+ {
+  "cell": "892830828bbffff",
+  "risk": 3.47,
+  "band": "kind of safe",
+  "incidents": 5,
+  "newest_hours": 91.5,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: aggravated assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: larceny - from vehicle",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: theft from vehicle",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 2,
+   "hazard": 2,
+   "violent": 1
+  },
+  "reason": "5 incidents, newest 4 days ago \u00b7 2 vehicle thefts, 1 assault"
+ },
+ {
+  "cell": "8928308283bffff",
+  "risk": 3.2,
+  "band": "kind of safe",
+  "incidents": 5,
+  "newest_hours": 91.3,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: larceny - from vehicle",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: larceny theft - bicycle",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 4,
+   "violent": 1
+  },
+  "reason": "5 incidents, newest 4 days ago \u00b7 4 thefts incl. bicycle"
+ },
+ {
+  "cell": "89283087483ffff",
+  "risk": 3.19,
+  "band": "kind of safe",
+  "incidents": 4,
+  "newest_hours": 27.5,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: disorderly conduct",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: intimidation",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: vandalism",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "harassment": 2,
+   "hazard": 2
+  },
+  "reason": "4 incidents, newest 28h ago \u00b7 intimidation, vandalism \u00b7 no violence"
+ },
+ {
+  "cell": "89283082953ffff",
+  "risk": 2.84,
+  "band": "kind of safe",
+  "incidents": 4,
+  "newest_hours": 73.3,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: aggravated assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: intimidation",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: larceny theft - from building",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 2,
+   "harassment": 1,
+   "violent": 1
+  },
+  "reason": "4 incidents, newest 3 days ago \u00b7 1 aggravated assault, 2 thefts"
+ },
+ {
+  "cell": "89283082823ffff",
+  "risk": 2.69,
+  "band": "kind of safe",
+  "incidents": 1,
+  "newest_hours": 47.3,
+  "open_late": [
+   "Super Sam"
+  ],
+  "top": [
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "violent": 1
+  },
+  "reason": "1 simple assault 47h ago \u00b7 1 place open late"
+ },
+ {
+  "cell": "8928308288bffff",
+  "risk": 2.53,
+  "band": "kind of safe",
+  "incidents": 4,
+  "newest_hours": 23.9,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: warrant",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: drug violation",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "police_activity": 3,
+   "violent": 1
+  },
+  "reason": "4 incidents, newest 24h ago \u00b7 1 assault, drug and warrant reports"
+ },
+ {
+  "cell": "892830828d3ffff",
+  "risk": 2.44,
+  "band": "kind of safe",
+  "incidents": 3,
+  "newest_hours": 22.9,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: larceny theft - shoplifting",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: larceny theft - other",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: drug violation",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 2,
+   "police_activity": 1
+  },
+  "reason": "3 incidents, newest 23h ago \u00b7 2 thefts \u00b7 no violence"
+ },
+ {
+  "cell": "892830828abffff",
+  "risk": 2.43,
+  "band": "kind of safe",
+  "incidents": 4,
+  "newest_hours": 44.9,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: motor vehicle theft (attempted)",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: warrant",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: drug violation",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "police_activity": 2,
+   "hazard": 1,
+   "theft": 1
+  },
+  "reason": "4 incidents, newest 45h ago \u00b7 attempted car theft \u00b7 no violence"
+ },
+ {
+  "cell": "89283082893ffff",
+  "risk": 2.37,
+  "band": "kind of safe",
+  "incidents": 8,
+  "newest_hours": 62.6,
+  "open_late": [
+   "The Valencia Room",
+   "Clarion Alley Street Art",
+   "Mandi House",
+   "Mission Grocery & Liquor",
+   "The Sycamore"
+  ],
+  "top": [
+   {
+    "summary": "SFPD report: aggravated assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: aggravated assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: larceny - from vehicle",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 3,
+   "police_activity": 2,
+   "violent": 2
+  },
+  "reason": "8 incidents, newest 63h ago \u00b7 2 aggravated assaults \u00b7 3 places open late"
+ },
+ {
+  "cell": "89283082c67ffff",
+  "risk": 2.34,
+  "band": "kind of safe",
+  "incidents": 4,
+  "newest_hours": 111.0,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: weapons offense",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: weapons offense",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: larceny - from vehicle",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 2,
+   "violent": 2
+  },
+  "reason": "4 incidents, newest 5 days ago \u00b7 2 weapons offenses, 2 thefts"
+ },
+ {
+  "cell": "89283082c6bffff",
+  "risk": 2.29,
+  "band": "kind of safe",
+  "incidents": 3,
+  "newest_hours": 94.8,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: motor vehicle theft",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: motor vehicle theft",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: motor vehicle theft",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 3
+  },
+  "reason": "3 car thefts, newest 4 days ago \u00b7 no violence"
+ },
+ {
+  "cell": "892830828cfffff",
+  "risk": 2.1,
+  "band": "kind of safe",
+  "incidents": 1,
+  "newest_hours": 71.8,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "violent": 1
+  },
+  "reason": "1 simple assault 3 days ago \u00b7 nothing open late"
+ },
+ {
+  "cell": "89283082d6fffff",
+  "risk": 1.95,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 27.3,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: larceny theft - shoplifting",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 1
+  },
+  "reason": "1 report in the last week \u00b7 SFPD report: larceny theft - shoplifting"
+ },
+ {
+  "cell": "8928308291bffff",
+  "risk": 1.69,
+  "band": "very safe",
+  "incidents": 3,
+  "newest_hours": 42.6,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: larceny theft - other",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: larceny - from vehicle",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: other",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 2,
+   "police_activity": 1
+  },
+  "reason": "3 reports in the last week \u00b7 SFPD report: larceny theft - other"
+ },
+ {
+  "cell": "89283082907ffff",
+  "risk": 1.61,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 41.1,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: larceny theft - shoplifting",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 1
+  },
+  "reason": "1 report in the last week \u00b7 SFPD report: larceny theft - shoplifting"
+ },
+ {
+  "cell": "89283082917ffff",
+  "risk": 1.6,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 41.5,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: motor vehicle theft",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 1
+  },
+  "reason": "1 report in the last week \u00b7 SFPD report: motor vehicle theft"
+ },
+ {
+  "cell": "89283082d67ffff",
+  "risk": 1.58,
+  "band": "very safe",
+  "incidents": 3,
+  "newest_hours": 125.3,
+  "open_late": [
+   "Central Haight Market"
+  ],
+  "top": [
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: larceny - from vehicle",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: larceny - from vehicle",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 2,
+   "violent": 1
+  },
+  "reason": "3 reports in the last week \u00b7 SFPD report: simple assault"
+ },
+ {
+  "cell": "892830829cfffff",
+  "risk": 1.47,
+  "band": "very safe",
+  "incidents": 3,
+  "newest_hours": 155.9,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: aggravated assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: vandalism",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "violent": 2,
+   "hazard": 1
+  },
+  "reason": "3 reports in the last week \u00b7 SFPD report: simple assault"
+ },
+ {
+  "cell": "8928308295bffff",
+  "risk": 1.43,
+  "band": "very safe",
+  "incidents": 2,
+  "newest_hours": 33.4,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: larceny theft - from building",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: vandalism",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "hazard": 1,
+   "theft": 1
+  },
+  "reason": "2 reports in the last week \u00b7 SFPD report: larceny theft - from building"
+ },
+ {
+  "cell": "892830828c7ffff",
+  "risk": 1.4,
+  "band": "very safe",
+  "incidents": 4,
+  "newest_hours": 75.9,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: larceny - from vehicle",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: other",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: other",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "police_activity": 3,
+   "theft": 1
+  },
+  "reason": "4 reports in the last week \u00b7 SFPD report: larceny - from vehicle"
+ },
+ {
+  "cell": "89283087493ffff",
+  "risk": 1.4,
+  "band": "very safe",
+  "incidents": 2,
+  "newest_hours": 94.5,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: larceny theft - other",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: larceny theft - other",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 2
+  },
+  "reason": "2 reports in the last week \u00b7 SFPD report: larceny theft - other"
+ },
+ {
+  "cell": "892830829c7ffff",
+  "risk": 1.27,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 58.3,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: burglary - other",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 1
+  },
+  "reason": "1 report in the last week \u00b7 SFPD report: burglary - other"
+ },
+ {
+  "cell": "892830829dbffff",
+  "risk": 1.19,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 62.8,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: burglary - other",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 1
+  },
+  "reason": "1 report in the last week \u00b7 SFPD report: burglary - other"
+ },
+ {
+  "cell": "8928308282bffff",
+  "risk": 1.19,
+  "band": "very safe",
+  "incidents": 3,
+  "newest_hours": 153.3,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: intimidation",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: vandalism",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "hazard": 1,
+   "harassment": 1,
+   "violent": 1
+  },
+  "reason": "3 reports in the last week \u00b7 SFPD report: simple assault"
+ },
+ {
+  "cell": "89283082837ffff",
+  "risk": 1.18,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 63.3,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: larceny - from vehicle",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 1
+  },
+  "reason": "1 report in the last week \u00b7 SFPD report: larceny - from vehicle"
+ },
+ {
+  "cell": "89283082887ffff",
+  "risk": 1.1,
+  "band": "very safe",
+  "incidents": 2,
+  "newest_hours": 68.3,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: warrant",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: drug violation",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "police_activity": 2
+  },
+  "reason": "2 reports in the last week \u00b7 SFPD report: warrant"
+ },
+ {
+  "cell": "89283082913ffff",
+  "risk": 1.1,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 68.8,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: burglary - residential",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 1
+  },
+  "reason": "1 report in the last week \u00b7 SFPD report: burglary - residential"
+ },
+ {
+  "cell": "892830874c3ffff",
+  "risk": 1.06,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 71.3,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: burglary - other",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 1
+  },
+  "reason": "1 report in the last week \u00b7 SFPD report: burglary - other"
+ },
+ {
+  "cell": "892830874d3ffff",
+  "risk": 1.04,
+  "band": "very safe",
+  "incidents": 2,
+  "newest_hours": 143.8,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: intimidation",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "violent": 1,
+   "harassment": 1
+  },
+  "reason": "2 reports in the last week \u00b7 SFPD report: simple assault"
+ },
+ {
+  "cell": "8928308294bffff",
+  "risk": 1.03,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 23.7,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: vandalism",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "hazard": 1
+  },
+  "reason": "1 report in the last week \u00b7 SFPD report: vandalism"
+ },
+ {
+  "cell": "892830828b3ffff",
+  "risk": 1.01,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 117.8,
+  "open_late": [
+   "George's Market"
+  ],
+  "top": [
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "violent": 1
+  },
+  "reason": "1 report in the last week \u00b7 SFPD report: simple assault"
+ },
+ {
+  "cell": "892830828cbffff",
+  "risk": 1.01,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 74.5,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: larceny theft - shoplifting",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 1
+  },
+  "reason": "1 report in the last week \u00b7 SFPD report: larceny theft - shoplifting"
+ },
+ {
+  "cell": "89283082857ffff",
+  "risk": 0.98,
+  "band": "very safe",
+  "incidents": 2,
+  "newest_hours": 156.5,
+  "open_late": [
+   "Powerhouse",
+   "Hole In the Wall Saloon",
+   "Az\u00facar Lounge"
+  ],
+  "top": [
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "violent": 2
+  },
+  "reason": "2 reports in the last week \u00b7 SFPD report: simple assault"
+ },
+ {
+  "cell": "8928308290bffff",
+  "risk": 0.98,
+  "band": "very safe",
+  "incidents": 2,
+  "newest_hours": 115.8,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: larceny theft - from building",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: motor vehicle theft",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 2
+  },
+  "reason": "2 reports in the last week \u00b7 SFPD report: larceny theft - from building"
+ },
+ {
+  "cell": "89283095a3bffff",
+  "risk": 0.95,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 128.8,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "violent": 1
+  },
+  "reason": "1 report in the last week \u00b7 SFPD report: simple assault"
+ },
+ {
+  "cell": "89283082c6fffff",
+  "risk": 0.95,
+  "band": "very safe",
+  "incidents": 3,
+  "newest_hours": 162.3,
+  "open_late": [
+   "Rite Spot Cafe"
+  ],
+  "top": [
+   {
+    "summary": "SFPD report: robbery - commercial",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: larceny theft - shoplifting",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: drug violation",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "police_activity": 1,
+   "violent": 1,
+   "theft": 1
+  },
+  "reason": "3 reports in the last week \u00b7 SFPD report: robbery - commercial"
+ },
+ {
+  "cell": "89283082817ffff",
+  "risk": 0.94,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 73.3,
+  "open_late": [
+   "Pizza Zone N Grill"
+  ],
+  "top": [
+   {
+    "summary": "SFPD report: larceny theft - other",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 1
+  },
+  "reason": "1 report in the last week \u00b7 SFPD report: larceny theft - other"
+ },
+ {
+  "cell": "89283082d33ffff",
+  "risk": 0.82,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 89.8,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: burglary - residential",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 1
+  },
+  "reason": "1 report in the last week \u00b7 SFPD report: burglary - residential"
+ },
+ {
+  "cell": "89283082d57ffff",
+  "risk": 0.82,
+  "band": "very safe",
+  "incidents": 3,
+  "newest_hours": 102.0,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: warrant",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: other",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: warrant",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "police_activity": 3
+  },
+  "reason": "3 reports in the last week \u00b7 SFPD report: warrant"
+ },
+ {
+  "cell": "89283082c27ffff",
+  "risk": 0.81,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 40.3,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: vandalism",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "hazard": 1
+  },
+  "reason": "1 report in the last week \u00b7 SFPD report: vandalism"
+ },
+ {
+  "cell": "89283082827ffff",
+  "risk": 0.73,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 97.8,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: motor vehicle theft",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 1
+  },
+  "reason": "1 report in the last week \u00b7 SFPD report: motor vehicle theft"
+ },
+ {
+  "cell": "89283082897ffff",
+  "risk": 0.63,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 24.9,
+  "open_late": [
+   "Elixir To Go",
+   "Soundtrack",
+   "ABV",
+   "The 500 Club",
+   "Gestalt Craft Beer Bar",
+   "Elixir"
+  ],
+  "top": [
+   {
+    "summary": "SFPD report: other",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "police_activity": 1
+  },
+  "reason": "1 report in the last week \u00b7 SFPD report: other"
+ },
+ {
+  "cell": "89283082c2fffff",
+  "risk": 0.62,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 102.5,
+  "open_late": [
+   "Pay and Save Grocery"
+  ],
+  "top": [
+   {
+    "summary": "SFPD report: larceny theft - other",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 1
+  },
+  "reason": "1 report in the last week \u00b7 SFPD report: larceny theft - other"
+ },
+ {
+  "cell": "89283082d5bffff",
+  "risk": 0.59,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 63.7,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: vandalism",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "hazard": 1
+  },
+  "reason": "1 report in the last week \u00b7 SFPD report: vandalism"
+ },
+ {
+  "cell": "89283082853ffff",
+  "risk": 0.58,
+  "band": "very safe",
+  "incidents": 2,
+  "newest_hours": 114.7,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: drug violation",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: other",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "police_activity": 2
+  },
+  "reason": "2 reports in the last week \u00b7 SFPD report: drug violation"
+ },
+ {
+  "cell": "892830828c3ffff",
+  "risk": 0.57,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 66.6,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: drug violation",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "police_activity": 1
+  },
+  "reason": "1 report in the last week \u00b7 SFPD report: drug violation"
+ },
+ {
+  "cell": "892830829d7ffff",
+  "risk": 0.55,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 118.0,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: larceny theft - other",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 1
+  },
+  "reason": "1 report in the last week \u00b7 SFPD report: larceny theft - other"
+ },
+ {
+  "cell": "89283082b93ffff",
+  "risk": 0.55,
+  "band": "very safe",
+  "incidents": 3,
+  "newest_hours": 168.1,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: drug violation",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: drug violation",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: drug violation",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "police_activity": 2,
+   "harassment": 1
+  },
+  "reason": "3 reports in the last week \u00b7 SFPD report: drug violation"
+ },
+ {
+  "cell": "89283082933ffff",
+  "risk": 0.52,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 172.6,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: simple assault",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "violent": 1
+  },
+  "reason": "1 report in the last week \u00b7 SFPD report: simple assault"
+ },
+ {
+  "cell": "89283082d53ffff",
+  "risk": 0.51,
+  "band": "very safe",
+  "incidents": 2,
+  "newest_hours": 143.8,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: motor vehicle theft",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: vandalism",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 1,
+   "hazard": 1
+  },
+  "reason": "2 reports in the last week \u00b7 SFPD report: motor vehicle theft"
+ },
+ {
+  "cell": "89283082d6bffff",
+  "risk": 0.49,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 120.0,
+  "open_late": [
+   "Superette Market"
+  ],
+  "top": [
+   {
+    "summary": "SFPD report: larceny theft - other",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 1
+  },
+  "reason": "1 report in the last week \u00b7 SFPD report: larceny theft - other"
+ },
+ {
+  "cell": "89283082843ffff",
+  "risk": 0.49,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 177.3,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: robbery - other",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "violent": 1
+  },
+  "reason": "1 report in the last week \u00b7 SFPD report: robbery - other"
+ },
+ {
+  "cell": "8928308290fffff",
+  "risk": 0.43,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 136.9,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: burglary - residential",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 1
+  },
+  "reason": "1 report in the last week \u00b7 SFPD report: burglary - residential"
+ },
+ {
+  "cell": "89283082eb7ffff",
+  "risk": 0.39,
+  "band": "very safe",
+  "incidents": 3,
+  "newest_hours": 173.0,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: warrant",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: drug violation",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: drug violation",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "police_activity": 3
+  },
+  "reason": "3 reports in the last week \u00b7 SFPD report: warrant"
+ },
+ {
+  "cell": "89283082d2bffff",
+  "risk": 0.37,
+  "band": "very safe",
+  "incidents": 2,
+  "newest_hours": 139.3,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: vandalism",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   },
+   {
+    "summary": "SFPD report: warrant",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "hazard": 1,
+   "police_activity": 1
+  },
+  "reason": "2 reports in the last week \u00b7 SFPD report: vandalism"
+ },
+ {
+  "cell": "892830828b7ffff",
+  "risk": 0.36,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 148.8,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: larceny theft - other",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 1
+  },
+  "reason": "1 report in the last week \u00b7 SFPD report: larceny theft - other"
+ },
+ {
+  "cell": "89283095acbffff",
+  "risk": 0.36,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 148.8,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: motor vehicle theft",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 1
+  },
+  "reason": "1 report in the last week \u00b7 SFPD report: motor vehicle theft"
+ },
+ {
+  "cell": "892830828afffff",
+  "risk": 0.34,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 102.2,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: vandalism",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "hazard": 1
+  },
+  "reason": "1 report in the last week \u00b7 SFPD report: vandalism"
+ },
+ {
+  "cell": "89283082833ffff",
+  "risk": 0.33,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 155.2,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: burglary - commercial",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 1
+  },
+  "reason": "1 report in the last week \u00b7 SFPD report: burglary - commercial"
+ },
+ {
+  "cell": "89283082873ffff",
+  "risk": 0.32,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 150.8,
+  "open_late": [
+   "AJ's Bar"
+  ],
+  "top": [
+   {
+    "summary": "SFPD report: larceny theft - other",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 1
+  },
+  "reason": "1 report in the last week \u00b7 SFPD report: larceny theft - other"
+ },
+ {
+  "cell": "89283082d73ffff",
+  "risk": 0.3,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 163.3,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "SFPD report: burglary - residential",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 1
+  },
+  "reason": "1 report in the last week \u00b7 SFPD report: burglary - residential"
+ },
+ {
+  "cell": "89283095a8bffff",
+  "risk": 0.23,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 162.0,
+  "open_late": [
+   "Yancy's Saloon",
+   "Mucky Duck",
+   "The Temple Bar"
+  ],
+  "top": [
+   {
+    "summary": "SFPD report: larceny theft - other",
+    "source": "datasf",
+    "url": "https://data.sf.gov/d/wg3w-h783"
+   }
+  ],
+  "in_corridor": true,
+  "sources": [
+   "datasf"
+  ],
+  "types": {
+   "theft": 1
+  },
+  "reason": "1 report in the last week \u00b7 SFPD report: larceny theft - other"
+ },
+ {
+  "cell": "89283082c03ffff",
+  "risk": 0.13,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 142.3,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "Police activity at station caused BART delays",
+    "source": "x",
+    "url": "https://x.com/SFBARTalert/status/2101785482929525180"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "x"
+  ],
+  "types": {
+   "police_activity": 1
+  },
+  "reason": "1 report in the last week \u00b7 Police activity at station caused BART delays"
+ },
+ {
+  "cell": "892830953c3ffff",
+  "risk": 0.03,
+  "band": "very safe",
+  "incidents": 1,
+  "newest_hours": 259.2,
+  "open_late": [],
+  "top": [
+   {
+    "summary": "Police activity at station caused major BART delays",
+    "source": "x",
+    "url": "https://x.com/SFBARTalert/status/2100021360198062301"
+   }
+  ],
+  "in_corridor": false,
+  "sources": [
+   "x"
+  ],
+  "types": {
+   "police_activity": 1
+  },
+  "reason": "1 report in the last week \u00b7 Police activity at station caused major BART delays"
+ },
+ {
+  "cell": "89283082d0fffff",
+  "risk": 0.0,
+  "band": "very safe",
+  "incidents": 0,
+  "newest_hours": null,
+  "open_late": [],
+  "top": [],
+  "in_corridor": true,
+  "sources": [],
+  "types": {},
+  "reason": "No incidents reported in the last 2 weeks"
+ },
+ {
+  "cell": "89283082d77ffff",
+  "risk": 0.0,
+  "band": "very safe",
+  "incidents": 0,
+  "newest_hours": null,
+  "open_late": [],
+  "top": [],
+  "in_corridor": true,
+  "sources": [],
+  "types": {},
+  "reason": "No incidents reported in the last 2 weeks"
+ },
+ {
+  "cell": "89283082d4fffff",
+  "risk": 0.0,
+  "band": "very safe",
+  "incidents": 0,
+  "newest_hours": null,
+  "open_late": [],
+  "top": [],
+  "in_corridor": true,
+  "sources": [],
+  "types": {},
+  "reason": "No incidents reported in the last 2 weeks"
+ },
+ {
+  "cell": "89283095a53ffff",
+  "risk": 0.0,
+  "band": "very safe",
+  "incidents": 0,
+  "newest_hours": null,
+  "open_late": [],
+  "top": [],
+  "in_corridor": true,
+  "sources": [],
+  "types": {},
+  "reason": "No incidents reported in the last 2 weeks"
+ },
+ {
+  "cell": "89283095acfffff",
+  "risk": 0.0,
+  "band": "very safe",
+  "incidents": 0,
+  "newest_hours": null,
+  "open_late": [],
+  "top": [],
+  "in_corridor": true,
+  "sources": [],
+  "types": {},
+  "reason": "No incidents reported in the last 2 weeks"
+ },
+ {
+  "cell": "89283095ac3ffff",
+  "risk": 0.0,
+  "band": "very safe",
+  "incidents": 0,
+  "newest_hours": null,
+  "open_late": [
+   "U C Market"
+  ],
+  "top": [],
+  "in_corridor": true,
+  "sources": [],
+  "types": {},
+  "reason": "No incidents reported in the last 2 weeks \u00b7 1 places open late"
+ },
+ {
+  "cell": "89283095a8fffff",
+  "risk": 0.0,
+  "band": "very safe",
+  "incidents": 0,
+  "newest_hours": null,
+  "open_late": [],
+  "top": [],
+  "in_corridor": true,
+  "sources": [],
+  "types": {},
+  "reason": "No incidents reported in the last 2 weeks"
+ },
+ {
+  "cell": "89283082d37ffff",
+  "risk": 0.0,
+  "band": "very safe",
+  "incidents": 0,
+  "newest_hours": null,
+  "open_late": [],
+  "top": [],
+  "in_corridor": true,
+  "sources": [],
+  "types": {},
+  "reason": "No incidents reported in the last 2 weeks"
+ },
+ {
+  "cell": "89283082d27ffff",
+  "risk": 0.0,
+  "band": "very safe",
+  "incidents": 0,
+  "newest_hours": null,
+  "open_late": [],
+  "top": [],
+  "in_corridor": true,
+  "sources": [],
+  "types": {},
+  "reason": "No incidents reported in the last 2 weeks"
+ },
+ {
+  "cell": "89283095a1bffff",
+  "risk": 0.0,
+  "band": "very safe",
+  "incidents": 0,
+  "newest_hours": null,
+  "open_late": [],
+  "top": [],
+  "in_corridor": true,
+  "sources": [],
+  "types": {},
+  "reason": "No incidents reported in the last 2 weeks"
+ },
+ {
+  "cell": "89283082d3bffff",
+  "risk": 0.0,
+  "band": "very safe",
+  "incidents": 0,
+  "newest_hours": null,
+  "open_late": [],
+  "top": [],
+  "in_corridor": true,
+  "sources": [],
+  "types": {},
+  "reason": "No incidents reported in the last 2 weeks"
+ },
+ {
+  "cell": "89283082d43ffff",
+  "risk": 0.0,
+  "band": "very safe",
+  "incidents": 0,
+  "newest_hours": null,
+  "open_late": [],
+  "top": [],
+  "in_corridor": true,
+  "sources": [],
+  "types": {},
+  "reason": "No incidents reported in the last 2 weeks"
+ },
+ {
+  "cell": "89283095ad7ffff",
+  "risk": 0.0,
+  "band": "very safe",
+  "incidents": 0,
+  "newest_hours": null,
+  "open_late": [],
+  "top": [],
+  "in_corridor": true,
+  "sources": [],
+  "types": {},
+  "reason": "No incidents reported in the last 2 weeks"
+ },
+ {
+  "cell": "892830828a7ffff",
+  "risk": 0.0,
+  "band": "very safe",
+  "incidents": 0,
+  "newest_hours": null,
+  "open_late": [],
+  "top": [],
+  "in_corridor": true,
+  "sources": [],
+  "types": {},
+  "reason": "No incidents reported in the last 2 weeks"
+ },
+ {
+  "cell": "89283082d7bffff",
+  "risk": 0.0,
+  "band": "very safe",
+  "incidents": 0,
+  "newest_hours": null,
+  "open_late": [],
+  "top": [],
+  "in_corridor": true,
+  "sources": [],
+  "types": {},
+  "reason": "No incidents reported in the last 2 weeks"
+ },
+ {
+  "cell": "89283082d63ffff",
+  "risk": 0.0,
+  "band": "very safe",
+  "incidents": 0,
+  "newest_hours": null,
+  "open_late": [],
+  "top": [],
+  "in_corridor": true,
+  "sources": [],
+  "types": {},
+  "reason": "No incidents reported in the last 2 weeks"
+ },
+ {
+  "cell": "89283082d47ffff",
+  "risk": 0.0,
+  "band": "very safe",
+  "incidents": 0,
+  "newest_hours": null,
+  "open_late": [
+   "Chevron",
+   "ExtraMile",
+   "Castro Gas and Food Mart"
+  ],
+  "top": [],
+  "in_corridor": true,
+  "sources": [],
+  "types": {},
+  "reason": "No incidents reported in the last 2 weeks \u00b7 3 places open late"
+ },
+ {
+  "cell": "89283095a13ffff",
+  "risk": 0.0,
+  "band": "very safe",
+  "incidents": 0,
+  "newest_hours": null,
+  "open_late": [
+   "Little Shamrock"
+  ],
+  "top": [],
+  "in_corridor": true,
+  "sources": [],
+  "types": {},
+  "reason": "No incidents reported in the last 2 weeks \u00b7 1 places open late"
+ },
+ {
+  "cell": "89283082d0bffff",
+  "risk": 0.0,
+  "band": "very safe",
+  "incidents": 0,
+  "newest_hours": null,
+  "open_late": [
+   "Eureka Market & Deli"
+  ],
+  "top": [],
+  "in_corridor": true,
+  "sources": [],
+  "types": {},
+  "reason": "No incidents reported in the last 2 weeks \u00b7 1 places open late"
+ },
+ {
+  "cell": "892830828a3ffff",
+  "risk": 0.0,
+  "band": "very safe",
+  "incidents": 0,
+  "newest_hours": null,
+  "open_late": [],
+  "top": [],
+  "in_corridor": true,
+  "sources": [],
+  "types": {},
+  "reason": "No incidents reported in the last 2 weeks"
+ },
+ {
+  "cell": "89283082d4bffff",
+  "risk": 0.0,
+  "band": "very safe",
+  "incidents": 0,
+  "newest_hours": null,
+  "open_late": [],
+  "top": [],
+  "in_corridor": true,
+  "sources": [],
+  "types": {},
+  "reason": "No incidents reported in the last 2 weeks"
+ },
+ {
+  "cell": "89283095ac7ffff",
+  "risk": 0.0,
+  "band": "very safe",
+  "incidents": 0,
+  "newest_hours": null,
+  "open_late": [
+   "The Red Tail Beer & Wine Bar",
+   "Shell",
+   "Fireside Bar"
+  ],
+  "top": [],
+  "in_corridor": true,
+  "sources": [],
+  "types": {},
+  "reason": "No incidents reported in the last 2 weeks \u00b7 3 places open late"
+ },
+ {
+  "cell": "892830828d7ffff",
+  "risk": 0.0,
+  "band": "very safe",
+  "incidents": 0,
+  "newest_hours": null,
+  "open_late": [],
+  "top": [],
+  "in_corridor": true,
+  "sources": [],
+  "types": {},
+  "reason": "No incidents reported in the last 2 weeks"
+ },
+ {
+  "cell": "8928308281bffff",
+  "risk": 0.0,
+  "band": "very safe",
+  "incidents": 0,
+  "newest_hours": null,
+  "open_late": [
+   "Butter",
+   "Bella lounge and bar SF"
+  ],
+  "top": [],
+  "in_corridor": true,
+  "sources": [],
+  "types": {},
+  "reason": "No incidents reported in the last 2 weeks \u00b7 2 places open late"
+ },
+ {
+  "cell": "89283082d07ffff",
+  "risk": 0.0,
+  "band": "very safe",
+  "incidents": 0,
+  "newest_hours": null,
+  "open_late": [],
+  "top": [],
+  "in_corridor": true,
+  "sources": [],
+  "types": {},
+  "reason": "No incidents reported in the last 2 weeks"
+ },
+ {
+  "cell": "89283095a83ffff",
+  "risk": 0.0,
+  "band": "very safe",
+  "incidents": 0,
+  "newest_hours": null,
+  "open_late": [],
+  "top": [],
+  "in_corridor": true,
+  "sources": [],
+  "types": {},
+  "reason": "No incidents reported in the last 2 weeks"
+ },
+ {
+  "cell": "89283095adbffff",
+  "risk": 0.0,
+  "band": "very safe",
+  "incidents": 0,
+  "newest_hours": null,
+  "open_late": [],
+  "top": [],
+  "in_corridor": true,
+  "sources": [],
+  "types": {},
+  "reason": "No incidents reported in the last 2 weeks"
+ },
+ {
+  "cell": "89283082dafffff",
+  "risk": 0.0,
+  "band": "very safe",
+  "incidents": 0,
+  "newest_hours": null,
+  "open_late": [],
+  "top": [],
+  "in_corridor": true,
+  "sources": [],
+  "types": {},
+  "reason": "No incidents reported in the last 2 weeks"
+ }
+]

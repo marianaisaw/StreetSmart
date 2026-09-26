@@ -1,0 +1,7 @@
+anthropic>=0.125
+apify-client>=1.12
+fastapi
+uvicorn
+h3>=4
+python-dotenv
+httpx

@@ -1,0 +1,286 @@
+{
+ "3": {
+  "plan": {
+   "recommended_route_id": "muni",
+   "alternatives": [
+    {
+     "route_id": "bart_n",
+     "why_not": "$2.55 fits budget but night exposure 141 vs 78: waits at Civic Center/UN Plaza station area (2 aggravated assaults) and Mission & 16th."
+    },
+    {
+     "route_id": "uber_n",
+     "why_not": "Safest per minute (exposure 47) but ~$13 total ($9-$14 Uber + $2.85 Muni) exceeds $3 budget."
+    },
+    {
+     "route_id": "uber",
+     "why_not": "Fastest (17 min) but ~$16 est. ($15-$23) far exceeds $3 budget."
+    }
+   ],
+   "total_cost": 2.85,
+   "cost_label": "$2.85",
+   "total_minutes": 44,
+   "safety_summary": "Lowest exposure within budget; move off Mission & 16th quickly (stabbing reported there), no Civic Center wait.",
+   "why": "This route skips waiting in the Civic Center / UN Plaza station area (24 incidents, including 2 aggravated assaults), though it still starts at Mission & 16th, which is flagged for a reported stabbing, so walk straight up 16th St to Church.",
+   "stops": [
+    "Church St & 16th St (J)",
+    "Church St & Duboce Ave (N)",
+    "Irving St & 9th Ave (N)"
+   ]
+  },
+  "trace": [
+   {
+    "tool": "get_routes",
+    "input": {
+     "origin": "Mission St & 16th St",
+     "destination": "9th Ave & Irving St, Inner Sunset"
+    }
+   },
+   {
+    "tool": "get_fares",
+    "input": {}
+   },
+   {
+    "tool": "score_route",
+    "input": {
+     "route_id": "muni"
+    }
+   },
+   {
+    "tool": "score_route",
+    "input": {
+     "route_id": "bart_n"
+    }
+   },
+   {
+    "tool": "score_route",
+    "input": {
+     "route_id": "uber_n"
+    }
+   },
+   {
+    "tool": "score_route",
+    "input": {
+     "route_id": "uber"
+    }
+   },
+   {
+    "tool": "estimate_rideshare",
+    "input": {
+     "miles": 1.08,
+     "minutes": 6
+    }
+   },
+   {
+    "tool": "estimate_rideshare",
+    "input": {
+     "miles": 2.94,
+     "minutes": 12
+    }
+   }
+  ]
+ },
+ "15": {
+  "plan": {
+   "recommended_route_id": "uber_n",
+   "alternatives": [
+    {
+     "route_id": "uber",
+     "why_not": "Fastest and least exposed (17 min, 42.8), but typical fare ~$16.19 (range $14.57\u2013$22.67) exceeds the $15 budget."
+    },
+    {
+     "route_id": "muni",
+     "why_not": "Cheapest at $2.85 but 44 min with 27 min on foot/waiting (exposure 77.9), including an 11-min walk from Mission & 16th."
+    },
+    {
+     "route_id": "bart_n",
+     "why_not": "Highest exposure (141.2): waits in unsafe cells at Civic Center/UN Plaza station area and Mission & 16th; 45 min."
+    }
+   ],
+   "total_cost": 12.99,
+   "cost_label": "~$13 est.",
+   "total_minutes": 31,
+   "safety_summary": "12 min on foot/waiting, exposure 47.2; only flagged spot is the pickup wait at Mission & 16th.",
+   "why": "A short Uber gets you away from Mission & 16th quickly, skipping the 11-minute walk from there and the Civic Center/UN Plaza station wait, where aggravated assaults were reported.",
+   "stops": [
+    "Church St & Duboce Ave (N)",
+    "Irving St & 9th Ave (N)"
+   ]
+  },
+  "trace": [
+   {
+    "tool": "get_routes",
+    "input": {
+     "origin": "Mission St & 16th St",
+     "destination": "9th Ave & Irving St"
+    }
+   },
+   {
+    "tool": "get_fares",
+    "input": {}
+   },
+   {
+    "tool": "score_route",
+    "input": {
+     "route_id": "muni"
+    }
+   },
+   {
+    "tool": "score_route",
+    "input": {
+     "route_id": "bart_n"
+    }
+   },
+   {
+    "tool": "score_route",
+    "input": {
+     "route_id": "uber_n"
+    }
+   },
+   {
+    "tool": "score_route",
+    "input": {
+     "route_id": "uber"
+    }
+   },
+   {
+    "tool": "estimate_rideshare",
+    "input": {
+     "miles": 1.08,
+     "minutes": 6
+    }
+   },
+   {
+    "tool": "estimate_rideshare",
+    "input": {
+     "miles": 2.94,
+     "minutes": 12
+    }
+   }
+  ]
+ },
+ "50": {
+  "plan": {
+   "recommended_route_id": "uber",
+   "alternatives": [
+    {
+     "route_id": "uber_n",
+     "why_not": "31 min, ~$12.99 (Uber $9-14 + $2.85 Muni), exposure 47.2 with 12 min on foot or waiting; slower and less safe than door-to-door."
+    },
+    {
+     "route_id": "muni",
+     "why_not": "Cheapest at $2.85 but 44 min with 27 min on foot or waiting; exposure 77.9."
+    },
+    {
+     "route_id": "bart_n",
+     "why_not": "$2.55 but 45 min; exposure 141.2 because you wait in the Civic Center / UN Plaza station area (2 aggravated assaults reported) and the N-Judah passes an unsafe stretch."
+    }
+   ],
+   "total_cost": 16.19,
+   "cost_label": "~$16 est.",
+   "total_minutes": 17,
+   "safety_summary": "Lowest exposure (42.8): only ~5 min waiting for pickup at Mission & 16th, which is flagged. Wait indoors.",
+   "why": "Going door to door skips the Civic Center / UN Plaza station wait and the 11-minute walk to Church, leaving only a short pickup wait at the flagged Mission & 16th corner.",
+   "stops": [
+    "Mission St & 16th St (pickup)",
+    "9th Ave & Irving St (drop-off)"
+   ]
+  },
+  "trace": [
+   {
+    "tool": "get_routes",
+    "input": {
+     "origin": "Mission St & 16th St",
+     "destination": "9th Ave & Irving St"
+    }
+   },
+   {
+    "tool": "get_fares",
+    "input": {}
+   },
+   {
+    "tool": "score_route",
+    "input": {
+     "route_id": "muni"
+    }
+   },
+   {
+    "tool": "score_route",
+    "input": {
+     "route_id": "bart_n"
+    }
+   },
+   {
+    "tool": "score_route",
+    "input": {
+     "route_id": "uber_n"
+    }
+   },
+   {
+    "tool": "score_route",
+    "input": {
+     "route_id": "uber"
+    }
+   },
+   {
+    "tool": "estimate_rideshare",
+    "input": {
+     "miles": 1.08,
+     "minutes": 6
+    }
+   },
+   {
+    "tool": "estimate_rideshare",
+    "input": {
+     "miles": 2.94,
+     "minutes": 12
+    }
+   }
+  ]
+ },
+ "15:f6082dd5af": {
+  "plan": {
+   "recommended_route_id": "muni",
+   "alternatives": [
+    {
+     "route_id": "bart_n",
+     "why_not": "1 min slower (45 min) and nearly double the night exposure (141.2 vs 77.9), including a wait in the Civic Center / UN Plaza station area (2 aggravated assaults reported)."
+    }
+   ],
+   "total_cost": 2.85,
+   "cost_label": "$2.85",
+   "total_minutes": 44,
+   "safety_summary": "One flagged spot at Mission & 16th (stabbing reported); walk off promptly. Night exposure 77.9 vs 141.2.",
+   "why": "It's the fastest option, and it skips the wait in the Civic Center / UN Plaza station area, where 2 aggravated assaults were reported.",
+   "stops": [
+    "Church St & 16th St (J)",
+    "Church St & Duboce Ave (N)",
+    "Irving St & 9th Ave (N)"
+   ]
+  },
+  "trace": [
+   {
+    "tool": "get_routes",
+    "input": {
+     "origin": "Mission St & 16th St",
+     "destination": "9th Ave & Irving St"
+    }
+   },
+   {
+    "tool": "get_fares",
+    "input": {}
+   },
+   {
+    "tool": "score_route",
+    "input": {
+     "route_id": "muni"
+    }
+   },
+   {
+    "tool": "score_route",
+    "input": {
+     "route_id": "bart_n"
+    }
+   }
+  ]
+ }
+}
